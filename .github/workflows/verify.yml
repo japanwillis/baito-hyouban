@@ -25,3 +25,19 @@ jobs:
           test -f dist/guide/first-part-time-job/index.html
           test -f dist/images/BH-0001-eyecatch.webp
 
+      - name: Diagnostic - verify existing first article differs only by AdSense head tag
+        run: |
+          python3 - <<'PY'
+          import urllib.request
+          from pathlib import Path
+          old = urllib.request.urlopen('https://baito-hyouban.com/guide/first-part-time-job/',timeout=20).read()
+          new = Path('dist/guide/first-part-time-job/index.html').read_bytes()
+          tag = b'adsbygoogle.js'
+          p = new.find(tag)
+          print('AdSense tag offset:',p)
+          print('New tag context:',repr(new[max(0,p-90):p+190]))
+          a,b = old.find(b'<head>'),new.find(b'<head>')
+          print('Old HEAD context:',repr(old[a:a+240]))
+          print('New HEAD context:',repr(new[b:b+360]))
+          print('Content lengths old/new:',len(old),len(new))
+          PY
