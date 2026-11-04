@@ -98,7 +98,7 @@ class ReleaseTests(unittest.TestCase):
         candidate = self.new / protected
         before.write_bytes(original)
         candidate.write_bytes(original.replace(
-            b'<head>\n', b'<head>\n' + r.ADSENSE_TAG + b'\n'
+            b'<head>\n', b'<head>\n' + r.ADSENSE_TAG
         ))
         plan = self.engine.plan(self.new, 'a' * 40)
         self.assertIn(protected, plan['changed'])
