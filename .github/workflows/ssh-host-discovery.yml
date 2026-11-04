@@ -1,0 +1,35 @@
+name: Xserver SSH host key discovery (no login)
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/ssh-host-discovery.yml'
+permissions:
+  contents: read
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    env:
+      HOST: ${{ vars.XSERVER_HOST }}
+      PORT: ${{ vars.XSERVER_PORT }}
+    steps:
+      - name: Validate variables
+        shell: bash
+        run: |
+          test -n "$HOST" || { echo "XSERVER_HOST is missing"; exit 1; }
+          test -n "$PORT" || { echo "XSERVER_PORT is missing"; exit 1; }
+          [[ "$HOST" =~ ^[a-zA-Z0-9.-]+$ ]] || { echo "Invalid hostname"; exit 1; }
+          [[ "$PORT" =~ ^[0-9]{1,5}$ ]] || { echo "Invalid port"; exit 1; }
+      - name: Probe SSH host public keys
+        shell: bash
+        run: |
+          set -euo pipefail
+          ssh-keyscan -T 10 -p "$PORT" -t ed25519,ecdsa,rsa "$HOST" 2>/dev/null > hostkeys.txt || true
+          if [ ! -s hostkeys.txt ]; then
+            echo "::error::No SSH host keys returned. Check hostname/port, Xserver foreign-IP restrictions and network access."
+            exit 1
+          fi
+          echo "UNTRUSTED SSH fingerprints (must be independently verified):"
+          ssh-keygen -lf hostkeys.txt -E sha256
+          echo "No authentication or deployment was attempted."
