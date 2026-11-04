@@ -29,9 +29,9 @@
       "reviewUrl": "https://docs.google.com/document/d/1fkrtF1YSUEgQNPJ_CMbDE_K0NXsjQtKGkT8ewzTNIV4/edit",
       "imageUrl": "https://drive.google.com/file/d/19KQKOa0Ms0t8SGP7G_zCb0hKNTG183tg/view",
       "imagePath": "/images/BH-0002-eyecatch.webp",
-      "sourceSha256": "fffc643237d94c8ecd1a04232577333ed08d3099b48016cf486d5951b1c9f841",
+      "sourceSha256": "a89ef3d397e0bdf1ea2124c30f5df3b0e244779687f6d025e394f1a9b5c8e9b3",
       "imageSha256": "f1e7e99c771ab7ef4bfc0ad9896b0b29c72e290225ccdbea4d9ddd7a1d405650",
-      "note": "2026-11-04 UI編集：面接前6項目のMarkdown表を意味のあるカード型に変更。元の6項目と実質内容を維持し、アクセシビリティとスマホ表示を改善。記事の事実情報・出典・タイトルは変更なし。変更後のコンテンツハッシュを更新。"
+      "note": "2026-11-04 UX更新：6項目の面接準備メモを2列・スマホ1列のカード型へ。スタイルは記事内に限定してBH-0001の保護済みHTMLを不変に保つ。公開前に内容ハッシュ再承認とCIを検証。"
     }
   ]
 }
