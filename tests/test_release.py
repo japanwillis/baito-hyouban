@@ -91,6 +91,32 @@ class ReleaseTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'Page removal'):
             self.engine.plan(self.new, 'a' * 40)
 
+    def test_bh0001_adsense_header_only_can_be_planned(self):
+        protected = r.PROTECTED[0]
+        original = b'<html><head>\n<title>Approved article</title></head><body>Protected text</body></html>'
+        before = self.root / protected
+        candidate = self.new / protected
+        before.write_bytes(original)
+        candidate.write_bytes(original.replace(
+            b'<head>\n', b'<head>\n' + r.ADSENSE_TAG + b'\n'
+        ))
+        plan = self.engine.plan(self.new, 'a' * 40)
+        self.assertIn(protected, plan['changed'])
+        candidate.write_bytes(candidate.read_bytes().replace(b'Protected text', b'Altered text'))
+        with self.assertRaisesRegex(ValueError, 'BH-0001'):
+            self.engine.plan(self.new, 'a' * 40)
+
+    def test_bh0001_rejects_different_adsense_publisher(self):
+        protected = r.PROTECTED[0]
+        original = b'<html><head>\n<title>Approved article</title></head><body>Protected text</body></html>'
+        (self.root / protected).write_bytes(original)
+        (self.new / protected).write_bytes(original.replace(
+            b'<head>\n', b'<head>\n' +
+            r.ADSENSE_TAG.replace(b'8238079237305844', b'0000000000000000') + b'\n'
+        ))
+        with self.assertRaisesRegex(ValueError, 'BH-0001'):
+            self.engine.plan(self.new, 'a' * 40)
+
     def test_unexpected_edit_refuses_rollback(self):
         self.apply()
         (self.root / 'index.html').write_text('external edit')
