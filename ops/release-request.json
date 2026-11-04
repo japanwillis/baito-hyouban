@@ -1,6 +1,9 @@
 {
   "schema_version": 1,
-  "request_id": "plan-adsense-20261104-02",
-  "mode": "plan",
-  "source_sha": "7a99ec85c5b9c1f959de515237bf99768a041d8d"
+  "request_id": "deploy-adsense-20261104-01",
+  "mode": "deploy",
+  "source_sha": "7a99ec85c5b9c1f959de515237bf99768a041d8d",
+  "plan_id": "41799871339-1",
+  "plan_sha256": "6919eaf3b9306d264cecafd68866fd82894896b1d44c50657fa0865f0503bf82",
+  "approval": "DEPLOY 7a99ec85c5b9c1f959de515237bf99768a041d8d 6919eaf3b9306d264cecafd68866fd82894896b1d44c50657fa0865f0503bf82"
 }
