@@ -14,7 +14,9 @@ jobs:
         with:
           node-version: '22'
       - name: Install dependencies
-        run: npm install --no-audit --no-fund
+        run: npm ci --no-audit --no-fund
+      - name: Test approval gate and deployment recovery
+        run: npm test
       - name: Build static site
         run: npm run build
       - name: Confirm generated pages and image
@@ -22,3 +24,4 @@ jobs:
           test -f dist/index.html
           test -f dist/guide/first-part-time-job/index.html
           test -f dist/images/BH-0001-eyecatch.webp
+

@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 const pages = Object.values(import.meta.glob('./*.md',{eager:true}));
-const articles = pages.filter(p=>p.frontmatter.editorialStatus === 'conditionally-approved').map(p=>({title:p.frontmatter.title,url:p.url,description:p.frontmatter.description,image:p.frontmatter.heroImage}));
+const articles = pages.filter(p=>['approved', 'conditionally-approved'].includes(p.frontmatter.editorialStatus)).map(p=>({title:p.frontmatter.title,url:p.url,description:p.frontmatter.description,image:p.frontmatter.heroImage}));
 ---
 <Base title="バイトの基礎知識"><div class="page-head"><span class="eyebrow">GUIDE</span><h1>バイトの基礎知識</h1><p>面接や労働条件、初めてのアルバイトについて知っておきたい情報。</p></div><div class="articles">{articles.map(a=><a class="feature-article" href={a.url}><img src={a.image} alt="" width="1200" height="630"/><div><h2>{a.title}</h2><p>{a.description}</p><strong>記事を読む →</strong></div></a>)}</div></Base>
+

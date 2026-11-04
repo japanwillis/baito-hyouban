@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "articles": [
+    {
+      "articleId": "BH-0001",
+      "sourcePath": "src/pages/guide/first-part-time-job.md",
+      "publicPath": "/guide/first-part-time-job/",
+      "editorialStatus": "conditionally-approved",
+      "conditionsResolved": true,
+      "imageVerified": true,
+      "linksVerifiedOn": "2026-11-04",
+      "manuscriptUrl": "https://docs.google.com/document/d/1sL-8iDe5xrmoLlhKkUmVhKt3Iu2PtDkfT4SGkv5omBM/edit",
+      "reviewUrl": "https://docs.google.com/document/d/18j6OMaJPjQS-9MaTl9s1puHAuDfNc5n45E3D9D6ye8s/edit",
+      "imageUrl": "https://drive.google.com/file/d/1_5Td-91FhXCA1kRwnhS_ssV25Kar2VmT/view",
+      "imagePath": "/images/BH-0001-eyecatch.webp",
+      "sourceSha256": "a6af7574ca8871f19d4f87f0614e0dfa5d9f2d66a6f18b716e707197b3365a0b",
+      "imageSha256": "d05c31da4454fb1fb3511fe3b385c68fc370f5c2aa5ffd465b768a69d3a937cc",
+      "note": "既存公開済み記事の承認記録。本文・画像の再制作は禁止。2026-11-04公開検品時点の原稿を固定。"
+    }
+  ]
+}
