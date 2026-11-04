@@ -17,14 +17,50 @@ editorialStatus: approved
 
 求人票と予定表を手元に置き、次の欄を埋めてみてください。「希望」「確実にできること」「まだ決められないこと」を分けるのがポイントです。
 
-| メモすること | 自分の答えに入れる内容 |
-| --- | --- |
-| 応募した理由 | 仕事内容への関心、収入を得たい理由、通いやすさなど、実際の理由 |
-| 働ける曜日と時間 | 勤務できる日と開始・終了時刻、希望する週の日数 |
-| 例外になる予定 | 試験、部活動、帰省、家庭の用事など、事前にわかる制約 |
-| 開始日と継続の見通し | いつから働けるか、現時点でどの程度続けたいか |
-| 未確定のこと | 学校の時間割など、いつ確認できるかもメモする |
-| 応募先に聞きたいこと | 仕事内容、教わり方、シフト、勤務条件についての不明点 |
+<div class="prep-card-list" role="list" aria-label="面接前にメモしたい6項目">
+  <section class="prep-card" role="listitem">
+    <span class="prep-card__number" aria-hidden="true">01</span>
+    <div class="prep-card__body">
+      <h3>応募した理由</h3>
+      <p>仕事内容への関心、収入を得たい理由、通いやすさなど、<strong>自分が実際に応募を決めた理由</strong>を整理します。</p>
+    </div>
+  </section>
+  <section class="prep-card" role="listitem">
+    <span class="prep-card__number" aria-hidden="true">02</span>
+    <div class="prep-card__body">
+      <h3>働ける曜日と時間</h3>
+      <p><strong>勤務できる曜日と開始・終了時刻</strong>、希望する週の日数を具体的に書きます。</p>
+    </div>
+  </section>
+  <section class="prep-card" role="listitem">
+    <span class="prep-card__number" aria-hidden="true">03</span>
+    <div class="prep-card__body">
+      <h3>例外になる予定</h3>
+      <p>試験、部活動、帰省、家庭の用事など、<strong>先にわかっている制約</strong>をメモします。</p>
+    </div>
+  </section>
+  <section class="prep-card" role="listitem">
+    <span class="prep-card__number" aria-hidden="true">04</span>
+    <div class="prep-card__body">
+      <h3>開始日と継続の見通し</h3>
+      <p><strong>いつから働けるか</strong>、現時点でどの程度続けたいかを整理します。</p>
+    </div>
+  </section>
+  <section class="prep-card" role="listitem">
+    <span class="prep-card__number" aria-hidden="true">05</span>
+    <div class="prep-card__body">
+      <h3>まだ決まっていないこと</h3>
+      <p>学校の時間割など、未確定のことは<strong>いつ確認できるか</strong>も一緒に書いておきます。</p>
+    </div>
+  </section>
+  <section class="prep-card" role="listitem">
+    <span class="prep-card__number" aria-hidden="true">06</span>
+    <div class="prep-card__body">
+      <h3>応募先に聞きたいこと</h3>
+      <p>仕事内容、教わり方、シフト、勤務条件など、<strong>求人票だけではわからない点</strong>をまとめます。</p>
+    </div>
+  </section>
+</div>
 
 ## 面接に向けて準備したい8つの質問
 
