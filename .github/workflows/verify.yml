@@ -1,0 +1,24 @@
+name: Verify Astro build
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+      - name: Build static site
+        run: npm run build
+      - name: Confirm generated pages and image
+        run: |
+          test -f dist/index.html
+          test -f dist/guide/first-part-time-job/index.html
+          test -f dist/images/BH-0001-eyecatch.webp
