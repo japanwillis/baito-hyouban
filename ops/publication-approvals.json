@@ -29,9 +29,9 @@
       "reviewUrl": "https://docs.google.com/document/d/1fkrtF1YSUEgQNPJ_CMbDE_K0NXsjQtKGkT8ewzTNIV4/edit",
       "imageUrl": "https://drive.google.com/file/d/19KQKOa0Ms0t8SGP7G_zCb0hKNTG183tg/view",
       "imagePath": "/images/BH-0002-eyecatch.webp",
-      "sourceSha256": "3408f76eb6f614e9b02ba19f17c4acdb875ae7ac44f73e5d4c5484ea164b1b52",
+      "sourceSha256": "fffc643237d94c8ecd1a04232577333ed08d3099b48016cf486d5951b1c9f841",
       "imageSha256": "f1e7e99c771ab7ef4bfc0ad9896b0b29c72e290225ccdbea4d9ddd7a1d405650",
-      "note": "編集者完成稿v2を表・見出し・リンクを保って変換。管理情報と編集記録は非掲載。"
+      "note": "2026-11-04 UI編集：面接前6項目のMarkdown表を意味のあるカード型に変更。元の6項目と実質内容を維持し、アクセシビリティとスマホ表示を改善。記事の事実情報・出典・タイトルは変更なし。変更後のコンテンツハッシュを更新。"
     }
   ]
 }
