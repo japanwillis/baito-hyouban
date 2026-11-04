@@ -9,31 +9,54 @@ BH-0002以降は、Googleドライブのマスター指示書・公開運営指�
 
 ## 記事の受け取り
 
-1. 台帳から記事ID・編集レビューURL・最終原稿URL・最終画像URL・alt文を確認する。編集待ち／差し戻し／保留なら終了する。
+1. 台帳から記事ID・編集レビューURL・最終原稿URL・最終画像URL・alt文を確認する。編集待ち／編集・修正中／差し戻し／保留なら終了する。現行の編集者Workは通常の修正を自ら行い、完成稿を「編集完成・承認」として納品する。公開担当は台帳の表示値を確認して英語の承認状態へ対応づける。
 2. 原稿から管理メモを除き、最終稿だけをMarkdownへ移す。画像は1200×630の検品済みWebPを使用する。元の承認済み内容を書き換えない。
 3. 公式・公的出典と内部リンクを再確認する。未公開記事へのリンクを出さない。
 4. `ops/publication-approvals.json` に記事ID、原稿・レビュー・画像URL、公開パス、確認日、承認状態、画像検品状態、残留条件解消、原稿・画像のSHA256を記録する。
 5. 変更をPRにまとめる。`npm ci` → `npm test` → `npm run build` を通す。ビルド前後のゲートは承認記録のない原稿・画像・生成記事を拒否する。下書きは `src/pages` や `public` に置かない。
 6. PC／スマホ表示、見出し、タイトル、description、canonical、OG画像、リンク、一覧・サイトマップへの掲載を検品する。PRの差分と台帳を照合してからmainに反映する。
 
+## 接続済みGitHub連携による実行入口
+
+コードの読書き・コミット・PR・実行結果・ログ・成果物の取得は接続済みGitHub連携を使う。通常の運用でクラウドブラウザ認証を要求しない。
+現在の連携には新規workflow_dispatch呼出しが公開されていないため、専用ファイルへの明示的な実行依頼コミットを入口にする。Google認証の未完了は作業停止理由にしない。
+
+依頼先は `main` の `ops/release-request.json`。1コミットでこのファイルだけを変更する。GitHub連携のcontents APIまたは期待SHA付きのref更新で、mainの同時更新を検知する。
+このファイルの変更でだけ本ワークフローを起動する。通常のコード・記事コミット、スケジュール、他のActions成功を契機とした自動公開は設定しない。
+リポジトリのmain書込権限を持つ担当が、目的と対象を確認して依頼する。秘密鍵やパスワードはJSONに入れない。
+
 ## 本番へ書き込まない差分確認（plan）
 
-GitHub Actionsの **Continuous release (manual plan, deploy, rollback)** を開く。
-Use workflow fromは`main`、modeは`plan`、source_shaは現在のmainの完全な40桁SHA。他の入力は空欄。
+まずmainの現在の完全な40桁SHAを読む。そのSHAをsource_shaに設定し、次のJSONを新しいrequest_idでコミットする。
 
-planは本番ファイルを書き換えない。接続先ホスト鍵を既存の固定指紋と照合し、非公開領域へ候補を転送する。
-サーバーのPython3、同一ファイルシステム、バックアップ・切替・途中失敗からの復旧を非公開の使い捨て領域で試験する。
-本番全ファイルと候補のSHA256を比較し、追加・変更・維持されるファイル、対象コミット、plan_sha256をActionsのSummaryと`result.json`に出す。
-BH-0001のHTML／画像変更、既存HTMLの削除、シンボリックリンク、パス逸脱、未完了の公開処理があれば停止する。
+```json
+{
+  "schema_version": 1,
+  "request_id": "plan-20261104-unique01",
+  "mode": "plan",
+  "source_sha": "取得したmainの完全な40桁SHA"
+}
+```
+
+依頼コミット自身のSHAは事前に予測しない。source_shaは依頼前の検証対象コードを表す。依頼ファイル以外の差分がsource_shaから発生していれば停止する。
+request_idは実行ごとに変更する。複数コード変更との一括コミット、force push、mergeコミットでの依頼は受け付けない。
+
+Actions側は、秘密情報のないジョブで依頼・差分・祖先関係を検証した後、指定された不変SHAをcheckoutしてビルド・承認照合・試験を行う。
+続いて固定SSHホスト鍵を照合し、候補を非公開領域へ転送。本番ファイルの全体バックアップを非公開領域へ保存してハッシュ一致を確認し、別の隔離領域で正常切替・途中失敗・復旧を試験する。本番公開ディレクトリは変更しない。
+結果は `result.json` とActions Summaryに、追加・変更・維持ファイル、plan_sha256、plan_id（run_id-attempt）、diff_verified・production_backup_verified・isolated_recovery_verifiedとして保存する。
+サーバーにも同じplan_idの検証記録と実物バックアップを保存し、後の公開時に照合する。
+
+実行結果の確認はGitHub連携のactions/runs読み取り→jobs・logs→artifactsと進む。成果物取得も連携ツールを使う。手動実行ボタンやブラウザのログイン状態には依存しない。
+ブラウザ用workflow_dispatchは補助入口として残すが、通常運用で使用する必要はない。
 
 ## 差分への手動承認と公開（deploy）
 
 planの結果と、原稿・画像の承認を人が確認する。GitHubリポジトリに書込権限がある人が手動実行する方式であり、二者承認やGitHub Environmentの必須レビューを設定済みという意味ではない。
 PrivateリポジトリのEnvironment保護機能は契約により利用条件が異なるため、この方式はその機能に依存しない。
 
-別の実行でmodeを`deploy`、source_shaをplanと同じSHA、plan_sha256を結果の64桁ハッシュにする。
-approvalには `DEPLOY <source_sha> <plan_sha256>` を正確に入力する。backup_idは空欄。
-mainが進んだ場合は新しいmainでplanからやり直す。plan後の本番ファイル変更や候補ファイル変更でもハッシュが一致せず停止する。
+結果を確認したうえで、別の明示依頼コミットを作る。mode=`deploy`、source_shaはplanと同じSHA、plan_idは成功したplanのrun_id-attempt、plan_sha256は確認済みの64桁ハッシュ、approvalは `DEPLOY <source_sha> <plan_sha256>`。request_idは新しくし、backup_idは指定しない。
+GitHub APIで指定したplanのActionsが同じワークフロー・main・同じattemptで成功していることを確認する。さらにサーバーに保存した検証記録の3条件がすべて成功で、バックアップ実物が一致し、コード・候補・本番のハッシュが承認時から変わっていないことを必須とする。
+mainにコード・記事の変更が入った場合は新しいSHAでplanからやり直す。依頼JSONだけの変更は許可する。planで新たに取得したバックアップとは別に、deploy直前にも全体バックアップを取得する。
 
 公開前に本番全体を `$HOME/.baito-hyouban-deploy/release-<run_id>-<attempt>/backup` へ保存し、ハッシュ一致を確認する。
 非公開の作業ディレクトリで既存ファイルと候補を合成し、既存のサーバー設定・古い参照用アセットを維持する。無差別削除・`rsync --delete`を使用しない。
@@ -45,10 +68,15 @@ HTTPS検証失敗時は直前バックアップへ戻して再検証する。既
 
 通常の障害は自動で復旧する。プロセス強制終了・タイムアウト・SSH断などで結果不明の場合は、再デプロイせずActionsログとサーバーのpending記録を確認する。
 バックアップIDは失敗／成功したdeployの`<run_id>-<attempt>`。planのrun IDではない。
-手動復旧はmode=`rollback`、現在のmainのsource_sha、backup_id、approval=`ROLLBACK <backup_id>`を指定する。plan_sha256は不要。
+復旧も新しい依頼JSONでmode=`rollback`、現在のmainのsource_sha、backup_id、approval=`ROLLBACK <backup_id>`を指定する。plan_id・plan_sha256は不要。
 最新の有効公開または未完了処理のバックアップだけを復旧可能とする。バックアップの完全性と本番の差分を再確認し、失敗版も非公開領域に残す。
 復旧後に全体のサーバーハッシュと公開ファイルのHTTPSを再検証する。
 バックアップと退避版を自動削除しない。容量は運営担当が確認し、保存期限・削除方針は別途決める。
+
+## 自動公開の扱い
+
+本番への自動公開は無効。mode=autoは拒否する。通常のpush・schedule・workflow_runによる公開ジョブは存在しない。明示的なdeploy依頼は、一回の公開を承認する操作であり、以降の自動公開を許可する操作ではない。
+自動公開を有効化する将来の変更は、実サーバーで差分確認・実物バックアップ検証・隔離復旧試験が成功した記録を確認し、別の変更として設計・承認する。今回の実装だけで有効にはしない。
 
 ## 成功後の記録
 

@@ -1,17 +1,23 @@
-name: Continuous release (manual plan, deploy, rollback)
+name: Continuous release (connector request)
 on:
+  push:
+    branches: [main]
+    paths: ['ops/release-request.json']
   workflow_dispatch:
     inputs:
       mode:
-        description: 'First run plan. Deploy requires the reviewed plan hash.'
+        description: 'Explicit request only; no automatic publishing'
         type: choice
         options: [plan, deploy, rollback]
         default: plan
         required: true
       source_sha:
-        description: 'Exact 40-character main commit SHA'
+        description: 'Exact reviewed 40-character source SHA'
         type: string
         required: true
+      plan_id:
+        description: 'Successful plan run_id-attempt (deploy only)'
+        type: string
       plan_sha256:
         description: 'Reviewed plan SHA256 (deploy only)'
         type: string
@@ -19,7 +25,7 @@ on:
         description: 'DEPLOY <source_sha> <plan_sha256> or ROLLBACK <backup_id>'
         type: string
       backup_id:
-        description: 'Backup ID from successful/unfinished deploy (rollback only)'
+        description: 'Backup run_id-attempt (rollback only)'
         type: string
 permissions:
   contents: read
@@ -27,42 +33,61 @@ concurrency:
   group: baito-hyouban-production
   cancel-in-progress: false
 jobs:
-  release:
+  request:
     if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 5
+    outputs:
+      mode: ${{ steps.request.outputs.mode }}
+      source_sha: ${{ steps.request.outputs.source_sha }}
+      plan_id: ${{ steps.request.outputs.plan_id }}
+      plan_sha256: ${{ steps.request.outputs.plan_sha256 }}
+      approval: ${{ steps.request.outputs.approval }}
+      backup_id: ${{ steps.request.outputs.backup_id }}
     steps:
       - uses: actions/checkout@v4
         with:
+          fetch-depth: 0
+          persist-credentials: false
+      - id: request
+        name: Validate request and source diff without server secrets
+        run: python3 scripts/release-request.py
+  release:
+    needs: request
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.request.outputs.source_sha }}
           persist-credentials: false
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Check requested commit
-        env:
-          SOURCE_SHA: ${{ inputs.source_sha }}
-        run: |
-          [[ "$SOURCE_SHA" =~ ^[a-f0-9]{40}$ ]]
-          test "$(git rev-parse HEAD)" = "$SOURCE_SHA"
       - name: Install, test and build approved release
-        if: ${{ inputs.mode != 'rollback' }}
+        if: ${{ needs.request.outputs.mode != 'rollback' }}
         run: |
           npm ci --no-audit --no-fund
           npm test
           npm run build
-      - name: Run manually selected operation
+      - name: Execute explicit connector request
         env:
-          RELEASE_MODE: ${{ inputs.mode }}
-          RELEASE_SHA: ${{ inputs.source_sha }}
-          PLAN_SHA256: ${{ inputs.plan_sha256 }}
-          RELEASE_APPROVAL: ${{ inputs.approval }}
-          BACKUP_ID: ${{ inputs.backup_id }}
+          RELEASE_MODE: ${{ needs.request.outputs.mode }}
+          RELEASE_SHA: ${{ needs.request.outputs.source_sha }}
+          PLAN_ID: ${{ needs.request.outputs.plan_id }}
+          PLAN_SHA256: ${{ needs.request.outputs.plan_sha256 }}
+          RELEASE_APPROVAL: ${{ needs.request.outputs.approval }}
+          BACKUP_ID: ${{ needs.request.outputs.backup_id }}
           XSERVER_HOST: ${{ vars.XSERVER_HOST }}
           XSERVER_USER: ${{ vars.XSERVER_USER }}
           XSERVER_PORT: ${{ vars.XSERVER_PORT }}
           XSERVER_KEY: ${{ secrets.XSERVER_SSH_PRIVATE_KEY }}
+          GH_READ_TOKEN: ${{ github.token }}
         run: python3 scripts/release-controller.py
-      - name: Retain plan and release verification
+      - name: Retain evidence for direct connector inspection
         if: always()
         uses: actions/upload-artifact@v4
         with:
@@ -70,4 +95,5 @@ jobs:
           path: release-evidence/
           if-no-files-found: warn
           retention-days: 30
-# No push/schedule trigger. No automatic deployment. Never invokes initial-publish-xserver.yml.
+# Only an explicit request commit triggers server operations; normal code pushes do not.
+# No schedule/workflow_run publish trigger. Automatic production publishing is disabled.

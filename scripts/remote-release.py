@@ -117,6 +117,37 @@ class Engine:
             raise
         return state
 
+    def verified_plan(self, candidate, source_sha, plan_id):
+        if not re.fullmatch(r'[0-9]+-[0-9]+', plan_id):
+            raise ValueError('Invalid plan ID')
+        plan = self.plan(candidate, source_sha)
+        rehearsal(self.control)
+        target = self.control / ('plan-' + plan_id)
+        target.mkdir(mode=0o700)
+        backup = target / 'backup'
+        shutil.copytree(str(self.root), str(backup), copy_function=shutil.copy2)
+        if inventory(backup) != plan['before'] or inventory(self.root) != plan['before']:
+            raise ValueError('Plan backup mismatch or concurrent server edit')
+        result = dict(plan, plan_id=plan_id, checks={'diff_verified': True,
+                      'production_backup_verified': True, 'isolated_recovery_verified': True})
+        write_json(target / 'receipt.json', result)
+        return result
+
+    def require_plan(self, candidate, source_sha, approved_digest, plan_id):
+        if not re.fullmatch(r'[0-9]+-[0-9]+', plan_id):
+            raise ValueError('Verified plan ID is required')
+        target = self.control / ('plan-' + plan_id)
+        receipt = json.loads((target / 'receipt.json').read_text())
+        checks = receipt.get('checks', {})
+        if (receipt.get('source_sha') != source_sha or receipt.get('plan_sha256') != approved_digest or
+            any(checks.get(k) is not True for k in ('diff_verified', 'production_backup_verified', 'isolated_recovery_verified'))):
+            raise ValueError('Successful diff, backup and recovery proof required')
+        if inventory(target / 'backup') != receipt['before']:
+            raise ValueError('Plan backup no longer matches')
+        if self.plan(candidate, source_sha)['plan_sha256'] != approved_digest:
+            raise ValueError('Source, candidate or production changed after plan')
+        return receipt
+
     def finish(self, release_id):
         state = self._state(release_id)
         if state['phase'] != 'awaiting-https' or inventory(self.root) != state['after']:
@@ -223,7 +254,7 @@ def unpack(archive, destination):
             out.chmod(0o644)
 
 def main():
-    mode, release_id, source_sha, approved = sys.argv[1:]
+    mode, release_id, source_sha, approved, plan_id = sys.argv[1:]
     if not re.fullmatch(r'[0-9]+-[0-9]+', release_id) or not re.fullmatch(r'[a-f0-9]{40}', source_sha):
         raise ValueError('Invalid release ID or commit')
     home = Path.home()
@@ -231,11 +262,13 @@ def main():
     with (engine.control / 'lock').open('a') as lock:
         fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
         if mode in ('plan', 'apply'):
-            rehearsal(engine.control)
             candidate = engine.control / ('incoming-' + release_id)
             unpack(engine.control / (release_id + '.tar'), candidate)
-            result = (engine.plan(candidate, source_sha) if mode == 'plan' else
-                      engine.apply(candidate, source_sha, approved, release_id))
+            if mode == 'plan':
+                result = engine.verified_plan(candidate, source_sha, release_id)
+            else:
+                engine.require_plan(candidate, source_sha, approved, plan_id)
+                result = engine.apply(candidate, source_sha, approved, release_id)
         elif mode == 'rollback':
             result = engine.rollback(release_id)
         elif mode == 'finish':

@@ -1,0 +1,6 @@
+{
+  "schema_version": 1,
+  "request_id": "plan-YYYYMMDD-unique",
+  "mode": "plan",
+  "source_sha": "REPLACE_WITH_VERIFIED_MAIN_SHA"
+}

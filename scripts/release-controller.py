@@ -14,6 +14,22 @@ from pathlib import Path
 HOST_FP = 'SHA256:VBukSLflrITK4l8kOHlHhvV5YrpzMEtiwOJO8uMYKY8'
 BASE = 'https://baito-hyouban.com'
 
+def verify_successful_plan_run(plan_id, repository, token):
+    if not re.fullmatch(r'[0-9]+-[0-9]+', plan_id) or not re.fullmatch(r'[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+', repository):
+        raise ValueError('Invalid plan reference')
+    if not token:
+        raise ValueError('Read-only Actions token required')
+    run_id, attempt = plan_id.split('-')
+    req = urllib.request.Request('https://api.github.com/repos/' + repository + '/actions/runs/' + run_id,
+          headers={'Authorization': 'Bearer ' + token, 'Accept': 'application/vnd.github+json'})
+    # Fixed GitHub API destination; credentials never appear in request logs/output.
+    with urllib.request.urlopen(req, timeout=30) as response:
+        run = json.load(response)
+    if (run.get('status') != 'completed' or run.get('conclusion') != 'success' or
+        str(run.get('run_attempt')) != attempt or run.get('head_branch') != 'main' or
+        run.get('path') != '.github/workflows/continuous-release.yml'):
+        raise ValueError('The referenced plan workflow has not succeeded')
+
 def public_verify(manifest):
     # Verify EVERY changed/new file and all public HTML entrypoints. Requests do not
     # follow redirects, so a redirect or soft error cannot count as a successful release.
@@ -40,6 +56,7 @@ def main():
     sha = os.environ['RELEASE_SHA']
     approval = os.environ.get('RELEASE_APPROVAL', '')
     plan_digest = os.environ.get('PLAN_SHA256', '')
+    plan_id = os.environ.get('PLAN_ID', '')
     current_id = os.environ['GITHUB_RUN_ID'] + '-' + os.environ['GITHUB_RUN_ATTEMPT']
     backup_id = os.environ.get('BACKUP_ID', '')
     if mode not in ('plan', 'deploy', 'rollback') or not re.fullmatch(r'[a-f0-9]{40}', sha):
@@ -50,6 +67,8 @@ def main():
     if mode == 'deploy' and (not re.fullmatch(r'[a-f0-9]{64}', plan_digest) or
         approval != 'DEPLOY ' + sha + ' ' + plan_digest):
         raise ValueError('Explicit approval of commit and plan required')
+    if mode == 'deploy':
+        verify_successful_plan_run(plan_id, os.environ.get('GITHUB_REPOSITORY', ''), os.environ.get('GH_READ_TOKEN', ''))
     if mode == 'rollback' and (not re.fullmatch(r'[0-9]+-[0-9]+', backup_id) or approval != 'ROLLBACK ' + backup_id):
         raise ValueError('Explicit approval of backup ID required')
     host, user, port = [os.environ.get('XSERVER_' + n, '') for n in ('HOST', 'USER', 'PORT')]
@@ -76,8 +95,8 @@ def main():
         ssh = ['ssh', '-T', '-i', str(identity), '-p', port, '-o', 'BatchMode=yes', '-o', 'IdentitiesOnly=yes',
                '-o', 'StrictHostKeyChecking=yes', '-o', 'UserKnownHostsFile=' + str(known), user + '@' + host]
         engine = Path('scripts/remote-release.py').read_bytes()
-        def remote(op, rid, digest='-'):
-            command = 'python3 - ' + ' '.join(shlex.quote(x) for x in [op, rid, sha, digest])
+        def remote(op, rid, digest='-', proof='-'):
+            command = 'python3 - ' + ' '.join(shlex.quote(x) for x in [op, rid, sha, digest, proof])
             result = subprocess.run(ssh + [command], input=engine, stdout=subprocess.PIPE, check=True)
             return json.loads(result.stdout)
         if mode in ('plan', 'deploy'):
@@ -91,13 +110,14 @@ def main():
             # Known, validated numeric filename. This upload never touches public_html.
             command = 'umask 077; test ! -L "$HOME/.baito-hyouban-deploy" && mkdir -p "$HOME/.baito-hyouban-deploy" && chmod 700 "$HOME/.baito-hyouban-deploy" && test ! -e "$HOME/.baito-hyouban-deploy/' + current_id + '.tar" && cat > "$HOME/.baito-hyouban-deploy/' + current_id + '.tar"'
             subprocess.run(ssh + [command], input=archive.read_bytes(), check=True)
-            result = remote('plan' if mode == 'plan' else 'apply', current_id, plan_digest or '-')
+            result = remote('plan' if mode == 'plan' else 'apply', current_id, plan_digest or '-', plan_id or '-')
             Path('release-evidence/result.json').write_text(json.dumps(result, indent=2))
             if mode == 'plan':
                 summary = '## Plan only — public files unchanged\n\nCommit: `' + sha + '`\n\nPlan SHA256: `' + result['plan_sha256'] + '`\n'
                 for name in ('added', 'changed', 'preserved'):
                     summary += '\n### ' + name + '\n\n' + ''.join('- `' + p + '`\n' for p in result[name])
-                summary += '\nAfter reviewing result.json, manually run deploy with:\n\n`DEPLOY ' + sha + ' ' + result['plan_sha256'] + '`\n'
+                summary += '\nPlan ID: `' + current_id + '`\n\nDiff, real-site backup and isolated recovery rehearsal passed.\n'
+                summary += '\nAfter reviewing result.json, submit a separate deploy request with plan_id and approval:\n\n`DEPLOY ' + sha + ' ' + result['plan_sha256'] + '`\n'
                 with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as f:
                     f.write(summary)
                 print(summary)
