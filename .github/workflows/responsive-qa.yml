@@ -1,0 +1,35 @@
+name: Responsive QA (public site only)
+on:
+  push:
+    branches: ['qa/responsive-*']
+    paths: ['.github/workflows/responsive-qa.yml', 'scripts/responsive-qa.mjs']
+permissions:
+  contents: read
+jobs:
+  responsive:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install isolated pinned browser test dependencies
+        run: |
+          npm install --prefix "$RUNNER_TEMP/responsive-qa" --no-package-lock --no-audit --no-fund playwright@1.64.1
+          node "$RUNNER_TEMP/responsive-qa/node_modules/playwright/cli.js" install --with-deps chromium
+      - name: Check public pages at mobile, tablet and desktop widths
+        env:
+          PLAYWRIGHT_MODULE_PATH: ${{ runner.temp }}/responsive-qa/node_modules/playwright/index.mjs
+        run: node scripts/responsive-qa.mjs
+      - name: Save screenshots and measurements
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: responsive-qa-${{ github.run_id }}
+          path: responsive-qa-evidence/
+          if-no-files-found: error
+          retention-days: 30
+# Separate QA branch only. No Xserver secret, upload, deployment or form submission.
