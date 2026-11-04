@@ -12,7 +12,9 @@ jobs:
         with:
           node-version: '22'
       - name: Install dependencies
-        run: npm install --no-audit --no-fund
+        run: npm ci --no-audit --no-fund
+      - name: Test release safety
+        run: npm test
       - name: Build static site
         run: npm run build
       - name: Check first article and image
@@ -29,3 +31,4 @@ jobs:
           if-no-files-found: error
           retention-days: 7
 # This workflow ONLY prepares an artifact. It does not connect to Xserver or publish.
+

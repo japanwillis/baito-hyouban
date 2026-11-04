@@ -1,6 +1,6 @@
 # エックスサーバーへの公開手順（準備版）
 
-**現在は未公開です。** GitHub Actions の `Prepare static release (no deployment)` は、検証用の静的ファイルを作るだけでサーバー接続・公開はしません。
+**2026-11-04にBH-0001を初回公開済み。** 2記事目以降は[継続公開手順](ContinuousRelease.md)を使用する。初回公開専用ワークフローは再実行しない。`Prepare static release (no deployment)` は引き続き成果物作成のみ。
 
 ## 前提
 - ドメイン: `baito-hyouban.com`
@@ -21,9 +21,10 @@
 - SSH秘密鍵、サーバーパスワードをチャットやGoogleドライブに貼らない。
 - GitHub Secretsの設定を行う際は鍵管理者自身がGitHubの管理画面で入力する。
 - 公開鍵はサーバーパネルに登録する。公開鍵と秘密鍵を取り違えない。
-- リリースワークフローが実装されるまで GitHub Actions は **サーバーに接続しない**。
+- 継続公開は手動のplan（差分確認）とdeploy（ハッシュ指定の明示承認）を分ける。pushを契機とした自動公開は行わない。
 
 ## 公式マニュアル
 - SSH設定: https://www.xserver.ne.jp/manual/man_server_ssh.php
 - FTP公開ディレクトリ: https://www.xserver.ne.jp/manual/man_ftp_setting.php
 - ドメイン設定: https://www.xserver.ne.jp/manual/man_domain_setting.php
+
