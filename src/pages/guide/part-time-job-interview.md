@@ -179,3 +179,16 @@ editorialStatus: approved
 [[4] 厚生労働省 公正採用選考特設サイト よくある質問](https://kouseisaiyou.mhlw.go.jp/question.html)
 
 情報確認日：2026年11月4日。公的資料は労働条件明示と公正な採用選考に関する記述の根拠です。回答や準備の方法は編集部の提案であり、勤務条件・質問内容は応募先によって異なります。
+
+
+<style>
+.prep-card-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:1.5rem 0 2rem}
+.prep-card{display:flex;align-items:flex-start;gap:14px;min-width:0;padding:20px;border:1px solid #dce8e9;border-radius:14px;background:#fff;box-shadow:0 4px 18px rgba(23,58,69,.045)}
+.prep-card__number{display:grid;place-items:center;flex:0 0 38px;width:38px;height:38px;border-radius:11px;background:#e5f3f3;color:#126b75;font-size:13px;font-weight:800;letter-spacing:.03em}
+.prep-card__body{min-width:0}
+.article-content .prep-card h3{font-size:1.02rem;line-height:1.5;margin:0 0 .45rem;color:#173945}
+.article-content .prep-card p{margin:0;font-size:.92rem;line-height:1.82;color:#415f68}
+.article-content .prep-card strong{color:#264852}
+@media(max-width:800px){.prep-card-list{grid-template-columns:1fr;gap:10px}.prep-card{padding:16px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
