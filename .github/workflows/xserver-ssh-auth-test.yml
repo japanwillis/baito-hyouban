@@ -1,0 +1,62 @@
+name: Xserver SSH authentication test (read-only)
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/xserver-ssh-auth-test.yml'
+permissions:
+  contents: read
+jobs:
+  authenticate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    env:
+      XSERVER_HOST: ${{ vars.XSERVER_HOST }}
+      XSERVER_USER: ${{ vars.XSERVER_USER }}
+      XSERVER_PORT: ${{ vars.XSERVER_PORT }}
+      XSERVER_KEY: ${{ secrets.XSERVER_SSH_PRIVATE_KEY }}
+      EXPECTED_ED25519_FP: 'SHA256:VBukSLflrITK4l8kOHlHhvV5YrpzMEtiwOJO8uMYKY8'
+    steps:
+      - name: Validate connection settings without displaying secrets
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$XSERVER_HOST" && test -n "$XSERVER_USER" && test -n "$XSERVER_PORT" && test -n "$XSERVER_KEY" || { echo "::error::Missing SSH configuration"; exit 1; }
+          [[ "$XSERVER_HOST" =~ ^[A-Za-z0-9][A-Za-z0-9.-]*$ ]] || exit 1
+          [[ "$XSERVER_USER" =~ ^[A-Za-z0-9][A-Za-z0-9_-]*$ ]] || exit 1
+          [[ "$XSERVER_PORT" =~ ^[0-9]{1,5}$ ]] && (( 10#$XSERVER_PORT >= 1 && 10#$XSERVER_PORT <= 65535 )) || exit 1
+      - name: Check independently verified host fingerprint
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          workdir="$(mktemp -d)"
+          echo "SSH_WORKDIR=$workdir" >> "$GITHUB_ENV"
+          ssh-keyscan -T 12 -p "$XSERVER_PORT" -t ed25519 "$XSERVER_HOST" 2>/dev/null > "$workdir/known_hosts"
+          test -s "$workdir/known_hosts" || { echo "::error::Host did not return an ED25519 key"; exit 1; }
+          actual="$(ssh-keygen -lf "$workdir/known_hosts" -E sha256 | awk '{print $2}' | head -n 1)"
+          if [[ "$actual" != "$EXPECTED_ED25519_FP" ]]; then
+            echo "::error::SSH host fingerprint mismatch. Authentication refused."
+            exit 1
+          fi
+          echo "Server identity verified against independently confirmed ED25519 fingerprint."
+      - name: Verify SSH public-key authentication only
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          trap 'rm -rf "$SSH_WORKDIR"' EXIT
+          printf '%s\n' "$XSERVER_KEY" > "$SSH_WORKDIR/deploy.key"
+          chmod 600 "$SSH_WORKDIR/deploy.key"
+          ssh-keygen -y -P '' -f "$SSH_WORKDIR/deploy.key" >/dev/null || { echo "::error::Private key could not be read without a passphrase"; exit 1; }
+          output="$(ssh -T -i "$SSH_WORKDIR/deploy.key" -p "$XSERVER_PORT" \
+            -o BatchMode=yes -o IdentitiesOnly=yes \
+            -o ConnectTimeout=15 -o ConnectionAttempts=1 \
+            -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$SSH_WORKDIR/known_hosts" \
+            -o PreferredAuthentications=publickey -o NumberOfPasswordPrompts=0 \
+            "$XSERVER_USER@$XSERVER_HOST" 'printf "SSH_AUTH_OK\\n"')"
+          if [[ "$output" != 'SSH_AUTH_OK' ]]; then
+            echo "::error::Unexpected SSH response; no deployment performed."
+            exit 1
+          fi
+          echo "SSH authentication successful. No server files were modified."
