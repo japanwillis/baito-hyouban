@@ -1,0 +1,118 @@
+name: Initial publish to Xserver (manual confirmation)
+on:
+  workflow_dispatch:
+    inputs:
+      confirmation:
+        description: 'Type PUBLISH to confirm first public release'
+        required: true
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: baito-hyouban-production
+  cancel-in-progress: false
+jobs:
+  publish:
+    if: ${{ github.ref == 'refs/heads/main' && inputs.confirmation == 'PUBLISH' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    env:
+      XSERVER_HOST: ${{ vars.XSERVER_HOST }}
+      XSERVER_USER: ${{ vars.XSERVER_USER }}
+      XSERVER_PORT: ${{ vars.XSERVER_PORT }}
+      XSERVER_KEY: ${{ secrets.XSERVER_SSH_PRIVATE_KEY }}
+      EXPECTED_ED25519_FP: 'SHA256:VBukSLflrITK4l8kOHlHhvV5YrpzMEtiwOJO8uMYKY8'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install and build
+        run: |
+          set -euo pipefail
+          npm install --no-audit --no-fund
+          npm run build
+      - name: Verify exact release contents
+        shell: bash
+        run: |
+          set -euo pipefail
+          for f in index.html guide/first-part-time-job/index.html images/BH-0001-eyecatch.webp about/index.html contact/index.html privacy/index.html advertising/index.html editorial-policy/index.html sitemap.xml robots.txt; do
+            test -f "dist/$f" || { echo "::error::Missing release file: $f"; exit 1; }
+          done
+          if find dist -type l | grep -q .; then
+            echo "::error::Unexpected symbolic link in release"
+            exit 1
+          fi
+          echo "Required pages and image found."
+      - name: Set up pinned SSH authentication
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$XSERVER_HOST" && test -n "$XSERVER_USER" && test -n "$XSERVER_PORT" && test -n "$XSERVER_KEY" || { echo "::error::Missing Xserver settings"; exit 1; }
+          [[ "$XSERVER_HOST" =~ ^[A-Za-z0-9][A-Za-z0-9.-]*$ ]]
+          [[ "$XSERVER_USER" =~ ^[A-Za-z0-9][A-Za-z0-9_-]*$ ]]
+          [[ "$XSERVER_PORT" =~ ^[0-9]{1,5}$ ]]
+          umask 077
+          workdir="$(mktemp -d)"
+          echo "SSH_TMPDIR=$workdir" >> "$GITHUB_ENV"
+          ssh-keyscan -T 12 -p "$XSERVER_PORT" -t ed25519 "$XSERVER_HOST" 2>/dev/null > "$workdir/known_hosts"
+          test -s "$workdir/known_hosts"
+          actual="$(ssh-keygen -lf "$workdir/known_hosts" -E sha256 | awk '{print $2}' | head -n 1)"
+          if [[ "$actual" != "$EXPECTED_ED25519_FP" ]]; then
+            echo "::error::SSH host key mismatch; refusing deployment"
+            exit 1
+          fi
+          printf '%s\n' "$XSERVER_KEY" > "$workdir/deploy.key"
+          chmod 600 "$workdir/deploy.key"
+          ssh-keygen -y -P '' -f "$workdir/deploy.key" > /dev/null
+          echo "Pinned SSH identity confirmed."
+      - name: Check destination is exactly the empty site root
+        shell: bash
+        run: |
+          set -euo pipefail
+          ssh -T -i "$SSH_TMPDIR/deploy.key" -p "$XSERVER_PORT" -o BatchMode=yes -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$SSH_TMPDIR/known_hosts" "$XSERVER_USER@$XSERVER_HOST" 'sh -s' <<'REMOTE'
+          set -eu
+          dest="$HOME/baito-hyouban.com/public_html"
+          test -d "$dest" || { echo "Destination directory missing"; exit 1; }
+          test ! -L "$dest" || { echo "Destination is symlink; refusing"; exit 1; }
+          test -w "$dest" || { echo "Destination not writable"; exit 1; }
+          if [ -n "$(find "$dest" -mindepth 1 -maxdepth 1 -print -quit)" ]; then
+            echo "Destination not empty: refusing initial deployment"
+            exit 1
+          fi
+          command -v tar >/dev/null || { echo "tar unavailable"; exit 1; }
+          echo "Empty domain root verified."
+          REMOTE
+      - name: Publish static files (no deletion)
+        shell: bash
+        run: |
+          set -euo pipefail
+          tar -C dist -cf - . | ssh -T -i "$SSH_TMPDIR/deploy.key" -p "$XSERVER_PORT" -o BatchMode=yes -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$SSH_TMPDIR/known_hosts" "$XSERVER_USER@$XSERVER_HOST" 'cd "$HOME/baito-hyouban.com/public_html" && tar -xf -'
+      - name: Verify files on Xserver
+        shell: bash
+        run: |
+          set -euo pipefail
+          ssh -T -i "$SSH_TMPDIR/deploy.key" -p "$XSERVER_PORT" -o BatchMode=yes -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$SSH_TMPDIR/known_hosts" "$XSERVER_USER@$XSERVER_HOST" 'sh -s' <<'REMOTE'
+          set -eu
+          dest="$HOME/baito-hyouban.com/public_html"
+          test -s "$dest/index.html"
+          test -s "$dest/guide/first-part-time-job/index.html"
+          test -s "$dest/images/BH-0001-eyecatch.webp"
+          test -s "$dest/privacy/index.html"
+          echo "Required files present on Xserver."
+          REMOTE
+      - name: Check public website via HTTPS
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --location --silent --show-error --retry 3 --retry-delay 3 --max-time 25 -o /tmp/baito-home.html https://baito-hyouban.com/
+          grep -q 'バイトの評判' /tmp/baito-home.html || { echo "::error::Homepage content not verified"; exit 1; }
+          curl --fail --location --silent --show-error --retry 3 --retry-delay 3 --max-time 25 -o /tmp/baito-article.html https://baito-hyouban.com/guide/first-part-time-job/
+          grep -q '初めてのバイト' /tmp/baito-article.html || { echo "::error::Article content not verified"; exit 1; }
+          echo "Public homepage and article verified over HTTPS."
+      - name: Clean up SSH material
+        if: always()
+        shell: bash
+        run: |
+          if [ -n "${SSH_TMPDIR:-}" ] && [ -d "$SSH_TMPDIR" ]; then rm -rf -- "$SSH_TMPDIR"; fi
+# No automatic push trigger. Does not delete remote files. Initial deployment refuses a nonempty target.
