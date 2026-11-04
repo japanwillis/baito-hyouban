@@ -1,9 +1,6 @@
 {
   "schema_version": 1,
-  "request_id": "deploy-interviewcards-20261104-02",
-  "mode": "deploy",
-  "source_sha": "24872ca9f065f1913044225843dec701090dfaec",
-  "plan_id": "41797222378-1",
-  "plan_sha256": "347d1999270d289df41f32f852ac0a11245ac930923beaa8d49a97550a13d50a",
-  "approval": "DEPLOY 24872ca9f065f1913044225843dec701090dfaec 347d1999270d289df41f32f852ac0a11245ac930923beaa8d49a97550a13d50a"
+  "request_id": "plan-adsense-20261104-01",
+  "mode": "plan",
+  "source_sha": "2bf0bfb696644b4f56cf5dc46504e10957c2afbe"
 }
