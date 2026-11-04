@@ -16,6 +16,21 @@ import tempfile
 from pathlib import Path, PurePosixPath
 
 PROTECTED = ('guide/first-part-time-job/index.html', 'images/BH-0001-eyecatch.webp')
+# The publisher-authorized global AdSense code is the sole allowed modification
+# to the protected BH-0001 HTML. All underlying article bytes remain unchanged.
+ADSENSE_TAG = b'<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8238079237305844" crossorigin="anonymous"></script>'
+
+def approved_adsense_header_only(root, candidate):
+    original = (root / PROTECTED[0]).read_bytes()
+    updated = (candidate / PROTECTED[0]).read_bytes()
+    if updated.count(ADSENSE_TAG) != 1:
+        return False
+    start, end = updated.find(b'<head>'), updated.find(b'</head>')
+    where = updated.find(ADSENSE_TAG)
+    if not (start >= 0 and start < where < end):
+        return False
+    # Explicitly allow one script line immediately after <head>, not article edits.
+    return updated.replace(ADSENSE_TAG + b'\n', b'', 1) == original
 
 def canonical(value):
     return json.dumps(value, ensure_ascii=True, sort_keys=True, separators=(',', ':')).encode()
@@ -60,8 +75,11 @@ class Engine:
         if not before or 'index.html' not in before:
             raise ValueError('Existing site required; initial deployment forbidden')
         for p in PROTECTED:
-            if p not in before or proposed.get(p) != before[p]:
-                raise ValueError('BH-0001 content/image must remain byte-identical: ' + p)
+            if p not in before or p not in proposed:
+                raise ValueError('Protected BH-0001 asset missing: ' + p)
+            if proposed[p] != before[p]:
+                if p != PROTECTED[0] or not approved_adsense_header_only(self.root, candidate):
+                    raise ValueError('BH-0001 content/image must remain byte-identical: ' + p)
         # Article removal is a separate, explicitly reviewed operation. Old hashed assets
         # and unknown server files remain intact, including any server configuration.
         removed_html = [p for p in before if p.endswith('.html') and p not in proposed]
