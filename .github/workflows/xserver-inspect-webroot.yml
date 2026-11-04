@@ -1,0 +1,70 @@
+name: Inspect Xserver web root (read-only)
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/xserver-inspect-webroot.yml'
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      XSERVER_HOST: ${{ vars.XSERVER_HOST }}
+      XSERVER_USER: ${{ vars.XSERVER_USER }}
+      XSERVER_PORT: ${{ vars.XSERVER_PORT }}
+      XSERVER_KEY: ${{ secrets.XSERVER_SSH_PRIVATE_KEY }}
+      EXPECTED_ED25519_FP: 'SHA256:VBukSLflrITK4l8kOHlHhvV5YrpzMEtiwOJO8uMYKY8'
+    steps:
+      - name: Verify connection settings and host identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$XSERVER_HOST" && test -n "$XSERVER_USER" && test -n "$XSERVER_PORT" && test -n "$XSERVER_KEY"
+          [[ "$XSERVER_HOST" =~ ^[A-Za-z0-9][A-Za-z0-9.-]*$ ]]
+          [[ "$XSERVER_USER" =~ ^[A-Za-z0-9][A-Za-z0-9_-]*$ ]]
+          [[ "$XSERVER_PORT" =~ ^[0-9]{1,5}$ ]]
+          umask 077
+          dir="$(mktemp -d)"
+          echo "SSH_TEMP_DIR=$dir" >> "$GITHUB_ENV"
+          ssh-keyscan -T 10 -p "$XSERVER_PORT" -t ed25519 "$XSERVER_HOST" 2>/dev/null > "$dir/known_hosts"
+          test -s "$dir/known_hosts"
+          actual="$(ssh-keygen -lf "$dir/known_hosts" -E sha256 | awk '{print $2}' | head -1)"
+          test "$actual" = "$EXPECTED_ED25519_FP" || { echo "::error::Host key mismatch"; exit 1; }
+          printf '%s\n' "$XSERVER_KEY" > "$dir/deploy.key"
+          chmod 600 "$dir/deploy.key"
+          echo "Pinned SSH host key verified."
+      - name: Inspect web root metadata without writing
+        shell: bash
+        run: |
+          set -euo pipefail
+          trap 'rm -rf "$SSH_TEMP_DIR"' EXIT
+          ssh -T -i "$SSH_TEMP_DIR/deploy.key" -p "$XSERVER_PORT" \
+            -o BatchMode=yes -o IdentitiesOnly=yes \
+            -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$SSH_TEMP_DIR/known_hosts" \
+            -o ConnectTimeout=15 -o NumberOfPasswordPrompts=0 \
+            "$XSERVER_USER@$XSERVER_HOST" 'sh -s' <<'REMOTE'
+          set -eu
+          target="$HOME/baito-hyouban.com/public_html"
+          echo "WEBROOT_RELATIVE_PATH=baito-hyouban.com/public_html"
+          if [ ! -d "$target" ]; then
+            echo "WEBROOT_EXISTS=no"
+            exit 0
+          fi
+          echo "WEBROOT_EXISTS=yes"
+          if [ -L "$target" ]; then
+            echo "WEBROOT_IS_SYMLINK=yes"
+          else
+            echo "WEBROOT_IS_SYMLINK=no"
+          fi
+          if [ -w "$target" ]; then
+            echo "WEBROOT_WRITABLE=yes"
+          else
+            echo "WEBROOT_WRITABLE=no"
+          fi
+          echo "WEBROOT_TOP_LEVEL_ITEMS:"
+          find "$target" -mindepth 1 -maxdepth 1 -printf '%f\n' | LC_ALL=C sort | head -n 40 || true
+          echo "WEBROOT_TOP_LEVEL_ITEMS_END"
+          echo "NO_FILES_CHANGED=yes"
+          REMOTE
