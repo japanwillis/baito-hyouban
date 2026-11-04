@@ -30,7 +30,7 @@ def approved_adsense_header_only(root, candidate):
     if not (start >= 0 and start < where < end):
         return False
     # Explicitly allow one script line immediately after <head>, not article edits.
-    return updated.replace(ADSENSE_TAG + b'\n', b'', 1) == original
+    return updated.replace(ADSENSE_TAG, b'', 1) == original
 
 def canonical(value):
     return json.dumps(value, ensure_ascii=True, sort_keys=True, separators=(',', ':')).encode()
