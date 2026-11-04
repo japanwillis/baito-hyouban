@@ -16,6 +16,22 @@
       "sourceSha256": "a6af7574ca8871f19d4f87f0614e0dfa5d9f2d66a6f18b716e707197b3365a0b",
       "imageSha256": "d05c31da4454fb1fb3511fe3b385c68fc370f5c2aa5ffd465b768a69d3a937cc",
       "note": "既存公開済み記事の承認記録。本文・画像の再制作は禁止。2026-11-04公開検品時点の原稿を固定。"
+    },
+    {
+      "articleId": "BH-0002",
+      "sourcePath": "src/pages/guide/part-time-job-interview.md",
+      "publicPath": "/guide/part-time-job-interview/",
+      "editorialStatus": "approved",
+      "conditionsResolved": true,
+      "imageVerified": true,
+      "linksVerifiedOn": "2026-11-04",
+      "manuscriptUrl": "https://docs.google.com/document/d/1fkrtF1YSUEgQNPJ_CMbDE_K0NXsjQtKGkT8ewzTNIV4/edit",
+      "reviewUrl": "https://docs.google.com/document/d/1fkrtF1YSUEgQNPJ_CMbDE_K0NXsjQtKGkT8ewzTNIV4/edit",
+      "imageUrl": "https://drive.google.com/file/d/19KQKOa0Ms0t8SGP7G_zCb0hKNTG183tg/view",
+      "imagePath": "/images/BH-0002-eyecatch.webp",
+      "sourceSha256": "3408f76eb6f614e9b02ba19f17c4acdb875ae7ac44f73e5d4c5484ea164b1b52",
+      "imageSha256": "f1e7e99c771ab7ef4bfc0ad9896b0b29c72e290225ccdbea4d9ddd7a1d405650",
+      "note": "編集者完成稿v2を表・見出し・リンクを保って変換。管理情報と編集記録は非掲載。"
     }
   ]
 }
