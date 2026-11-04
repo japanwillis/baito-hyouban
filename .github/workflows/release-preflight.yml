@@ -1,0 +1,31 @@
+name: Prepare static release (no deployment)
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+      - name: Build static site
+        run: npm run build
+      - name: Check first article and image
+        run: |
+          test -f dist/index.html
+          test -f dist/guide/first-part-time-job/index.html
+          test -f dist/images/BH-0001-eyecatch.webp
+          test -f dist/sitemap.xml
+      - name: Archive static release for review
+        uses: actions/upload-artifact@v4
+        with:
+          name: baito-hyouban-static-preview
+          path: dist/
+          if-no-files-found: error
+          retention-days: 7
+# This workflow ONLY prepares an artifact. It does not connect to Xserver or publish.
