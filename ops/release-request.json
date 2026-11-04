@@ -1,9 +1,6 @@
 {
   "schema_version": 1,
-  "request_id": "deploy-bh0002-20261104-01",
-  "mode": "deploy",
-  "source_sha": "a2b75ebabdbde99b3c3f67a2c0793884ac603d94",
-  "plan_id": "41794178003-1",
-  "plan_sha256": "cdb1faf83592c80255deec71d7497e74302ce8d42a23f9849bd7be4514b588d1",
-  "approval": "DEPLOY a2b75ebabdbde99b3c3f67a2c0793884ac603d94 cdb1faf83592c80255deec71d7497e74302ce8d42a23f9849bd7be4514b588d1"
+  "request_id": "plan-ui-cards-20261104-01",
+  "mode": "plan",
+  "source_sha": "5c47500b7db233b9f382d3bf4a68062d4b6e06de"
 }
