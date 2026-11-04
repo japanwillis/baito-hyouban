@@ -16,7 +16,7 @@ try {
       return url.origin === origin ? route.continue() : route.abort();
     });
     const page = await context.newPage();
-    for (const [label, path] of [['home', '/'], ['guide', '/guide/'], ['article', '/guide/first-part-time-job/']]) {
+    for (const [label, path] of [['home', '/'], ['guide', '/guide/'], ['article', '/guide/part-time-job-interview/']]) {
       const response = await page.goto(origin + path, { waitUntil: 'networkidle', timeout: 45000 });
       await page.evaluate(async () => { await document.fonts.ready; });
       await page.locator('footer').scrollIntoViewIfNeeded();
@@ -43,8 +43,8 @@ try {
       results.push({ label, path, width, screenshot, metrics, errors });
     }
     await page.goto(origin + '/', { waitUntil: 'networkidle' });
-    await page.locator('a.feature-article').click();
-    await page.waitForURL(origin + '/guide/first-part-time-job/');
+    await page.locator('a.feature-article[href="/guide/part-time-job-interview/"]').click();
+    await page.waitForURL(origin + '/guide/part-time-job-interview/');
     results.push({ label: 'home-to-article-navigation', width, errors: [] });
     await context.close();
   }
