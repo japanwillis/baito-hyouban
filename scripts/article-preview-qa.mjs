@@ -1,9 +1,12 @@
-// Read-only public-site browser regression, run only on a separate QA branch.
-import { mkdir, writeFile } from 'node:fs/promises';
+// Read-only responsive QA for the newest approved article; local preview by default.
+import { mkdir, writeFile, readFile } from 'node:fs/promises';
 import { pathToFileURL } from 'node:url';
 const { chromium } = await import(pathToFileURL(process.env.PLAYWRIGHT_MODULE_PATH).href);
 const canonicalOrigin = 'https://baito-hyouban.com';
-const origin = 'http://127.0.0.1:4321';
+const origin = process.env.QA_ORIGIN || 'http://127.0.0.1:4321';
+if (!['http://127.0.0.1:4321', canonicalOrigin].includes(origin)) throw Error('Unapproved QA origin');
+const approvals = JSON.parse(await readFile('ops/publication-approvals.json', 'utf8'));
+const articlePath = approvals.articles.at(-1).publicPath;
 const out = 'responsive-qa-evidence';
 await mkdir(out, { recursive: true });
 const browser = await chromium.launch();
@@ -17,7 +20,7 @@ try {
       return url.origin === origin ? route.continue() : route.abort();
     });
     const page = await context.newPage();
-    for (const [label, path] of [['home', '/'], ['guide', '/guide/'], ['article', '/guide/part-time-job-interview/']]) {
+    for (const [label, path] of [['home', '/'], ['guide', '/guide/'], ['article', articlePath]]) {
       const response = await page.goto(origin + path, { waitUntil: 'networkidle', timeout: 45000 });
       await page.evaluate(async () => { await document.fonts.ready; });
       await page.locator('footer').scrollIntoViewIfNeeded();
@@ -44,8 +47,8 @@ try {
       results.push({ label, path, width, screenshot, metrics, errors });
     }
     await page.goto(origin + '/', { waitUntil: 'networkidle' });
-    await page.locator('a.feature-article[href="/guide/part-time-job-interview/"]').click();
-    await page.waitForURL(origin + '/guide/part-time-job-interview/');
+    await page.locator(`a.feature-article[href="${articlePath}"]`).click();
+    await page.waitForURL(origin + articlePath);
     results.push({ label: 'home-to-article-navigation', width, errors: [] });
     await context.close();
   }
