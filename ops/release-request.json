@@ -1,6 +1,9 @@
 {
   "schema_version": 1,
-  "request_id": "bh0004-0010-plan-20261105",
-  "mode": "plan",
-  "source_sha": "84c81d86fa4b15bac1aead0ae6f3691b625fe261"
+  "request_id": "bh0004-0010-deploy-20261105",
+  "mode": "deploy",
+  "source_sha": "84c81d86fa4b15bac1aead0ae6f3691b625fe261",
+  "plan_id": "41979874602-1",
+  "plan_sha256": "fefbe47b372711a967ce4bcab11686db0b5bf02f40b9a7ef8684190a42e85cbe",
+  "approval": "DEPLOY 84c81d86fa4b15bac1aead0ae6f3691b625fe261 fefbe47b372711a967ce4bcab11686db0b5bf02f40b9a7ef8684190a42e85cbe"
 }
