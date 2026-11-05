@@ -160,6 +160,38 @@
       "sourceSha256": "e47eaa6a2fa4baa77cba38920ad072de3716b25c8d634ccbcddc86c17f48a6b1",
       "imageSha256": "aeebd6e859e56091ee80919874a1b86d2541653351aa6a40bc1623b0cb59973e",
       "note": "2026-11-05 一括公開の明示指示に基づく承認稿v2の変換。管理情報・編集記録を非掲載。本文・表・出典を保持。画像実物1200×630 WebPとaltを照合。"
+    },
+    {
+      "articleId": "BH-0011",
+      "sourcePath": "src/pages/company/familymart.md",
+      "publicPath": "/company/familymart/",
+      "editorialStatus": "approved",
+      "conditionsResolved": true,
+      "imageVerified": true,
+      "linksVerifiedOn": "2026-11-06",
+      "manuscriptUrl": "https://docs.google.com/document/d/18PqH70Kgb0-asdWF-9lrQUJ6HdSzCPbsIQU00B060Es/edit",
+      "reviewUrl": "https://docs.google.com/document/d/18PqH70Kgb0-asdWF-9lrQUJ6HdSzCPbsIQU00B060Es/edit",
+      "imageUrl": "https://drive.google.com/file/d/1SZKFMd1KWTAyn84D04yQMO5d36rW-pQ3/view",
+      "imagePath": "/images/BH-0011-eyecatch.webp",
+      "sourceSha256": "3dec5a3f63a0cbb3693e70f616601dba47db647704a9f9b4721c2f4b0c869ce1",
+      "imageSha256": "2f154dc7436543ebbc0e8d057be66bf415bd8b31ef436f6940f904f8638213ab",
+      "note": "2026-11-06完成稿v2を公開稿に変換し出典・画像実物1200×630 WebP・公式求人・公的資料を照合。技術的な公開前ゲートと本番検証は別工程で実施。"
+    },
+    {
+      "articleId": "BH-0012",
+      "sourcePath": "src/pages/job/convenience-store-jobs.md",
+      "publicPath": "/job/convenience-store-jobs/",
+      "editorialStatus": "approved",
+      "conditionsResolved": true,
+      "imageVerified": true,
+      "linksVerifiedOn": "2026-11-06",
+      "manuscriptUrl": "https://docs.google.com/document/d/12nG-g-2uzFOhgr96INOLUKAJxtMTxM5rRWgCEV-cWLI/edit",
+      "reviewUrl": "https://docs.google.com/document/d/12nG-g-2uzFOhgr96INOLUKAJxtMTxM5rRWgCEV-cWLI/edit",
+      "imageUrl": "https://drive.google.com/file/d/1beMMfdxTiEYC9uBhTihMf9S1joVdPt4F/view",
+      "imagePath": "/images/BH-0012-eyecatch.webp",
+      "sourceSha256": "15247f2a871878b7db26b7de7dfa7213a967a7146ae515cf5a269fb9ca2f0c6e",
+      "imageSha256": "69dda143c14562436d38a1beb591756b1ef366a792ac36e8da51583a3c86978a",
+      "note": "2026-11-06完成稿v2を公開稿に変換し出典・画像実物1200×630 WebP・公式求人・公的資料を照合。技術的な公開前ゲートと本番検証は別工程で実施。"
     }
   ]
 }
