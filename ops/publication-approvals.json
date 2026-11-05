@@ -32,6 +32,22 @@
       "sourceSha256": "a89ef3d397e0bdf1ea2124c30f5df3b0e244779687f6d025e394f1a9b5c8e9b3",
       "imageSha256": "f1e7e99c771ab7ef4bfc0ad9896b0b29c72e290225ccdbea4d9ddd7a1d405650",
       "note": "2026-11-04 UX更新：6項目の面接準備メモを2列・スマホ1列のカード型へ。スタイルは記事内に限定してBH-0001の保護済みHTMLを不変に保つ。公開前に内容ハッシュ再承認とCIを検証。"
+    },
+    {
+      "articleId": "BH-0003",
+      "sourcePath": "src/pages/guide/labor-conditions-notice.md",
+      "publicPath": "/guide/labor-conditions-notice/",
+      "editorialStatus": "approved",
+      "conditionsResolved": true,
+      "imageVerified": true,
+      "linksVerifiedOn": "2026-11-05",
+      "manuscriptUrl": "https://docs.google.com/document/d/1XycSxgF91mSdmYRK5QL7CPFouQXhIGxdjk9_Se0xBUA/edit",
+      "reviewUrl": "https://docs.google.com/document/d/1XycSxgF91mSdmYRK5QL7CPFouQXhIGxdjk9_Se0xBUA/edit",
+      "imageUrl": "https://drive.google.com/file/d/11rcno32o7pnWMrdAIhV6G_DHmxFZgAYM/view",
+      "imagePath": "/images/BH-0003-eyecatch.webp",
+      "sourceSha256": "65c352bd6784b7e820850901ef5bed4d7439845829b33226d07fa490cc904003",
+      "imageSha256": "39019395e6b5077abe62b87768fb7cf33ffc04df2407b226982906c70e2f9f6a",
+      "note": "編集完成稿v2の本文・表・出典を保持。管理情報・編集記録は除外。表の内容は不変でスマホ幅では項目ごとに縦表示。2026-11-05に出典7件と画像実物を照合。"
     }
   ]
 }
