@@ -1,4 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+const pages=Object.values(import.meta.glob('./*.md',{eager:true}));
+const articles=pages.filter(p=>['approved','conditionally-approved'].includes(p.frontmatter.editorialStatus)).map(p=>({title:p.frontmatter.title,url:p.url,description:p.frontmatter.description,image:p.frontmatter.heroImage}));
 ---
-<Base title="職種別のバイト評判"><h1>職種別のバイト評判</h1><p>職種ごとの仕事内容と特徴を順次掲載します。</p></Base>
+<Base title="職種別のバイト評判"><div class="page-head"><span class="eyebrow">JOB</span><h1>職種別のバイト評判</h1><p>仕事内容や研修、働き方を公的・公式情報と編集部の考察を分けて整理します。</p></div><div class="articles">{articles.map(a=><a class="feature-article" href={a.url}><img src={a.image} alt="" width="1200" height="630" loading="lazy"/><div><h2>{a.title}</h2><p>{a.description}</p><strong>記事を読む →</strong></div></a>)}</div></Base>
