@@ -6,7 +6,7 @@ const canonicalOrigin='https://baito-hyouban.com';
 const origin=process.env.QA_ORIGIN||'http://127.0.0.1:4321';
 if(!['http://127.0.0.1:4321',canonicalOrigin].includes(origin))throw Error('Unapproved QA origin');
 const approvals=JSON.parse(await readFile('ops/publication-approvals.json','utf8')).articles;
-const pages=[['home','/'],['guide','/guide/'],['company','/company/'],...approvals.map(a=>[a.articleId,a.publicPath])];
+const pages=[['home','/'],['guide','/guide/'],['company','/company/'],['job','/job/'],...approvals.map(a=>[a.articleId,a.publicPath])];
 const out='responsive-qa-evidence';await mkdir(out,{recursive:true});
 const browser=await chromium.launch();const results=[];
 try{
@@ -23,7 +23,7 @@ try{
    const screenshot=`${label}-${width}.jpg`;await page.screenshot({path:`${out}/${screenshot}`,fullPage:true,type:'jpeg',quality:90});results.push({label,path,width,screenshot,metrics,errors});
   }
   for(const a of approvals){
-   const category=a.publicPath.startsWith('/company/')?'/company/':'/guide/';await page.goto(origin+category,{waitUntil:'networkidle'});await page.locator(`a.feature-article[href="${a.publicPath}"]`).click();await page.waitForURL(origin+a.publicPath);results.push({label:'category-to-article-navigation',articleId:a.articleId,width,errors:[]});
+   const category=a.publicPath.startsWith('/company/')?'/company/':a.publicPath.startsWith('/job/')?'/job/':'/guide/';await page.goto(origin+category,{waitUntil:'networkidle'});await page.locator(`a.feature-article[href="${a.publicPath}"]`).click();await page.waitForURL(origin+a.publicPath);results.push({label:'category-to-article-navigation',articleId:a.articleId,width,errors:[]});
   }
   await context.close();
  }
