@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "request_id": "bh0011-0012-plan-20261106a",
-  "mode": "plan",
+  "request_id": "bh0011-0012-deploy-20261106a",
+  "mode": "deploy",
   "source_sha": "a5a660ec2700cc3b88899dc2d14cb99f0cb8a620",
-  "plan_id": "",
-  "plan_sha256": "",
-  "approval": "",
+  "plan_id": "42086779764-1",
+  "plan_sha256": "78606de76381715693451c764c278a4c095f88b6ed69de0606cb96f4a4cdb0dd",
+  "approval": "DEPLOY a5a660ec2700cc3b88899dc2d14cb99f0cb8a620 78606de76381715693451c764c278a4c095f88b6ed69de0606cb96f4a4cdb0dd",
   "backup_id": ""
 }
