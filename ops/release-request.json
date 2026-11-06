@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "request_id": "workplace-deploy-20261106a",
-  "mode": "deploy",
-  "source_sha": "a2cbca1bd943496258c984d17403142df9cf0ba0",
-  "plan_id": "42158746949-1",
-  "plan_sha256": "c6f83b5b081b1000e4632d04dfea8504895cd30da9dd770f6155cf326b7f377f",
-  "approval": "DEPLOY a2cbca1bd943496258c984d17403142df9cf0ba0 c6f83b5b081b1000e4632d04dfea8504895cd30da9dd770f6155cf326b7f377f",
+  "request_id": "anxiety-plan-20261106a",
+  "mode": "plan",
+  "source_sha": "61d52fef5f9101b8daaae9d2494413855031d035",
+  "plan_id": "",
+  "plan_sha256": "",
+  "approval": "",
   "backup_id": ""
 }
