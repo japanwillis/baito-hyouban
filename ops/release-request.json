@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "request_id": "anxiety-deploy-20261106a",
-  "mode": "deploy",
-  "source_sha": "61d52fef5f9101b8daaae9d2494413855031d035",
-  "plan_id": "42159645727-1",
-  "plan_sha256": "0be4dd50e2472b67b76f25a70293402a9b12ef0bc95f69bf49081b289720abd1",
-  "approval": "DEPLOY 61d52fef5f9101b8daaae9d2494413855031d035 0be4dd50e2472b67b76f25a70293402a9b12ef0bc95f69bf49081b289720abd1",
+  "request_id": "batch-20261107-plan-bh0013-0018",
+  "mode": "plan",
+  "source_sha": "e47032dc28daa6ca99ad464c4553474065ad3d5e",
+  "plan_id": "",
+  "plan_sha256": "",
+  "approval": "",
   "backup_id": ""
 }
