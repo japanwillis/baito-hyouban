@@ -1,0 +1,87 @@
+---
+import Base from '../../layouts/Base.astro';
+import { worries, worryCategories } from '../../lib/first-job-worries.mjs';
+---
+<Base title="初バイト不安解消ナビ｜面接・ミス・人間関係の悩みから探す" description="初めてのアルバイトが不安な人向け。面接、仕事のミス、人間関係、シフト、給料など12の悩みから、具体的な対処法・応募先への質問例・関連記事を探せます。">
+ <nav class="breadcrumb" aria-label="パンくずリスト"><a href="/">ホーム</a><span>›</span><span>初バイト不安解消ナビ</span></nav>
+ <section class="worry-hero">
+  <div><span class="eyebrow">FIRST JOB GUIDE</span><h1>初バイトの不安、<br/><em>ひとつずつ解消しよう。</em></h1>
+  <p>面接・仕事のミス・先輩との関係・シフト…。気になっていることから、今できる準備と質問の仕方を見つけましょう。</p>
+  <div class="worry-labels"><span>12の悩みから探せる</span><span>無料・登録不要</span><span>関連記事につながる</span></div></div>
+  <div class="worry-visual" aria-hidden="true"><span>💬</span><span>📝</span><span>🌿</span></div>
+ </section>
+ <section class="worry-main" aria-labelledby="worry-heading">
+  <div class="worry-section-heading"><span class="eyebrow">STEP 01</span><h2 id="worry-heading">いま気になっていることは？</h2><p>当てはまる悩みを選んでください。キーワードで絞り込むこともできます。</p></div>
+  <div class="worry-search"><label for="worry-query">悩みをキーワードから探す</label><input type="search" id="worry-query" placeholder="例：面接、覚える、シフト" autocomplete="off"/></div>
+  <div class="worry-categories" role="group" aria-label="悩みのカテゴリー">
+   {worryCategories.map((category,index)=><button type="button" class:list={['worry-category',index===0&&'active']} data-category={category} aria-pressed={index===0?'true':'false'}>{category}</button>)}
+  </div>
+  <p class="worry-count" id="worry-count" aria-live="polite">12件の悩みが見つかりました</p>
+  <div class="worry-grid" id="worry-grid">
+   {worries.map(w=><button type="button" class="worry-card" data-worry-id={w.id}><span class="worry-emoji" aria-hidden="true">{w.icon}</span><span class="worry-card-info"><small>{w.category}</small><strong>{w.title}</strong><span>{w.summary}</span></span><span class="worry-arrow" aria-hidden="true">→</span></button>)}
+  </div>
+  <p class="worry-empty" id="worry-empty" hidden>該当する悩みが見つかりません。別の言葉を試すか「すべて」に戻してください。</p>
+ </section>
+ <section class="worry-answer" id="worry-answer" hidden aria-labelledby="answer-title">
+  <div class="worry-answer-heading"><span class="eyebrow">STEP 02 · YOUR GUIDE</span><h2 id="answer-title" tabindex="-1"></h2><p id="answer-summary"></p></div>
+  <div class="answer-columns">
+   <div class="answer-checklist"><h3>まず、やってみたい3つのこと</h3><ol id="answer-steps"></ol></div>
+   <div class="answer-script"><h3>応募先・職場への質問例</h3><p id="answer-question"></p><button id="copy-question" type="button">質問例をコピー</button><span id="copy-feedback" role="status"></span></div>
+  </div>
+  <div class="answer-article"><div><strong>詳しく知りたい方へ</strong><p>関連する既存記事や実用ツールで、具体的な確認ポイントを調べられます。</p></div><a id="answer-link" href="/guide/">関連記事を見る →</a></div>
+  <button type="button" class="worry-reset" id="worry-reset">← ほかの悩みも探す</button>
+ </section>
+ <section class="worry-help"><span class="eyebrow">NEXT STEP</span><h2>「どんなバイトが向いているか」から考えるのもOK</h2><p>最初から仕事を一つに決めなくても大丈夫。生活に合う条件を整理し、職種ごとの作業を比較してみましょう。</p><div><a href="/diagnosis/">向いているバイト診断 →</a><a href="/job-comparison/">職種を比較 →</a><a href="/salary-calculator/">月収を計算 →</a><a href="/workplace-check/">職場環境を確認 →</a></div></section>
+ <p class="worry-disclaimer">ここで示す準備・質問例は編集部による一般的な提案です。個別の職場環境や採用結果を保証するものではありません。未払い賃金・嫌がらせ・安全上の問題などがある場合は、公的な相談窓口の利用も検討してください。</p>
+ <style>
+ .worry-hero{background:linear-gradient(118deg,#e8f5f3,#f2f8fa);border-radius:24px;display:grid;grid-template-columns:1.5fr .65fr;align-items:center;gap:20px;padding:42px 45px}.worry-hero h1{font-size:clamp(29px,4.6vw,44px);line-height:1.45;margin:12px 0}.worry-hero em{color:#087f89;font-style:normal}.worry-hero p{font-size:15px;color:#557780}.worry-labels{display:flex;flex-wrap:wrap;gap:9px;margin-top:24px}.worry-labels span{background:#fff;padding:5px 12px;color:#38717c;font-size:12px;border-radius:30px;font-weight:700}.worry-visual{position:relative;display:grid;grid-template-columns:80px 80px;gap:12px;justify-content:center}.worry-visual span{display:grid;place-items:center;background:#fff;width:80px;height:80px;border:1px solid #deeeee;box-shadow:0 8px 18px #143e470a;border-radius:17px;font-size:35px}.worry-visual span:last-child{grid-column:1/-1;justify-self:center}.worry-main{margin:40px 0 55px}.worry-section-heading h2{font-size:clamp(24px,3vw,30px);margin:5px 0}.worry-section-heading p{font-size:14px;color:#66818a}.worry-search{max-width:520px;margin:21px 0}.worry-search label{font-size:13px;font-weight:700;display:block;margin-bottom:8px}.worry-search input{font:inherit;font-size:16px;border:1px solid #c6dade;background:#fff;border-radius:11px;padding:13px 15px;width:100%;min-height:49px}.worry-search input:focus-visible,.worry-category:focus-visible,.worry-card:focus-visible,.answer-script button:focus-visible,.worry-reset:focus-visible{outline:3px solid #dbad49;outline-offset:2px}.worry-categories{display:flex;gap:9px;flex-wrap:wrap;margin:0 0 15px}.worry-category{font:inherit;font-size:13px;font-weight:700;background:#fff;border:1px solid #ccdee0;color:#39727c;border-radius:30px;padding:6px 13px;cursor:pointer}.worry-category.active{background:#087b86;color:white;border-color:#087b86}.worry-count{font-size:13px;color:#607f87}.worry-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:13px}.worry-card{display:flex;align-items:flex-start;gap:13px;text-align:left;border:1.5px solid #dce9eb;border-radius:15px;background:#fff;padding:19px;cursor:pointer;color:#274b54;min-height:160px;font:inherit}.worry-card:hover{border-color:#0b8a95;background:#f0f9f8}.worry-card[hidden]{display:none!important}.worry-card.selected{border-color:#07838d;background:#eaf7f5}.worry-emoji{display:grid;place-items:center;background:#f0f7f6;border-radius:12px;font-size:25px;min-width:47px;height:47px}.worry-card-info{display:grid;gap:5px;flex:1}.worry-card-info small{color:#087b88;font-size:11px;font-weight:800}.worry-card-info strong{font-size:15px;line-height:1.5}.worry-card-info>span{font-size:12px;color:#6b8188;line-height:1.7}.worry-arrow{color:#09818c;font-size:16px}.worry-empty{font-size:14px;padding:18px;background:#f4f8f9;border-radius:12px}.worry-answer{background:#f4f9f8;border:1px solid #d7e9e7;border-radius:20px;padding:30px;margin:20px 0 52px;scroll-margin-top:20px}.worry-answer[hidden],.worry-empty[hidden]{display:none!important}.worry-answer-heading h2{font-size:clamp(22px,3vw,29px);margin:4px 0}.worry-answer-heading p{color:#56737d;font-size:14px}.answer-columns{display:grid;grid-template-columns:1fr 1fr;gap:17px;margin:22px 0}.answer-checklist,.answer-script{background:#fff;border:1px solid #dcebea;border-radius:14px;padding:20px}.answer-columns h3{font-size:17px;margin-top:0}.answer-checklist ol{padding-left:22px}.answer-checklist li{font-size:14px;margin:10px 0}.answer-script p{font-size:15px;color:#254e57;border-left:3px solid #128b94;padding:6px 12px}.answer-script button{border:1px solid #087985;color:#087985;font:inherit;font-weight:700;font-size:13px;padding:9px 14px;border-radius:9px;background:white;cursor:pointer}.answer-script span{font-size:12px;color:#407780;display:block;margin-top:7px}.answer-article{display:flex;align-items:center;justify-content:space-between;gap:20px;background:#e3f2f0;border-radius:13px;padding:20px}.answer-article p{font-size:13px;margin:4px 0;color:#56737d}.answer-article a{background:#087985;color:#fff;font-weight:700;white-space:nowrap;text-decoration:none;border-radius:10px;padding:11px 16px;font-size:13px}.worry-reset{margin-top:20px;border:0;background:transparent;color:#287280;font-weight:700;font:inherit;cursor:pointer}.worry-help{margin:45px 0;background:#f1f7f9;border-radius:19px;padding:27px}.worry-help h2{font-size:23px;margin:6px 0}.worry-help p{color:#5f7a83;font-size:14px}.worry-help div{display:flex;gap:14px;flex-wrap:wrap}.worry-help a{font-size:13px;font-weight:700}.worry-disclaimer{font-size:12px;color:#71858d;margin-bottom:65px}@media(max-width:850px){.worry-hero{grid-template-columns:1fr;padding:25px}.worry-visual{display:none}.worry-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:600px){.worry-grid,.answer-columns{grid-template-columns:1fr}.worry-answer{padding:19px}.answer-article{display:grid;gap:14px}.answer-article a{white-space:normal;text-align:center}.worry-card{min-height:auto}}
+ </style>
+ <script>
+  import { worries, filterWorries } from '../../lib/first-job-worries.mjs';
+  const $=id=>document.getElementById(id);
+  const cards=[...document.querySelectorAll('[data-worry-id]')];
+  const categories=[...document.querySelectorAll('[data-category]')];
+  let category='すべて'; let current=null;
+  function renderList(){
+   const matches=new Set(filterWorries({category,query:$('worry-query').value}).map(w=>w.id));
+   cards.forEach(card=>{card.hidden=!matches.has(card.dataset.worryId);});
+   $('worry-count').textContent=matches.size+'件の悩みが見つかりました';
+   $('worry-empty').hidden=matches.size!==0;
+  }
+  function showAnswer(id,scroll=true){
+   const entry=worries.find(w=>w.id===id);
+   if(!entry)return;
+   current=entry;
+   cards.forEach(card=>card.classList.toggle('selected',card.dataset.worryId===id));
+   $('answer-title').textContent=entry.title;
+   $('answer-summary').textContent=entry.summary;
+   const list=$('answer-steps');list.replaceChildren();
+   entry.steps.forEach(step=>{const li=document.createElement('li');li.textContent=step;list.append(li);});
+   $('answer-question').textContent=entry.question;
+   $('answer-link').href=entry.link;$('answer-link').textContent=entry.label+' →';
+   $('copy-feedback').textContent='';
+   $('worry-answer').hidden=false;
+   if(scroll){$('answer-title').focus({preventScroll:true});$('worry-answer').scrollIntoView({behavior:'smooth',block:'start'});}
+  }
+  categories.forEach(button=>button.addEventListener('click',()=>{
+   category=button.dataset.category;
+   categories.forEach(b=>{const active=b===button;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));});
+   renderList();
+  }));
+  $('worry-query').addEventListener('input',renderList);
+  cards.forEach(card=>card.addEventListener('click',()=>showAnswer(card.dataset.worryId)));
+  $('copy-question').addEventListener('click',async()=>{
+   if(!current)return;
+   try{await navigator.clipboard.writeText(current.question);$('copy-feedback').textContent='コピーしました';}
+   catch{$('copy-feedback').textContent='コピーできませんでした';}
+  });
+  $('worry-reset').addEventListener('click',()=>{
+   $('worry-answer').hidden=true;
+   cards.forEach(card=>card.classList.remove('selected'));
+   $('worry-heading').scrollIntoView({behavior:'smooth',block:'start'});
+  });
+  const preset=new URLSearchParams(window.location.search).get('topic');
+  if(preset && worries.some(w=>w.id===preset))showAnswer(preset,false);
+  renderList();
+ </script>
+</Base>
