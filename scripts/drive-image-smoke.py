@@ -31,8 +31,9 @@ def main():
         print("WebP create/download/hash verification: SUCCESS")
         print("Drive test file ID:", file_id)
     finally:
-        # Keep temporary image only for the cross-connector folder-move test.
-        # The orchestrator will delete it after verifying move.
+        if file_id:
+            service.files().delete(fileId=file_id).execute()
+            print("Disposable WebP removed: SUCCESS")
         staged.unlink(missing_ok=True)
 
 if __name__=="__main__":
