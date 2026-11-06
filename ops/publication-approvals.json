@@ -253,9 +253,9 @@
       "reviewUrl": "https://docs.google.com/document/d/1V3jF9Lr3ZLJ60AdLvEermdskTkZjbWFnsmymYO1naHQ/edit",
       "imageUrl": "https://drive.google.com/file/d/1mTbDfD5j8q9Uwm_fXsb18OVvzC60QyQo/view",
       "imagePath": "/images/BH-0016-eyecatch.webp",
-      "sourceSha256": "25666fe38b66a38ca6b895e70a48906386d81adf8142153962a58e77d7e497fa",
+      "sourceSha256": "6aeb842772696e19b6f5315c57fd5a6cca1a1b11ce3fcbb4cf761a73b72f1810",
       "imageSha256": "43dbc1231e3914e85dd227e5b045112c92aad5362e7f572fff88e890893e14e7",
-      "note": "2026-11-07 深夜一括公開候補。完成稿第2稿v2、原本Google Docs revision AHj4eMTim76ltqHcoRpjIKyuQab-OaC0P9ieT5PY、Drive実WebPを再取得・1200×630/ハッシュ検証。記事出典・公式求人を再照合。承認対象原稿・画像をSHA256で固定。"
+      "note": "2026-11-07 深夜一括公開候補。完成稿第2稿v2、原本Google Docs revision AHj4eMTim76ltqHcoRpjIKyuQab-OaC0P9ieT5PY、Drive実WebPを再取得・1200×630/ハッシュ検証。記事出典・公式求人を再照合。承認対象原稿・画像をSHA256で固定。 公開表示に不要な制作管理用の内部リンク候補メモを除外。"
     },
     {
       "articleId": "BH-0017",
@@ -285,9 +285,9 @@
       "reviewUrl": "https://docs.google.com/document/d/1YIBvD-CFqHCngww53XmctYqSRZBIZSUYzzinkbxcxzg/edit",
       "imageUrl": "https://drive.google.com/file/d/1vlDJppYY6hR3El03YKUF84BICmucVmQV/view",
       "imagePath": "/images/BH-0018-eyecatch.webp",
-      "sourceSha256": "195bf7eafaa3225ddebd3a0c93ce3ddd8043ad6e79d786f16638a1e503d2aa93",
+      "sourceSha256": "60e810139b329ecd9c5b3606bd98e4c19a2a2aa5af7c3828a14a15ea2d9023b2",
       "imageSha256": "06b6121eaa4648954bdacd5b29b3a3a1fddfece97ed858af6f1cccedef2200c1",
-      "note": "2026-11-07 深夜一括公開候補。完成稿第2稿v2、原本Google Docs revision AHj4eMRfhWqz6XmGuN2visxB3lOHhRrp52FOm-fy、Drive実WebPを再取得・1200×630/ハッシュ検証。記事出典・公式求人を再照合。承認対象原稿・画像をSHA256で固定。"
+      "note": "2026-11-07 深夜一括公開候補。完成稿第2稿v2、原本Google Docs revision AHj4eMRfhWqz6XmGuN2visxB3lOHhRrp52FOm-fy、Drive実WebPを再取得・1200×630/ハッシュ検証。記事出典・公式求人を再照合。承認対象原稿・画像をSHA256で固定。 公開表示に不要な制作管理用の内部リンク候補メモを除外。"
     }
   ]
 }
