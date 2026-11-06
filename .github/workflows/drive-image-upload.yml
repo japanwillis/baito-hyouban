@@ -2,7 +2,7 @@ name: Verify Google Drive OAuth integration
 on:
   push:
     branches: [main]
-    paths: ['.github/workflows/drive-image-upload.yml']
+    paths: ['.github/workflows/drive-image-upload.yml', 'scripts/drive-oauth-probe.py', 'scripts/drive-image-runner.py', 'scripts/drive-image-validation.py']
   workflow_dispatch:
 permissions:
   contents: read
