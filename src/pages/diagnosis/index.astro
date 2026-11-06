@@ -1,0 +1,116 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+<Base title="向いているバイト診断｜10問で自分に合う仕事を探そう" description="無料・登録不要のバイト適性チェック。10問で接客・体力・作業スタイル・シフトの希望を整理し、候補のバイトTOP5と応募前の確認ポイントを紹介します。">
+  <nav class="breadcrumb" aria-label="パンくずリスト"><a href="/">ホーム</a><span>›</span><span>向いているバイト診断</span></nav>
+  <section class="diagnosis-hero">
+    <div><span class="eyebrow">PART-TIME JOB FINDER</span><h1>あなたに向いている<br/><em>バイト診断</em></h1><p>「初バイト、何を選んだらいい？」「接客はちょっと不安…」<br/>10の質問から、働き方の好みと仕事の候補を整理しましょう。</p><div class="hero-labels"><span>約3分</span><span>全10問</span><span>無料・登録不要</span></div></div>
+    <div class="hero-visual" aria-hidden="true"><span>☕</span><span>🛒</span><span>📦</span><span>📚</span><b>?</b></div>
+  </section>
+  <div class="diag-layout">
+    <section class="diag-panel" id="diagnosis" aria-labelledby="diag-heading">
+      <div id="start-panel">
+        <span class="eyebrow">START</span><h2 id="diag-heading">仕事選びのヒントを見つけよう</h2><p>接客が好きか、体を動かしたいか、生活リズムをどうしたいか。好き・苦手の両方から、あなたに合うかもしれない仕事を探します。</p>
+        <div class="start-points"><p>✓ 正解・不正解はありません</p><p>✓ 回答はこの画面内で処理します</p><p>✓ 仕事を「向いていない」と決めつけません</p></div>
+        <button id="start-btn" class="diag-primary" type="button">無料で診断を始める <span aria-hidden="true">→</span></button>
+      </div>
+      <div id="question-panel" hidden>
+        <div class="diag-progress-head"><span id="question-count">質問 1 / 10</span><span id="progress-num">10%</span></div>
+        <div class="diag-progress"><div id="progress-bar"></div></div>
+        <h2 id="question-text" tabindex="-1"></h2>
+        <p class="diag-hint">いちばん近いものを選んでください。</p>
+        <div id="answer-options" class="answer-options" role="group" aria-label="回答を選択"></div>
+        <button type="button" id="back-btn" class="diag-back">← 前の質問に戻る</button>
+      </div>
+      <div id="result-panel" hidden aria-live="polite">
+        <span class="eyebrow">YOUR RESULT</span><h2 id="result-heading" tabindex="-1">診断結果</h2>
+        <p id="result-intro"></p>
+        <div id="results-list" class="results-list"></div>
+        <div class="result-notes"><h3>応募前に確認したいこと</h3><ul id="result-checks"></ul><p>この診断は編集部が設定した質問とスコアによる仕事選びの参考情報です。採用可能性や職業適性を保証するものではありません。仕事内容・時間帯・負担は職場ごとに異なります。</p></div>
+        <div class="result-actions"><button type="button" id="retry-btn" class="diag-primary">もう一度診断する</button><button type="button" id="copy-btn" class="diag-secondary">結果をコピー</button><span id="copy-status" role="status"></span></div>
+      </div>
+    </section>
+    <aside class="diag-side">
+      <h2>診断結果の見方</h2><p>上位に出た仕事が、必ずあなたに最適とは限りません。自分が重視する条件の「きっかけ」として利用してください。</p>
+      <h3>職場によって変わること</h3><ul><li>接客・裏方の担当割合</li><li>研修や質問できる体制</li><li>重い物の運搬や立ち仕事</li><li>シフトと帰宅時刻</li></ul>
+      <a href="/guide/part-time-job-choosing/">初バイトの選び方を読む →</a>
+    </aside>
+  </div>
+  <section class="diag-reading"><span class="eyebrow">NEXT STEP</span><h2>診断のあとは、実際の仕事を確認</h2><div class="diag-reading-grid"><a href="/job/convenience-store-jobs/"><strong>コンビニの仕事を知る</strong><span>レジ以外の作業や時間帯による違い →</span></a><a href="/company/"><strong>企業別の評判記事</strong><span>チェーンごとの仕事内容・条件を比較 →</span></a><a href="/guide/"><strong>初バイトの基礎知識</strong><span>面接・シフト・労働条件を確認 →</span></a></div></section>
+  <style>
+    .diagnosis-hero{background:linear-gradient(120deg,#e7f5f2,#f2f8fa);border-radius:24px;padding:38px 44px;display:grid;grid-template-columns:1.5fr 1fr;gap:15px;align-items:center}.diagnosis-hero h1{font-size:clamp(29px,4.5vw,45px);line-height:1.42;margin:13px 0}.diagnosis-hero em{font-style:normal;color:#087d89}.diagnosis-hero p{color:#536d77;font-size:15px}.hero-labels{display:flex;gap:9px;flex-wrap:wrap;margin-top:20px}.hero-labels span{background:#fff;padding:5px 12px;border-radius:50px;color:#235662;font-size:12px;font-weight:700}.hero-visual{min-height:200px;display:grid;grid-template-columns:repeat(2,70px);place-content:center;gap:12px;position:relative}.hero-visual span{display:grid;place-items:center;background:#fff;border:1px solid #d9ebed;box-shadow:0 6px 16px #204c5210;font-size:34px;border-radius:17px;height:70px}.hero-visual b{position:absolute;right:16%;top:24%;color:#fff;background:#138b93;font-size:25px;border-radius:50%;width:46px;height:46px;text-align:center;line-height:46px;transform:rotate(12deg)}.diag-layout{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:24px;align-items:start;margin:25px 0 55px}.diag-panel{background:#fff;border:1px solid #dce9ec;border-radius:20px;box-shadow:0 8px 40px #244b540d;padding:36px;min-height:380px}.diag-panel h2{font-size:clamp(22px,3.4vw,28px);line-height:1.5;margin:8px 0 16px}.diag-panel p{color:#627b85}.diag-side{background:#f5f9f9;padding:24px;border-radius:17px;font-size:14px;color:#58727c}.diag-side h2{font-size:18px;color:#173b45}.diag-side h3{font-size:15px;color:#173b45;margin-top:20px}.diag-side ul{padding-left:23px}.diag-side a{font-weight:700}.start-points{background:#f3faf8;padding:13px 21px;border-radius:14px;margin:23px 0}.start-points p{margin:6px 0;color:#3e6b68;font-size:14px}.diag-primary{border:0;border-radius:11px;background:#087582;color:#fff;padding:14px 24px;font:inherit;font-weight:700;cursor:pointer;min-height:48px}.diag-primary:hover{background:#075e6b}.diag-primary:focus-visible,.diag-secondary:focus-visible,.diag-back:focus-visible,.answer-option:focus-visible{outline:3px solid #efb044;outline-offset:3px}.diag-progress-head{display:flex;justify-content:space-between;font-size:13px;color:#41747e;font-weight:700}.diag-progress{height:8px;background:#e4f0ef;border-radius:12px;overflow:hidden;margin:12px 0 30px}.diag-progress>div{height:100%;background:#118995;width:10%;transition:width .2s}.diag-hint{font-size:13px}.answer-options{display:grid;gap:12px;margin:24px 0}.answer-option{width:100%;text-align:left;border:1.5px solid #d5e5e7;background:#fff;color:#1d3d47;font:inherit;font-size:15px;padding:16px 19px;border-radius:12px;cursor:pointer;min-height:55px;display:flex;justify-content:space-between;align-items:center}.answer-option:hover{background:#ecf8f7;border-color:#0d8993}.answer-option span{color:#0a8290;font-weight:700}.diag-back{background:none;border:0;color:#526f79;font:inherit;font-size:14px;cursor:pointer;padding:8px 0}.results-list{display:grid;gap:15px;margin:24px 0}.result-item{padding:22px;border:1px solid #dce9ec;border-radius:14px}.result-item:first-child{border-color:#82bec2;background:#f0f9f7}.result-top{display:flex;justify-content:space-between;gap:16px;align-items:center}.result-top h3{font-size:20px;margin:0}.rank-label{font-size:12px;color:#087582;font-weight:800}.match-label{font-size:12px;color:#58737e}.result-item p{font-size:14px;margin:8px 0}.result-item a{font-weight:700;font-size:14px}.result-notes{background:#f6f9fa;border-radius:13px;padding:20px;margin-bottom:24px}.result-notes h3{font-size:17px;margin:0}.result-notes li{font-size:14px;margin:7px 0}.result-notes p{font-size:12px;line-height:1.8}.result-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.diag-secondary{font:inherit;color:#087582;font-weight:700;border:1px solid #7bb5bd;background:white;border-radius:11px;padding:12px 20px;cursor:pointer;min-height:48px}#copy-status{font-size:12px;color:#426d73}.diag-reading{padding:0 0 66px}.diag-reading h2{font-size:24px;margin-top:6px}.diag-reading-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.diag-reading-grid a{border:1px solid #dce9ec;border-radius:14px;padding:19px;text-decoration:none;display:grid;gap:10px;color:#173d48}.diag-reading-grid span{font-size:13px;color:#0d7a87}.diag-panel [hidden]{display:none!important}@media(max-width:800px){.diagnosis-hero{grid-template-columns:1fr;padding:25px}.hero-visual{display:none}.diag-layout{grid-template-columns:1fr}.diag-panel{padding:22px;min-height:320px}.diag-side{order:2}.diag-reading-grid{grid-template-columns:1fr}}
+  </style>
+  <script>
+    import { questions, jobProfiles, rankJobs } from '../../lib/job-diagnosis.mjs';
+    const $ = (id) => document.getElementById(id);
+    const start = $('start-panel');
+    const qp = $('question-panel');
+    const rp = $('result-panel');
+    let answers = [];
+    let current = 0;
+    let ranked = [];
+    const put = (id, value) => { $(id).textContent = value; };
+    function showQuestion(){
+      start.hidden = true; rp.hidden = true; qp.hidden = false;
+      const q = questions[current];
+      put('question-count', '質問 ' + (current + 1) + ' / ' + questions.length);
+      put('progress-num', Math.round((current + 1) / questions.length * 100) + '%');
+      $('progress-bar').style.width = ((current + 1) / questions.length * 100) + '%';
+      put('question-text', q.text);
+      const container = $('answer-options');
+      container.replaceChildren();
+      q.options.forEach((o, i) => {
+        const button = document.createElement('button');
+        button.type = 'button'; button.className = 'answer-option';
+        button.textContent = o.text;
+        const arrow = document.createElement('span');
+        arrow.textContent = '→'; arrow.setAttribute('aria-hidden', 'true');
+        button.append(arrow);
+        button.addEventListener('click', () => {
+          answers[current] = i;
+          if(current < questions.length - 1){current++;showQuestion();}
+          else{showResult();}
+        });
+        container.append(button);
+      });
+      $('back-btn').hidden = current === 0;
+      $('question-text').focus({preventScroll:true});
+    }
+    function showResult(){
+      ranked = rankJobs(answers);
+      qp.hidden = true; rp.hidden = false;
+      const winner = ranked[0];
+      put('result-heading','あなたの希望に近いバイト TOP5');
+      put('result-intro','回答をもとに、あなたが重視する働き方と一致しやすい仕事を並べました。まずは上位候補から仕事内容を確認してみましょう。');
+      const list = $('results-list'); list.replaceChildren();
+      ranked.slice(0,5).forEach((result, index) => {
+        const profile = jobProfiles.find(j => j.id === result.id);
+        const card = document.createElement('article'); card.className='result-item';
+        const top = document.createElement('div'); top.className='result-top';
+        const title = document.createElement('h3');
+        const badge = document.createElement('span'); badge.className='rank-label'; badge.textContent='第' + (index+1) + '位';
+        title.textContent=profile.name;
+        const caption = document.createElement('span');caption.className='match-label';caption.textContent='希望との一致度を比較';
+        top.append(title,caption);
+        const reason = document.createElement('p');reason.textContent=result.reason;
+        const caution = document.createElement('p');caution.textContent='確認したい点：'+profile.check;
+        const link=document.createElement('a'); link.href=profile.link; link.textContent='関連記事を読む →';
+        card.append(badge,top,reason,caution,link);
+        list.append(card);
+      });
+      const checks = $('result-checks');checks.replaceChildren();
+      const reminders=[ '実際の担当業務と研修・フォロー体制','週に働ける日数・終了時刻・通勤時間','研修中の時給・交通費・労働条件の明示'];
+      reminders.forEach(text=>{const li=document.createElement('li');li.textContent=text;checks.append(li);});
+      $('result-heading').focus({preventScroll:true});
+      rp.scrollIntoView({behavior:'smooth',block:'start'});
+    }
+    $('start-btn').addEventListener('click',()=>{answers=[];current=0;showQuestion();});
+    $('back-btn').addEventListener('click',()=>{if(current>0){current--;answers=answers.slice(0,current);showQuestion();}});
+    $('retry-btn').addEventListener('click',()=>{answers=[];current=0;showQuestion();qp.scrollIntoView({behavior:'smooth',block:'start'});});
+    $('copy-btn').addEventListener('click',async()=>{
+      const text='バイト診断結果｜'+ranked.slice(0,5).map((r,i)=>(i+1)+'位 '+jobProfiles.find(j=>j.id===r.id).name).join('、')+'\nhttps://baito-hyouban.com/diagnosis/';
+      try { await navigator.clipboard.writeText(text);put('copy-status','コピーしました'); }
+      catch {put('copy-status','コピーできませんでした。ブラウザの設定をご確認ください。');}
+    });
+  </script>
+</Base>
