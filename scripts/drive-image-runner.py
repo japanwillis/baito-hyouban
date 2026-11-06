@@ -36,6 +36,9 @@ def main():
 if __name__=="__main__":
     try:
         main()
+    except ValueError as error:
+        print("Drive upload validation failed:", str(error), file=sys.stderr)
+        sys.exit(1)
     except Exception as error:
         print("Drive upload failed:",type(error).__name__,file=sys.stderr)
         sys.exit(1)
