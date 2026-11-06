@@ -29,10 +29,10 @@ def main():
         result=module.upload_and_verify(service,"BH-0999",digest)
         file_id=result["id"]
         print("WebP create/download/hash verification: SUCCESS")
+        print("Drive test file ID:", file_id)
     finally:
-        if file_id:
-            service.files().delete(fileId=file_id).execute()
-            print("Disposable WebP removed: SUCCESS")
+        # Keep temporary image only for the cross-connector folder-move test.
+        # The orchestrator will delete it after verifying move.
         staged.unlink(missing_ok=True)
 
 if __name__=="__main__":
