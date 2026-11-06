@@ -46,7 +46,7 @@ class IncomeCalculatorTests(unittest.TestCase):
           }
           const ok=calculateIncome({...defaults,hours:8,breakMinutes:60,shifts:7});
           assert.equal(ok.paidHours,7);
-          assert.equal(ok.monthlyHours,7*7*52/12);
+          assert.ok(Math.abs(ok.monthlyHours-7*7*52/12)<1e-9);
           assert.ok(Number.isInteger(ok.monthlyWages));
         """)
 
