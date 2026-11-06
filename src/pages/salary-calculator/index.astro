@@ -1,0 +1,157 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+<Base
+  title="バイト月収シミュレーター｜時給・週の勤務日数から収入を計算"
+  description="時給、実働時間、シフト日数から税引前の月収・年収を無料計算。週固定・月の勤務回数に対応。交通費や自分で入力する控除を分けて表示し、2つの働き方を比較できます。"
+>
+  <nav class="breadcrumb" aria-label="パンくずリスト"><a href="/">ホーム</a><span>›</span><span>バイト月収シミュレーター</span></nav>
+  <div class="income-hero">
+    <div>
+      <span class="eyebrow">SALARY SIMULATOR</span>
+      <h1>バイトの<strong>月収</strong>、<br/>いくらになる？</h1>
+      <p>時給とシフトを入力するだけ。月の収入・年間の目安がすぐわかる、無料の収入シミュレーターです。</p>
+      <div class="hero-chips"><span>登録不要</span><span>週・月のシフトに対応</span><span>2パターン比較</span></div>
+    </div>
+    <div class="income-hero-deco" aria-hidden="true"><span>¥</span><small>時給 × 時間 × 日数</small></div>
+  </div>
+  <section class="calc-layout" aria-label="収入シミュレーション">
+    <div class="calc-inputs">
+      <div class="pane-header"><span class="eyebrow">STEP 01</span><h2>働く条件を入力</h2><p>求人票の時給と、実際に働く時間を入力してください。</p></div>
+      <form id="calc-form" novalidate>
+        <fieldset class="mode-switch"><legend>シフトの数え方</legend><div class="mode-options">
+          <label><input type="radio" name="mode" value="weekly" checked /><span>週に何日</span></label>
+          <label><input type="radio" name="mode" value="monthly"/><span>月に何日</span></label>
+        </div></fieldset>
+        <div class="field-grid">
+          <label class="input-field"><span>時給</span><span class="number-control"><input id="hourly" type="number" inputmode="numeric" min="1" max="100000" step="1" value="1200" required/><span>円</span></span></label>
+          <label class="input-field"><span id="shifts-label">週の勤務日数</span><span class="number-control"><input id="shifts" type="number" inputmode="decimal" min="0.25" max="7" step="0.5" value="3" required/><span id="shifts-unit">日／週</span></span></label>
+          <label class="input-field"><span>1回の拘束時間</span><span class="number-control"><input id="hours" type="number" inputmode="decimal" min="0.25" max="24" step="0.25" value="5" required/><span>時間</span></span></label>
+          <label class="input-field"><span>1回の休憩時間（無給）</span><span class="number-control"><input id="breaks" type="number" inputmode="numeric" min="0" max="1440" step="5" value="0" required/><span>分</span></span></label>
+        </div>
+        <p class="field-help">「拘束時間」は休憩を含む時間です。時給の対象となる実働時間は、拘束時間から無給の休憩を差し引いて計算します。</p>
+        <details class="extras"><summary>交通費・自己負担・控除も計算する（任意）</summary>
+          <div class="field-grid">
+            <label class="input-field"><span>1勤務あたり支給される交通費</span><span class="number-control"><input id="fare" type="number" min="0" max="100000" step="1" value="0" inputmode="numeric"/><span>円</span></span></label>
+            <label class="input-field"><span>1勤務あたり自己負担する費用</span><span class="number-control"><input id="costs" type="number" min="0" max="100000" step="1" value="0" inputmode="numeric"/><span>円</span></span></label>
+            <label class="input-field"><span>月に自分で見積もる控除額</span><span class="number-control"><input id="deductions" type="number" min="0" max="1000000" step="1" value="0" inputmode="numeric"/><span>円</span></span></label>
+          </div>
+          <p class="field-help">所得税・住民税・社会保険料は自動計算しません。控除額は給与明細などで確認した値を自分で入力してください。交通費は賃金とは別に表示します。</p>
+        </details>
+        <div class="form-actions"><button type="reset" class="subtle-button" id="reset-btn">入力をリセット</button><span id="input-message" role="status" aria-live="polite"></span></div>
+      </form>
+    </div>
+    <aside class="result-pane" aria-label="計算結果" id="calculation-result">
+      <span class="eyebrow">YOUR ESTIMATE</span><p class="result-label">月収の目安 <small>（税引前・交通費を除く）</small></p>
+      <p class="big-income" id="monthly-pay" aria-live="polite">78,000<small>円</small></p>
+      <div class="income-breakdown">
+        <div><span>年収の目安（税引前）</span><strong id="annual-pay">936,000 円</strong></div>
+        <div><span>月の実働時間</span><strong id="monthly-hours">65.0 時間</strong></div>
+        <div><span>月の勤務回数（換算）</span><strong id="monthly-shifts">13.0 回</strong></div>
+        <div><span>支給交通費の目安（月）</span><strong id="monthly-fare">0 円</strong></div>
+        <div><span>自己負担費用（月）</span><strong id="monthly-costs">0 円</strong></div>
+        <div><span>自分で設定した控除（月）</span><strong id="monthly-deductions">0 円</strong></div>
+      </div>
+      <div class="remainder"><span>交通費を加え、費用と入力した控除だけを引いた金額</span><strong id="remainder-pay">78,000 円</strong><small>実際の手取り額ではありません。税金・保険料の自動計算はしていません。</small></div>
+      <p class="calc-warning" id="calc-error" role="alert" hidden>入力値を確認してください。</p>
+      <button type="button" class="compare-button" id="save-comparison">この条件を保存して別パターンと比較する</button>
+      <div id="comparison" class="comparison" hidden aria-live="polite">
+        <h3>2パターン比較</h3>
+        <p id="comparison-label"></p>
+        <div class="comparison-data"><div><span>保存した条件 A</span><strong id="saved-pay"></strong></div><div><span>今の条件 B</span><strong id="current-pay"></strong></div></div>
+        <p id="comparison-diff"></p><button type="button" class="subtle-button" id="clear-comparison">比較を解除</button>
+      </div>
+      <p class="result-footnote">週固定の場合、1か月を52週÷12か月（約4.33週）として計算します。勤務日や給与の締め日によって、実際の月収は異なります。</p>
+    </aside>
+  </section>
+  <section class="calc-guide" aria-labelledby="guide-title">
+    <span class="eyebrow">HOW TO USE</span><h2 id="guide-title">計算結果を見るときの注意点</h2>
+    <div class="guide-cards">
+      <article><span aria-hidden="true">01</span><h3>週3日なら、月12日とは限らない</h3><p>週単位のシフトは年間52週で月平均を計算。毎月の勤務回数がわかる場合は「月に何日」に切り替えると、より具体的に見積もれます。</p></article>
+      <article><span aria-hidden="true">02</span><h3>休憩は実働時間から引く</h3><p>例えば拘束6時間・休憩30分の場合、計算上の実働は5.5時間。実際に賃金が発生する時間は雇用条件を確認してください。</p></article>
+      <article><span aria-hidden="true">03</span><h3>「月収」と「手取り」は別</h3><p>税金・社会保険料、扶養の扱いは年齢・勤務先・契約・所得などで変わります。このツールは税引前の収入目安を示します。</p></article>
+    </div>
+    <div class="guide-more"><h3>応募前に、数字以外も確認しよう</h3><p>時給だけでなく、研修中の条件、シフト調整、交通費、労働条件通知書なども大切です。早朝・深夜の割増や残業手当がある場合は、時給欄に入力した金額だけでは正確な総額を計算できません。</p><div><a href="/guide/part-time-job-choosing/">初バイトの選び方 →</a><a href="/guide/labor-conditions-notice/">労働条件通知書の確認方法 →</a><a href="/diagnosis/">向いているバイト診断 →</a></div></div>
+  </section>
+  <style>
+    .income-hero{background:linear-gradient(116deg,#e8f5f3,#f0f8f8);padding:40px 48px;border-radius:24px;display:grid;grid-template-columns:1.5fr 1fr;align-items:center;gap:25px}.income-hero h1{font-size:clamp(28px,4.5vw,46px);line-height:1.42;margin:12px 0}.income-hero h1 strong{color:#087c88}.income-hero p{max-width:600px;color:#4e7078;font-size:15px}.hero-chips{display:flex;gap:8px;flex-wrap:wrap}.hero-chips span{background:#fff;color:#39707a;border-radius:40px;padding:5px 13px;font-size:12px;font-weight:700}.income-hero-deco{background:#fff;border:1px solid #d5e9e7;border-radius:25px;min-height:170px;display:grid;place-items:center;align-content:center;box-shadow:0 12px 40px #124d4910}.income-hero-deco span{font-size:74px;font-weight:900;color:#098593;line-height:1.4}.income-hero-deco small{color:#739099;font-weight:700}.calc-layout{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(320px,.85fr);gap:24px;align-items:start;margin:30px 0 55px}.calc-inputs,.result-pane{background:#fff;border:1px solid #dfeaec;border-radius:20px;padding:30px;box-shadow:0 8px 25px #2149520b}.pane-header h2{font-size:25px;margin:5px 0}.pane-header p{font-size:13px;color:#638087;margin:0 0 24px}.mode-switch{border:0;margin:0 0 24px;padding:0}.mode-switch legend{font-weight:700;font-size:14px;margin-bottom:10px}.mode-options{display:grid;grid-template-columns:1fr 1fr;gap:10px}.mode-options label{cursor:pointer}.mode-options input{position:absolute;opacity:0;width:1px;height:1px}.mode-options span{border:1px solid #cbdfe2;border-radius:10px;display:block;text-align:center;padding:10px;font-size:14px;font-weight:700}.mode-options input:checked+span{background:#e5f5f3;border-color:#098492;color:#086e7b}.mode-options input:focus-visible+span{outline:3px solid #e2a435;outline-offset:3px}.field-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.input-field{display:block;min-width:0}.input-field>span:first-child{display:block;font-size:13px;font-weight:700;margin-bottom:7px}.number-control{display:flex;align-items:center;border:1px solid #cbdfe2;border-radius:10px;overflow:hidden;background:#fff}.number-control:focus-within{outline:2px solid #168b96;outline-offset:1px}.number-control input{font-size:20px;color:#153847;font-weight:800;min-width:0;width:100%;border:0;padding:12px 10px;background:transparent;outline:0}.number-control>span{color:#607f88;font-size:12px;white-space:nowrap;padding-right:12px}.field-help{font-size:12px;color:#70848a;line-height:1.8}.extras{border-top:1px solid #e4eff0;margin-top:20px;padding-top:16px}.extras summary{cursor:pointer;font-weight:700;color:#096e7b;font-size:14px;padding:4px 0 18px}.form-actions{display:flex;gap:15px;align-items:center;flex-wrap:wrap;margin-top:20px}.subtle-button{background:#fff;border:1px solid #c0d8dc;border-radius:10px;color:#236877;padding:9px 14px;font-weight:700;cursor:pointer}.form-actions span{font-size:12px;color:#5a8088}.result-pane{position:sticky;top:18px;background:linear-gradient(#f4fbfa,#fff 190px)}.result-label{margin:15px 0 0;color:#376670;font-weight:700;font-size:14px}.result-label small{font-size:11px;display:block;font-weight:500}.big-income{font-size:clamp(34px,4.8vw,52px);font-weight:900;color:#096f7b;letter-spacing:-.045em;line-height:1.25;margin:13px 0 24px;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}.big-income small{font-size:19px;margin-left:5px;letter-spacing:0}.income-breakdown{border-top:1px solid #dbe8ea;border-bottom:1px solid #dbe8ea;padding:10px 0}.income-breakdown>div{display:flex;justify-content:space-between;gap:10px;align-items:baseline;padding:10px 0;font-size:13px}.income-breakdown>div span{color:#597982}.income-breakdown strong{color:#24434b;white-space:nowrap;font-variant-numeric:tabular-nums}.remainder{padding:18px;border-radius:12px;background:#e7f4f1;display:grid;gap:6px;margin-top:20px}.remainder span{font-size:12px;color:#3f626b}.remainder strong{font-size:25px;color:#096f7b;line-height:1.4}.remainder small,.result-footnote{font-size:11px;color:#6b8085;line-height:1.8}.result-footnote{margin:18px 0 0}.compare-button{width:100%;font:inherit;font-size:13px;font-weight:700;border:1px solid #087e89;border-radius:11px;padding:11px 10px;margin-top:18px;cursor:pointer;color:#087582;background:#fff}.compare-button:hover,.subtle-button:hover{background:#ecf7f6}.comparison{margin-top:16px;border-top:1px solid #d7e6e7;padding-top:15px}.comparison h3{font-size:18px;margin:0}.comparison>p{font-size:13px;color:#658089}.comparison-data{display:grid;grid-template-columns:1fr 1fr;gap:10px}.comparison-data>div{padding:13px;background:#f3f9f9;border-radius:9px}.comparison-data span{font-size:11px;display:block;color:#54717b}.comparison-data strong{font-size:18px;display:block}.comparison #comparison-diff{font-weight:700;color:#087582}.calc-warning{background:#fff2ec;color:#a53e18;padding:10px;border-radius:8px;font-weight:700;font-size:13px}.calc-guide{padding:0 0 65px}.calc-guide h2{font-size:27px;margin:3px 0 22px}.guide-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}.guide-cards article{border:1px solid #e0eaec;border-radius:15px;padding:22px}.guide-cards article>span{color:#05818c;font-weight:900;font-size:14px}.guide-cards h3{font-size:17px;line-height:1.5}.guide-cards p{font-size:13px;color:#59737c}.guide-more{margin-top:24px;padding:26px;background:#f0f8f8;border-radius:15px}.guide-more h3{margin:0}.guide-more p{color:#577580;font-size:14px}.guide-more>div{display:flex;flex-wrap:wrap;gap:18px;font-size:14px;font-weight:700}input:invalid{box-shadow:none}.calc-layout [hidden]{display:none!important}@media(max-width:850px){.income-hero{grid-template-columns:1fr;padding:27px}.income-hero-deco{display:none}.calc-layout{grid-template-columns:1fr}.result-pane{position:static}.guide-cards{grid-template-columns:1fr}}@media(max-width:520px){.calc-inputs,.result-pane{padding:20px}.field-grid{grid-template-columns:1fr}.number-control input{font-size:18px}.guide-more{padding:18px}}
+  </style>
+  <script>
+    import { calculateIncome, defaults } from '../../lib/income-calculator.mjs';
+    const $ = (id) => document.getElementById(id);
+    const fields={hourlyYen:'hourly',hours:'hours',breakMinutes:'breaks',shifts:'shifts',farePerShift:'fare',costPerShift:'costs',monthlyDeductions:'deductions'};
+    const yen = n => Math.round(n).toLocaleString('ja-JP') + ' 円';
+    let latest = null;
+    let saved = null;
+    function getInput() {
+      const mode=document.querySelector('input[name="mode"]:checked').value;
+      const config={mode};
+      for(const [key,id] of Object.entries(fields)){
+        const v=$(id).value.trim();
+        if(v==='')throw new RangeError('すべての数値欄に入力してください。');
+        config[key]=Number(v);
+      }
+      return config;
+    }
+    function render(){
+      try {
+        const config=getInput();
+        const result=calculateIncome(config);
+        latest=result;
+        $('calc-error').hidden=true;
+        $('monthly-pay').innerHTML=result.monthlyWages.toLocaleString('ja-JP')+'<small>円</small>';
+        $('annual-pay').textContent=yen(result.annualWages);
+        $('monthly-hours').textContent=result.monthlyHours.toFixed(1)+' 時間';
+        $('monthly-shifts').textContent=result.shiftsPerMonth.toFixed(1)+' 回';
+        $('monthly-fare').textContent=yen(result.monthlyFare);
+        $('monthly-costs').textContent=yen(result.monthlyCosts);
+        $('monthly-deductions').textContent=yen(result.monthlyDeductions);
+        $('remainder-pay').textContent=yen(result.estimatedRemainder);
+        $('save-comparison').disabled=false;
+        if(saved){
+          $('comparison').hidden=false;
+          $('saved-pay').textContent=yen(saved.monthlyWages);
+          $('current-pay').textContent=yen(result.monthlyWages);
+          const diff=result.monthlyWages-saved.monthlyWages;
+          $('comparison-diff').textContent=diff===0?'月収の差：同額': '月収の差：Bの方が'+yen(Math.abs(diff))+(diff>0?'多い':'少ない');
+          $('comparison-label').textContent='税引前の賃金だけを比較します（交通費・控除は含みません）。';
+        }
+      } catch(error) {
+        latest=null;
+        $('calc-error').textContent=error instanceof RangeError ? '入力を確認してください。時給・時間・日数・休憩の範囲が不正か、休憩が拘束時間以上になっています。' : '計算できませんでした。入力を確認してください。';
+        $('calc-error').hidden=false;
+        $('monthly-pay').textContent='—';
+        $('save-comparison').disabled=true;
+        if(saved) $('comparison').hidden=true;
+      }
+    }
+    function syncMode(){
+      const weekly=document.querySelector('input[name="mode"]:checked').value==='weekly';
+      $('shifts-label').textContent=weekly?'週の勤務日数':'月の勤務日数';
+      $('shifts-unit').textContent=weekly?'日／週':'日／月';
+      const node=$('shifts');node.max=weekly?'7':'31';node.value=weekly?'3':'12';
+      render();
+    }
+    $('calc-form').addEventListener('input',render);
+    $('calc-form').addEventListener('change',render);
+    document.querySelectorAll('input[name="mode"]').forEach(node=>node.addEventListener('change',syncMode));
+    $('calc-form').addEventListener('reset',()=>{
+      saved=null;
+      $('comparison').hidden=true;
+      $('input-message').textContent='入力を初期値に戻しました。';
+      window.setTimeout(()=>{syncMode();render();},0);
+    });
+    $('save-comparison').addEventListener('click',()=>{
+      if(!latest)return;
+      saved={...latest};
+      $('input-message').textContent='条件Aを保存しました。入力を変更すると条件Bと比較できます。';
+      render();
+      $('comparison').scrollIntoView({behavior:'smooth',block:'nearest'});
+    });
+    $('clear-comparison').addEventListener('click',()=>{
+      saved=null;$('comparison').hidden=true;
+      $('input-message').textContent='比較を解除しました。';
+    });
+    render();
+  </script>
+</Base>
