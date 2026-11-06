@@ -13,4 +13,58 @@ import Base from '../../layouts/Base.astro';
 <aside class="wc-side"><h2>公的な相談先</h2><p>働く条件や人間関係で困ったら、以下の窓口を利用できます。</p><a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/kijyungaiyou/kijyungaiyou06.html">厚生労働省｜労働基準行政の相談窓口 →</a><a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/soudanmadogutitou/itiran/index.html">厚生労働省｜相談窓口一覧 →</a><a href="https://www.check-roudou.mhlw.go.jp/lp/arubaito/">アルバイトの労働条件を確認 →</a><p>身の危険が迫っている場合は、チェックより安全の確保を優先してください。</p></aside>
 </div>
 <section class="wc-related"><h2>応募前にも役立つ情報</h2><a href="/guide/labor-conditions-notice/">労働条件通知書 →</a><a href="/job-comparison/">バイト職種比較 →</a><a href="/diagnosis/">バイト適性診断 →</a></section>
+<script>
+import {checkQuestions,evaluateWorkplace} from '../../lib/workplace-check.mjs';
+const $=id=>document.getElementById(id);
+let current=0;
+let answers=[];
+let last=null;
+function showQuestion(){
+  $('wc-intro').hidden=true;$('wc-results').hidden=true;$('wc-questions').hidden=false;
+  const q=checkQuestions[current];
+  $('wc-count').textContent='質問 '+(current+1)+' / '+checkQuestions.length;
+  $('wc-pct').textContent=Math.round(100*(current+1)/checkQuestions.length)+'%';
+  $('wc-bar').value=current+1;
+  $('wc-category').textContent=q.category;
+  $('wc-question').textContent=q.question;
+  $('wc-hint').textContent=q.hint;
+  $('wc-back').hidden=current===0;
+  $('wc-question').focus({preventScroll:true});
+}
+function showResult(){
+  last=evaluateWorkplace(answers);
+  $('wc-questions').hidden=true;$('wc-results').hidden=false;
+  $('wc-result-title').textContent=last.title;
+  $('wc-summary').textContent='「ある」'+last.flags.length+'件、「わからない」'+last.unknowns.length+'件。';
+  const msg=last.level==='consult'?'内容によっては早めの個別相談をおすすめします。':last.level==='review'?'複数の気になる点がありました。勤務条件と実態を確認しましょう。':last.level==='notice'?'記録を残して、状況を確認しましょう。':'選ばれた項目がなくても、問題がないと保証できるわけではありません。';
+  $('wc-status').textContent=msg;
+  $('wc-status').dataset.level=last.level;
+  const list=$('wc-flags');list.replaceChildren();
+  if(!last.flags.length){const p=document.createElement('p');p.textContent='「ある」と答えた項目はありません。';list.append(p);}
+  last.flags.forEach(q=>{
+    const item=document.createElement('article');item.className='wc-flag';
+    const title=document.createElement('strong');title.textContent=q.category+'｜'+q.question;
+    const hint=document.createElement('p');hint.textContent=q.action;
+    item.append(title,hint);list.append(item);
+  });
+  const unknown=$('wc-unknown');unknown.replaceChildren();
+  last.unknowns.forEach(q=>{const li=document.createElement('li');li.textContent=q.question;unknown.append(li);});
+  $('wc-unknown-wrap').hidden=!last.unknowns.length;
+  $('wc-result-title').focus({preventScroll:true});
+  $('wc-results').scrollIntoView({behavior:'smooth',block:'start'});
+}
+$('wc-start').addEventListener('click',()=>{answers=[];current=0;showQuestion();});
+document.querySelectorAll('[data-answer]').forEach(button=>button.addEventListener('click',()=>{
+  answers[current]=button.dataset.answer;
+  if(current===checkQuestions.length-1){showResult();}else{current++;showQuestion();}
+}));
+$('wc-back').addEventListener('click',()=>{if(current>0){current--;answers=answers.slice(0,current);showQuestion();}});
+$('wc-retry').addEventListener('click',()=>{answers=[];current=0;showQuestion();});
+$('wc-copy').addEventListener('click',async()=>{
+  if(!last)return;
+  const text=['職場環境セルフチェック',last.title,'ある：'+last.flags.length+'件','わからない：'+last.unknowns.length+'件',...last.flags.map(q=>'・'+q.question),'https://baito-hyouban.com/workplace-check/'].join('\n');
+  try{await navigator.clipboard.writeText(text);$('wc-copied').textContent='コピーしました';}
+  catch{$('wc-copied').textContent='コピーできませんでした';}
+});
+</script>
 </Base>
