@@ -1,4 +1,16 @@
 ---
 import Base from '../../layouts/Base.astro';
 ---
-<Base title="職場環境セルフチェック"><h1>職場環境セルフチェック</h1></Base>
+<Base title="ブラックバイト危険度チェック｜職場環境の気になるサイン" description="アルバイトの未払い賃金、休憩、シフト、ハラスメントなどの気になる状況を10問で確認。公的な相談先も紹介します。">
+<nav class="breadcrumb"><a href="/">ホーム</a><span>›</span><span>職場環境セルフチェック</span></nav>
+<section class="wc-hero"><span class="eyebrow">WORKPLACE CHECK</span><h1>そのバイト先、<em>大丈夫？</em></h1><p>10の質問で職場の気になるサインを整理。無料・登録不要。回答はブラウザ内だけで処理します。</p></section>
+<div class="wc-layout">
+<section class="wc-panel">
+<div id="wc-intro"><h2>職場で気になることはありますか？</h2><p>「ある」「ない」「わからない」のいずれかを選んでください。法律違反の有無を診断するものではありません。</p><button id="wc-start" type="button">チェックを始める →</button></div>
+<div id="wc-questions" hidden><div class="wc-progress"><strong id="wc-count"></strong><span id="wc-pct"></span></div><progress id="wc-bar" max="10" value="1"></progress><span id="wc-category" class="wc-tag"></span><h2 id="wc-question" tabindex="-1"></h2><p id="wc-hint"></p><div class="wc-answers"><button data-answer="yes" type="button">ある →</button><button data-answer="no" type="button">ない →</button><button data-answer="unknown" type="button">わからない →</button></div><button id="wc-back" class="wc-back" type="button">← 前の質問へ</button></div>
+<div id="wc-results" hidden><span class="eyebrow">YOUR RESULT</span><h2 id="wc-result-title" tabindex="-1"></h2><p id="wc-summary"></p><p class="wc-status" id="wc-status"></p><h3>気になる点と対処のヒント</h3><div id="wc-flags"></div><div id="wc-unknown-wrap" hidden><h3>確認しておきたい項目</h3><ul id="wc-unknown"></ul></div><div class="wc-tip"><strong>今できること</strong><p>給与明細、勤務表、契約書、業務の指示などを可能な範囲で保存。困ったときは公的窓口や信頼できる人に相談してください。</p></div><p class="wc-note">結果は編集部による確認項目の整理です。違法性や安全性を断定しません。深刻な問題は項目数にかかわらず相談を。</p><div class="wc-actions"><button id="wc-retry" type="button">もう一度チェック</button><button id="wc-copy" type="button">結果をコピー</button><span id="wc-copied" role="status"></span></div></div>
+</section>
+<aside class="wc-side"><h2>公的な相談先</h2><p>働く条件や人間関係で困ったら、以下の窓口を利用できます。</p><a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/kijyungaiyou/kijyungaiyou06.html">厚生労働省｜労働基準行政の相談窓口 →</a><a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/soudanmadogutitou/itiran/index.html">厚生労働省｜相談窓口一覧 →</a><a href="https://www.check-roudou.mhlw.go.jp/lp/arubaito/">アルバイトの労働条件を確認 →</a><p>身の危険が迫っている場合は、チェックより安全の確保を優先してください。</p></aside>
+</div>
+<section class="wc-related"><h2>応募前にも役立つ情報</h2><a href="/guide/labor-conditions-notice/">労働条件通知書 →</a><a href="/job-comparison/">バイト職種比較 →</a><a href="/diagnosis/">バイト適性診断 →</a></section>
+</Base>
