@@ -8,7 +8,7 @@ from pathlib import Path
 FOLDER_ID = "1iaRf8yRxkpHnx4LSOgMDzo3U4LwmPYnV"
 
 def validate(article_id, expected_sha256):
-    if not isinstance(article_id,str) or not re.fullmatch(r"BH-\\d{4}", article_id):
+    if not isinstance(article_id,str) or not re.fullmatch(r"BH-\d{4}", article_id):
         raise ValueError("Article ID must be BH-0000 format")
     if not isinstance(expected_sha256,str) or not re.fullmatch(r"[a-f0-9]{64}",expected_sha256):
         raise ValueError("Invalid expected SHA256")
