@@ -1,8 +1,8 @@
-name: Verify Google Drive OAuth integration
+name: Upload verified images to Google Drive
 on:
   push:
     branches: [main]
-    paths: ['.github/workflows/drive-image-upload.yml', 'scripts/drive-oauth-probe.py', 'scripts/drive-image-runner.py', 'scripts/drive-image-validation.py']
+    paths: ['.github/workflows/drive-image-upload.yml', 'scripts/drive-oauth-probe.py', 'scripts/drive-image-runner.py', 'scripts/drive-image-validation.py', 'scripts/drive-image-smoke.py', 'ops/drive-image-upload-request.json', 'ops/image-staging/**']
   workflow_dispatch:
 permissions:
   contents: read
@@ -25,6 +25,12 @@ jobs:
           GOOGLE_DRIVE_CLIENT_SECRET: ${{ secrets.GOOGLE_DRIVE_CLIENT_SECRET }}
           GOOGLE_DRIVE_REFRESH_TOKEN: ${{ secrets.GOOGLE_DRIVE_REFRESH_TOKEN }}
         run: python scripts/drive-oauth-probe.py
+      - name: Test WebP media upload, download and cleanup
+        env:
+          GOOGLE_DRIVE_CLIENT_ID: ${{ secrets.GOOGLE_DRIVE_CLIENT_ID }}
+          GOOGLE_DRIVE_CLIENT_SECRET: ${{ secrets.GOOGLE_DRIVE_CLIENT_SECRET }}
+          GOOGLE_DRIVE_REFRESH_TOKEN: ${{ secrets.GOOGLE_DRIVE_REFRESH_TOKEN }}
+        run: python scripts/drive-image-smoke.py
       - name: Upload staged image only when explicit request exists
         if: ${{ hashFiles('ops/drive-image-upload-request.json') != '' }}
         env:
