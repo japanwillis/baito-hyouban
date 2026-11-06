@@ -11,6 +11,11 @@ def main():
     from importlib.machinery import SourceFileLoader
     mod = SourceFileLoader("image_validation","scripts/drive-image-validation.py").load_module()
     request = json.loads(Path("ops/drive-image-upload-request.json").read_text())
+    if set(request) != {"schema_version", "request_id", "article_id", "sha256"} or request.get("schema_version") != 1:
+        raise ValueError("Invalid upload request fields")
+    import re
+    if not isinstance(request.get("request_id"),str) or not re.fullmatch(r"[A-Za-z0-9_-]{8,80}",request["request_id"]):
+        raise ValueError("Invalid request ID")
     article_id, digest = request["article_id"], request["sha256"]
     credentials = Credentials(
         token=None,
@@ -25,6 +30,7 @@ def main():
     evidence = mod.upload_and_verify(service,article_id,digest)
     Path("drive-upload-evidence").mkdir(exist_ok=True)
     Path("drive-upload-evidence/result.json").write_text(json.dumps(evidence,indent=2))
+    print("Pending Drive folder move:", evidence["needs_move_to_folder"])
     print("Verified Google Drive upload:", evidence["article_id"], evidence["url"])
 
 if __name__=="__main__":
