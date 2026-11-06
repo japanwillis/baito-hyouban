@@ -2,11 +2,16 @@
 import hashlib
 import io
 import json
+import re
 from pathlib import Path
 
 FOLDER_ID = "1iaRf8yRxkpHnx4LSOgMDzo3U4LwmPYnV"
 
 def validate(article_id, expected_sha256):
+    if not isinstance(article_id,str) or not re.fullmatch(r"BH-\\d{4}", article_id):
+        raise ValueError("Article ID must be BH-0000 format")
+    if not isinstance(expected_sha256,str) or not re.fullmatch(r"[a-f0-9]{64}",expected_sha256):
+        raise ValueError("Invalid expected SHA256")
     path = Path("ops/image-staging") / (article_id + "-eyecatch.webp")
     if not path.is_file() or path.is_symlink():
         raise ValueError("Image not staged")
@@ -27,19 +32,18 @@ def upload_and_verify(service, article_id, sha256):
     from googleapiclient.http import MediaFileUpload, MediaIoBaseDownload
     path, data = validate(article_id, sha256)
     name = path.name
-    query = "'" + FOLDER_ID + "' in parents and name = '" + name + "' and trashed = false"
+    query = "name = '" + name + "' and trashed = false"
     existing = service.files().list(q=query, fields="nextPageToken,files(id,name,mimeType,size,md5Checksum,parents)",pageSize=100).execute()
     if existing.get("nextPageToken") or len(existing["files"]) > 1:
         raise ValueError("Duplicate filename in Google Drive")
     if existing["files"]:
         file_id = existing["files"][0]["id"]
     else:
-        body = {"name": name, "mimeType": "image/webp", "parents": [FOLDER_ID]}
+        body = {"name": name, "mimeType": "image/webp"}
         media = MediaFileUpload(str(path), mimetype="image/webp", resumable=True)
         file_id = service.files().create(body=body, media_body=media, fields="id").execute()["id"]
     meta = service.files().get(fileId=file_id,fields="id,name,mimeType,size,md5Checksum,parents").execute()
     if (meta["name"] != name or meta["mimeType"] != "image/webp" or
-        FOLDER_ID not in meta.get("parents",[]) or
         int(meta["size"]) != len(data) or
         meta["md5Checksum"] != hashlib.md5(data).hexdigest()):
         raise ValueError("Google Drive metadata mismatch")
@@ -50,4 +54,4 @@ def upload_and_verify(service, article_id, sha256):
         _, done = reader.next_chunk()
     if hashlib.sha256(dest.getvalue()).hexdigest() != sha256:
         raise ValueError("Downloaded image digest mismatch")
-    return {"article_id":article_id, "id":file_id, "url":"https://drive.google.com/file/d/"+file_id+"/view", "sha256":sha256, "verified":True}
+    return {"article_id":article_id, "id":file_id, "url":"https://drive.google.com/file/d/"+file_id+"/view", "sha256":sha256, "verified":True, "needs_move_to_folder":FOLDER_ID}
