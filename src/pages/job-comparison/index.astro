@@ -64,7 +64,7 @@ import { comparisonJobs, comparisonFields } from '../../lib/job-comparison.mjs';
    parent.append(node);
    return node;
   }
-  function display(){
+  function display(shouldScroll=true){
    displayed=selectComparison(selected);
    const head=$('comparison-head'); const body=$('comparison-body'); const related=$('comparison-articles');
    head.replaceChildren();body.replaceChildren();related.replaceChildren();
@@ -87,8 +87,10 @@ import { comparisonJobs, comparisonFields } from '../../lib/job-comparison.mjs';
    });
    $('comparison-result').hidden=false;
    $('copy-message').textContent='';
-   $('result-heading').focus({preventScroll:true});
-   $('comparison-result').scrollIntoView({behavior:'smooth',block:'start'});
+   if(shouldScroll){
+    $('result-heading').focus({preventScroll:true});
+    $('comparison-result').scrollIntoView({behavior:'smooth',block:'start'});
+   }
   }
   $('compare-button').addEventListener('click',()=>{if(selected.length>=2&&selected.length<=3)display();});
   $('copy-comparison').addEventListener('click',async()=>{
@@ -106,6 +108,6 @@ import { comparisonJobs, comparisonFields } from '../../lib/job-comparison.mjs';
   }
   if(!selected.length)selected.push('convenience','cafe');
   selection();
-  if(selected.length>=2)display();
+  if(selected.length>=2)display(false);
  </script>
 </Base>
