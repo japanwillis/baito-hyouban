@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "request_id": "salary-deploy-20261106a",
-  "mode": "deploy",
-  "source_sha": "949fa5a5668d64a9435091b0803f93840f89b11e",
-  "plan_id": "42154976842-1",
-  "plan_sha256": "1f178d6e8d245744ad88ac9e5fdc0a01c2a10a53146ef63717531c5883ebb4a7",
-  "approval": "DEPLOY 949fa5a5668d64a9435091b0803f93840f89b11e 1f178d6e8d245744ad88ac9e5fdc0a01c2a10a53146ef63717531c5883ebb4a7",
+  "request_id": "comparison-plan-20261106a",
+  "mode": "plan",
+  "source_sha": "a819e4ad2a76363a4186bfe695b82b2f0106f66c",
+  "plan_id": "",
+  "plan_sha256": "",
+  "approval": "",
   "backup_id": ""
 }
