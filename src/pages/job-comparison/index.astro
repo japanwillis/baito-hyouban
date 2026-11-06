@@ -1,0 +1,111 @@
+---
+import Base from '../../layouts/Base.astro';
+import { comparisonJobs, comparisonFields } from '../../lib/job-comparison.mjs';
+---
+<Base title="バイト職種比較ツール｜仕事内容・接客・体力・シフトを比較" description="コンビニ・カフェ・ファミレス・スーパー・倉庫・清掃・事務など9職種から2〜3件を選んで仕事内容・接客・体力負担・シフトを比較。応募前の確認事項や関連記事もまとめて確認できます。">
+ <nav class="breadcrumb" aria-label="パンくずリスト"><a href="/">ホーム</a><span>›</span><span>バイト職種比較ツール</span></nav>
+ <header class="compare-hero">
+  <div><span class="eyebrow">JOB COMPARISON</span><h1>気になるバイト、<br/><em>並べて比較しよう。</em></h1><p>仕事内容・接客・体を動かす場面・シフトをひと目でチェック。候補を2〜3職種選んで、自分に合う働き方を考えてみましょう。</p><div class="hero-tags"><span>全9職種</span><span>最大3職種を比較</span><span>無料・登録不要</span></div></div>
+  <div class="compare-decoration" aria-hidden="true"><span>🏪</span><b>VS</b><span>☕</span></div>
+ </header>
+ <section class="choice-section" aria-labelledby="choice-heading">
+  <div class="section-label"><span class="eyebrow">STEP 01</span><h2 id="choice-heading">比較する職種を選ぶ</h2><p>2〜3職種を選択してください。選択した順番で比較表に表示します。</p></div>
+  <div id="choices" class="job-choice-grid" role="group" aria-label="比較する職種">
+   {comparisonJobs.map(job=>
+    <label class="job-choice">
+     <input type="checkbox" value={job.id} name="selected-jobs" />
+     <span class="job-choice-art" aria-hidden="true">{job.emoji}</span>
+     <span class="job-choice-title">{job.name}<small>{job.tag}</small></span>
+     <span class="choice-check" aria-hidden="true">✓</span>
+    </label>
+   )}
+  </div>
+  <div class="choice-action"><span id="choice-status" aria-live="polite">2〜3職種を選択してください。</span><button id="compare-button" type="button" disabled>比較する <span aria-hidden="true">→</span></button><button id="clear-choices" class="plain-button" type="button">選択を解除</button></div>
+ </section>
+ <section id="comparison-result" class="comparison-section" hidden aria-labelledby="result-heading">
+  <div class="section-label"><span class="eyebrow">STEP 02</span><h2 id="result-heading" tabindex="-1">職種の特徴を比較</h2><p>編集部が各業態の一般的な仕事内容を整理した参考情報です。実際の担当業務・研修・シフトは求人や店舗ごとに異なります。</p></div>
+  <div class="table-scroll" tabindex="0" aria-label="横にスクロールできる職種比較表">
+   <table id="comparison-table" class="compare-table"><caption>選択した職種の比較表</caption><thead id="comparison-head"></thead><tbody id="comparison-body"></tbody></table>
+  </div>
+  <div class="compare-links"><h3>各職種の詳細・応募前ガイド</h3><div id="comparison-articles" class="comparison-articles"></div></div>
+  <div class="result-tools"><button type="button" id="copy-comparison" class="outline-button">比較結果をコピーする</button><span id="copy-message" role="status"></span></div>
+ </section>
+ <section class="compare-guide"><span class="eyebrow">HOW TO CHOOSE</span><h2>比較しても迷ったら</h2><div class="guide-columns">
+  <article><strong>01</strong><h3>仕事内容を確かめる</h3><p>「接客少なめ」「裏方中心」などの募集文だけでは担当範囲は決まりません。最初に任される業務や、困ったときに誰に聞くかも確認しましょう。</p></article>
+  <article><strong>02</strong><h3>譲れない勤務条件を整理</h3><p>通勤、授業との両立、帰宅時刻、実働時間を優先して候補を絞ると比較しやすくなります。</p></article>
+  <article><strong>03</strong><h3>時給は求人票で確認</h3><p>全国共通の時給ランキングは掲載していません。応募する勤務地・時間帯の賃金を確認し、月収シミュレーターで計算できます。</p></article>
+ </div><div class="tools-cta"><a href="/diagnosis/">あなたに向いているバイト診断 →</a><a href="/salary-calculator/">月収シミュレーター →</a><a href="/guide/part-time-job-choosing/">初バイトの選び方 →</a></div></section>
+ <style>
+ .compare-hero{display:grid;grid-template-columns:1.6fr .8fr;align-items:center;gap:30px;padding:42px 46px;border-radius:24px;background:linear-gradient(115deg,#e6f5f3,#f4f8fb)}.compare-hero h1{font-size:clamp(28px,4.3vw,45px);line-height:1.48;margin:10px 0}.compare-hero em{font-style:normal;color:#077d89}.compare-hero p{color:#536f78;font-size:15px;max-width:620px}.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}.hero-tags span{background:white;color:#386874;border-radius:30px;padding:4px 12px;font-weight:700;font-size:12px}.compare-decoration{display:flex;align-items:center;justify-content:center;gap:12px}.compare-decoration span{background:white;border:1px solid #dbe9e9;border-radius:20px;padding:14px;font-size:54px;box-shadow:0 10px 24px #1344510a}.compare-decoration b{background:#0d8794;color:white;padding:11px 7px;border-radius:50%;font-size:13px}.choice-section{margin:35px 0 60px}.section-label h2{font-size:clamp(23px,3vw,29px);margin:5px 0}.section-label p{font-size:14px;color:#5b7882;margin:5px 0 22px}.job-choice-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}.job-choice{display:flex;gap:14px;align-items:center;position:relative;background:white;border:1.5px solid #dfeaec;border-radius:15px;padding:17px;cursor:pointer;transition:border-color .2s,background .2s;min-width:0}.job-choice:has(input:checked){border-color:#158e9b;background:#eaf8f6}.job-choice:has(input:disabled){cursor:not-allowed;opacity:.58}.job-choice input{position:absolute;inset:0;opacity:0;cursor:inherit}.job-choice:has(input:focus-visible){outline:3px solid #e5ad38;outline-offset:2px}.job-choice-art{width:51px;height:51px;display:grid;place-items:center;flex-shrink:0;background:#f1f7f6;border-radius:13px;font-size:29px}.job-choice-title{font-weight:800;color:#25454c;font-size:15px}.job-choice-title small{display:block;color:#789097;font-size:11px;font-weight:500;margin-top:2px}.choice-check{margin-left:auto;flex-shrink:0;display:grid;place-items:center;width:24px;height:24px;border:1.5px solid #bcced2;color:transparent;border-radius:50%}.job-choice:has(input:checked) .choice-check{background:#098591;color:white;border-color:#098591}.choice-action{display:flex;align-items:center;flex-wrap:wrap;gap:14px;margin:23px 0;background:#f2f8f8;padding:17px 20px;border-radius:14px}.choice-action>span{color:#50717c;font-size:14px;flex:1}.choice-action button:not(.plain-button){font:inherit;background:#087783;color:white;border:0;padding:12px 25px;border-radius:10px;font-weight:800;cursor:pointer}.choice-action button:disabled{opacity:.45;cursor:not-allowed}.plain-button{font:inherit;border:0;background:none;color:#4a7680;font-size:13px;font-weight:700;cursor:pointer}.comparison-section{padding-bottom:60px}.comparison-section[hidden]{display:none!important}.table-scroll{overflow-x:auto;border:1px solid #d9e8e8;border-radius:16px;overscroll-behavior-inline:contain}.compare-table{width:100%;border-collapse:separate;border-spacing:0;min-width:680px;table-layout:fixed;text-align:left;font-size:13px;line-height:1.8}.compare-table caption{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}.compare-table th,.compare-table td{padding:16px 17px;border-bottom:1px solid #e1ecee;vertical-align:top;overflow-wrap:anywhere}.compare-table thead th{background:#e7f5f3;color:#214a52;font-weight:800;font-size:16px}.compare-table thead th:first-child{width:150px}.compare-table tbody th{background:#f7f9fa;color:#375967;font-weight:800}.compare-table tbody tr:last-child th,.compare-table tbody tr:last-child td{border-bottom:0}.table-scroll:focus-visible{outline:3px solid #dcad4a}.compare-links{margin-top:24px;background:#f2f8f8;border-radius:15px;padding:23px}.compare-links h3{font-size:17px;margin:0 0 15px}.comparison-articles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.comparison-articles a{background:#fff;border:1px solid #d8e8e8;border-radius:12px;text-decoration:none;padding:14px;display:block;color:#186d7a;font-weight:700;font-size:13px}.comparison-articles a strong{display:block;color:#264c56;font-size:14px;margin-bottom:7px}.result-tools{display:flex;align-items:center;gap:13px;margin-top:18px}.outline-button{border:1px solid #087e8b;color:#087180;font:inherit;font-weight:700;background:white;border-radius:10px;padding:11px 16px;cursor:pointer}.result-tools span{color:#457a83;font-size:12px}.compare-guide{padding-bottom:70px}.compare-guide h2{font-size:26px;margin:5px 0 20px}.guide-columns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}.guide-columns article{border:1px solid #dfeaec;padding:22px;border-radius:15px}.guide-columns strong{color:#0d8290}.guide-columns h3{font-size:17px}.guide-columns p{font-size:13px;color:#607680}.tools-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:23px}.tools-cta a{border-radius:9px;background:#ecf7f6;padding:11px 16px;text-decoration:none;font-size:13px;font-weight:700}.choice-section [hidden]{display:none!important}@media(max-width:900px){.compare-hero{grid-template-columns:1fr;padding:28px}.compare-decoration{display:none}.job-choice-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.guide-columns{grid-template-columns:1fr}}@media(max-width:570px){.job-choice-grid{grid-template-columns:1fr}.choice-action>span{width:100%;flex-basis:100%}.choice-action button:not(.plain-button){flex:1}.comparison-articles{grid-template-columns:1fr}.compare-table{min-width:600px}.compare-table th,.compare-table td{padding:12px}.compare-table thead th:first-child{width:122px}}
+ </style>
+ <script>
+  import { comparisonJobs, comparisonFields, selectComparison } from '../../lib/job-comparison.mjs';
+  const selected=[];
+  const $=id=>document.getElementById(id);
+  const boxes=[...document.querySelectorAll('input[name="selected-jobs"]')];
+  let displayed=[];
+  function selection(){
+   boxes.forEach(box=>{box.checked=selected.includes(box.value);box.disabled=selected.length>=3&&!box.checked;});
+   $('compare-button').disabled=selected.length<2;
+   $('choice-status').textContent=selected.length===0?'2〜3職種を選択してください。':selected.length===1?'あと1職種選択してください。':selected.length===3?'3職種を選択中（最大3件）':selected.length+'職種を選択中（もう1職種追加できます）';
+  }
+  boxes.forEach(box=>box.addEventListener('change',()=>{
+   const index=selected.indexOf(box.value);
+   if(box.checked&&index===-1&&selected.length<3)selected.push(box.value);
+   if(!box.checked&&index>=0)selected.splice(index,1);
+   selection();
+   $('comparison-result').hidden=true;
+  }));
+  $('clear-choices').addEventListener('click',()=>{selected.length=0;selection();$('comparison-result').hidden=true;$('copy-message').textContent='';});
+  function addText(parent,tag,value,scope){
+   const node=document.createElement(tag);
+   node.textContent=value;
+   if(scope)node.scope=scope;
+   parent.append(node);
+   return node;
+  }
+  function display(){
+   displayed=selectComparison(selected);
+   const head=$('comparison-head'); const body=$('comparison-body'); const related=$('comparison-articles');
+   head.replaceChildren();body.replaceChildren();related.replaceChildren();
+   const hr=document.createElement('tr');
+   addText(hr,'th','比較項目','col');
+   displayed.forEach(job=>addText(hr,'th',job.emoji+' '+job.name,'col'));
+   head.append(hr);
+   comparisonFields.forEach(field=>{
+    const tr=document.createElement('tr');
+    addText(tr,'th',field.label,'row');
+    displayed.forEach(job=>addText(tr,'td',job[field.key]));
+    body.append(tr);
+   });
+   displayed.forEach(job=>{
+    const a=document.createElement('a');
+    a.href=job.link;
+    const title=document.createElement('strong');title.textContent=job.name;
+    a.append(title,document.createTextNode(job.linkLabel+' →'));
+    related.append(a);
+   });
+   $('comparison-result').hidden=false;
+   $('copy-message').textContent='';
+   $('result-heading').focus({preventScroll:true});
+   $('comparison-result').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  $('compare-button').addEventListener('click',()=>{if(selected.length>=2&&selected.length<=3)display();});
+  $('copy-comparison').addEventListener('click',async()=>{
+   if(displayed.length<2)return;
+   const text=['バイト職種比較｜バイトの評判',...comparisonFields.map(field=>field.label+'：'+displayed.map(job=>job.name+'＝'+job[field.key]).join('／')),'https://baito-hyouban.com/job-comparison/'].join('\n');
+   try{await navigator.clipboard.writeText(text);$('copy-message').textContent='コピーしました。';}
+   catch{$('copy-message').textContent='コピーできませんでした。ブラウザの設定を確認してください。';}
+  });
+  const params=new URLSearchParams(window.location.search);
+  const requested=params.get('jobs');
+  if(requested){
+   for(const id of requested.split(',').slice(0,3)){
+    if(comparisonJobs.some(j=>j.id===id)&&!selected.includes(id))selected.push(id);
+   }
+  }
+  if(!selected.length)selected.push('convenience','cafe');
+  selection();
+  if(selected.length>=2)display();
+ </script>
+</Base>
