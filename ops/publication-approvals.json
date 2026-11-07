@@ -288,6 +288,38 @@
       "sourceSha256": "60e810139b329ecd9c5b3606bd98e4c19a2a2aa5af7c3828a14a15ea2d9023b2",
       "imageSha256": "06b6121eaa4648954bdacd5b29b3a3a1fddfece97ed858af6f1cccedef2200c1",
       "note": "2026-11-07 深夜一括公開候補。完成稿第2稿v2、原本Google Docs revision AHj4eMRfhWqz6XmGuN2visxB3lOHhRrp52FOm-fy、Drive実WebPを再取得・1200×630/ハッシュ検証。記事出典・公式求人を再照合。承認対象原稿・画像をSHA256で固定。 公開表示に不要な制作管理用の内部リンク候補メモを除外。"
+    },
+    {
+      "articleId": "BH-0021",
+      "sourcePath": "src/pages/company/doutor.md",
+      "publicPath": "/company/doutor/",
+      "editorialStatus": "approved",
+      "conditionsResolved": true,
+      "imageVerified": true,
+      "linksVerifiedOn": "2026-11-08",
+      "manuscriptUrl": "https://docs.google.com/document/d/18wqraXu_U4yKo_eKjc8R2lHh8BmiZqDh8COWGZ-mSH0/edit",
+      "reviewUrl": "https://docs.google.com/document/d/18wqraXu_U4yKo_eKjc8R2lHh8BmiZqDh8COWGZ-mSH0/edit",
+      "imageUrl": "https://drive.google.com/file/d/1HDDhxok6keY0zHIkgKzQd8lrNF1VchJL/view",
+      "imagePath": "/images/BH-0021-eyecatch.webp",
+      "sourceSha256": "700f13744e5333a1d65689f5c9eea4ef6751382d3133052ec2208682579f1cd4",
+      "imageSha256": "6e246ccf3d93a47ee2e51183681aeebf8321fee68e19c089c890f520b6b75536",
+      "note": "2026-11-08: 本文は編集承認済み第2稿を原本として公開部分だけを抽出。公式・公的出典と掲載中の個別求人を再照合。Drive再取得済WebPのSHA256・1200×630確認。旧記事は変更しない。"
+    },
+    {
+      "articleId": "BH-0022",
+      "sourcePath": "src/pages/company/komeda.md",
+      "publicPath": "/company/komeda/",
+      "editorialStatus": "approved",
+      "conditionsResolved": true,
+      "imageVerified": true,
+      "linksVerifiedOn": "2026-11-08",
+      "manuscriptUrl": "https://docs.google.com/document/d/1WVxCn-Vq0D3mtAfVNcfYoH6MzyZYcT41O7CmIxPyjcw/edit",
+      "reviewUrl": "https://docs.google.com/document/d/1WVxCn-Vq0D3mtAfVNcfYoH6MzyZYcT41O7CmIxPyjcw/edit",
+      "imageUrl": "https://drive.google.com/file/d/1xkrlHp1KKTKPxzwVLcjzcH0vyEvVLnue/view",
+      "imagePath": "/images/BH-0022-eyecatch.webp",
+      "sourceSha256": "4fcb1ae3d989e0cbe0b92a1590d3256341ec08fe454ba7e4e138db0beffb428b",
+      "imageSha256": "50064ad07069b6225ddde7fbcf89288b6f8ecf8507d429a388621929a7f289ee",
+      "note": "2026-11-08: 本文は編集承認済み第2稿を原本として公開部分だけを抽出。公式・公的出典と掲載中の個別求人を再照合。Drive再取得済WebPのSHA256・1200×630確認。旧記事は変更しない。"
     }
   ]
 }
