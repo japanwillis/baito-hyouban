@@ -352,6 +352,38 @@
       "sourceSha256": "0179f487c81926c6bcab5004f61c1b18d918148befc182fc94607ef9de1f0c55",
       "imageSha256": "af9bba1c7a577b15f7eec5f88ed3229879b17f31caa78584cabbe74c250b04c0",
       "note": "編集承認済の原稿から本文と一次出典を抽出して公開用Markdown化。管理情報や未公開リンクを除外。記事用画像はDrive納品検証済Git blobを流用。既存記事の変更なし。2026-11-09安全ゲート・プレビュー・plan後の適格記事のみ公開。"
+    },
+    {
+      "articleId": "BH-0023",
+      "sourcePath": "src/pages/company/kura-sushi.md",
+      "publicPath": "/company/kura-sushi/",
+      "editorialStatus": "approved",
+      "conditionsResolved": true,
+      "imageVerified": true,
+      "linksVerifiedOn": "2026-11-09",
+      "manuscriptUrl": "https://docs.google.com/document/d/1W9fMdxCTcxEIvgxSmioVVJqezLskApXO_JlnA_OEVkQ/edit",
+      "reviewUrl": "https://docs.google.com/document/d/1W9fMdxCTcxEIvgxSmioVVJqezLskApXO_JlnA_OEVkQ/edit",
+      "imageUrl": "https://drive.google.com/file/d/1E3xzUx9YuPK0WQr9yRllGYgR8j-NWfSc/view",
+      "imagePath": "/images/BH-0023-eyecatch.webp",
+      "sourceSha256": "f162d1ee9d2bdeaaf115c28cf75b1dabb58a850f3c1985127acda1d9a14f6cd5",
+      "imageSha256": "8e2ca67a2bcbf04b8682fe7392b0d8488b84a641bea0172c8240d48f7fa52b37",
+      "note": "編集済み原稿の公開部分のみ抽出。根拠未確認の店舗求人を外し、現行の公式資料の確認範囲に合わせて参照表現を更新。Drive確認済オリジナルWebPとGit blobを照合。2026-11-09公開前安全審査対象。"
+    },
+    {
+      "articleId": "BH-0025",
+      "sourcePath": "src/pages/company/hama-sushi.md",
+      "publicPath": "/company/hama-sushi/",
+      "editorialStatus": "approved",
+      "conditionsResolved": true,
+      "imageVerified": true,
+      "linksVerifiedOn": "2026-11-09",
+      "manuscriptUrl": "https://docs.google.com/document/d/11XebWkAhm1O9RS7JEBxJ8fLuVq5eVcEBL6zpLBc7Viw/edit",
+      "reviewUrl": "https://docs.google.com/document/d/11XebWkAhm1O9RS7JEBxJ8fLuVq5eVcEBL6zpLBc7Viw/edit",
+      "imageUrl": "https://drive.google.com/file/d/1cmb1ccWA8wyG1MwFDQne76hm4-m6kyAN/view",
+      "imagePath": "/images/BH-0025-eyecatch.webp",
+      "sourceSha256": "e71e41c79ad83fe8d110b7f28785be54857aa5de5b6597b08ec8bb2ec4d545a5",
+      "imageSha256": "eeb859e8ed49a9a5461a0d358a8ddf15c19a6da139f862c6c53a1e7183f7a777",
+      "note": "編集済み原稿の公開部分のみ抽出。根拠未確認の店舗求人を外し、現行の公式資料の確認範囲に合わせて参照表現を更新。Drive確認済オリジナルWebPとGit blobを照合。2026-11-09公開前安全審査対象。"
     }
   ]
 }
