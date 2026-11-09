@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "request_id": "watercolor-20261109-deploy-b63dd2deb7",
-  "mode": "deploy",
-  "source_sha": "b63dd2deb717727abf8a4886980a11cc7bd400a0",
-  "plan_id": "42549677216-1",
-  "plan_sha256": "1410746df2fb788decbaa22a4351f6954087c08236ab893b401d7141a0808411",
-  "approval": "DEPLOY b63dd2deb717727abf8a4886980a11cc7bd400a0 1410746df2fb788decbaa22a4351f6954087c08236ab893b401d7141a0808411",
+  "request_id": "bh-nightly-20261110-plan-c559bfa",
+  "mode": "plan",
+  "source_sha": "c559bfa4610ca6b44574babadc2d319b807de3c5",
+  "plan_id": "",
+  "plan_sha256": "",
+  "approval": "",
   "backup_id": ""
 }
