@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "request_id": "batch-20261109-deploy-4reviewed-01",
-  "mode": "deploy",
-  "source_sha": "064595c0adac77c3e639589c80c7479491c25012",
-  "plan_id": "42510070411-1",
-  "plan_sha256": "06c3c46ff7560b2420600844e79bb94dd0be574b333744aa704b82a9fd6277b2",
-  "approval": "DEPLOY 064595c0adac77c3e639589c80c7479491c25012 06c3c46ff7560b2420600844e79bb94dd0be574b333744aa704b82a9fd6277b2",
+  "request_id": "watercolor-20261109-plan-b63dd2deb7",
+  "mode": "plan",
+  "source_sha": "b63dd2deb717727abf8a4886980a11cc7bd400a0",
+  "plan_id": "",
+  "plan_sha256": "",
+  "approval": "",
   "backup_id": ""
 }
