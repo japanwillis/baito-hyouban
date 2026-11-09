@@ -5,7 +5,7 @@ description: "くら寿司のバイトを公式採用・店舗別求人・公的
 checkedDate: "2026-11-09"
 articleId: "BH-0023"
 heroImage: "/images/BH-0023-eyecatch.webp"
-imageAlt: "回転寿司店の客席を整えるスタッフと厨房で食器を整理するスタッフのイラスト"
+imageAlt: "回転寿司店で寿司を皿に盛り付けるスタッフと、奥の洗い場で作業するスタッフのイラスト"
 editorialStatus: "approved"
 ---
 
