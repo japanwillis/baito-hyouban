@@ -413,9 +413,9 @@
       "reviewUrl": "https://docs.google.com/document/d/1d5TSN8Lo-i98o6kgQrul0hei_rh1rQXh5xvfGzzbQdw/edit",
       "imageUrl": "https://drive.google.com/file/d/1tEMkfcz0aPu0lTNOCoN5DwcWHUCMw9bz/view",
       "imagePath": "/images/BH-0026-eyecatch.webp",
-      "sourceSha256": "ff57c10348284917c12657a0cb89d9ed8714475614d1cef7dfab86e73a9784b4",
+      "sourceSha256": "6a6986db64b911fa4ce7a1357a616af322966bce331de1d075382e0245678e10",
       "imageSha256": "0ced9ae639f08753255bfe10249ecc140fcf61949a1a7bf995560b13dc01d3aa",
-      "note": "2026-11-10: 編集完成第2稿v2（修正履歴・後日承認反映含む）をGoogle Docsから全文再取得。一次資料・現行求人、BH-0001水彩画風と比較した実WebPの1200×630・SHA256・Drive納品を照合。公開前CI・差分・バックアップ・隔離復旧試験を別途実施。 公式求人最終照合：丸亀名張・垂水、ニトリ渋谷・川越、無印良品の現行採用導線、G-7常盤平・オーシャン塩釜の現在表示を参照。過去の時給表示と現在募集条件を区別。"
+      "note": "2026-11-10: 編集完成第2稿v2（修正履歴・後日承認反映含む）をGoogle Docsから全文再取得。一次資料・現行求人、BH-0001水彩画風と比較した実WebPの1200×630・SHA256・Drive納品を照合。公開前CI・差分・バックアップ・隔離復旧試験を別途実施。 公式求人最終照合：丸亀名張・垂水、ニトリ渋谷・川越、無印良品の現行採用導線、G-7常盤平・オーシャン塩釜の現在表示を参照。過去の時給表示と現在募集条件を区別。 2026-11-10公開前再点検：公式求人の時給表示を取得時点で断定せず、表示差がある旨と応募先への確認事項に統一。"
     },
     {
       "articleId": "BH-0027",
