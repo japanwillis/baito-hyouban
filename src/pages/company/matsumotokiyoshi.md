@@ -5,7 +5,7 @@ description: "マツモトキヨシのバイトで資格なしでも担当でき
 checkedDate: "2026-11-12"
 articleId: "BH-0029"
 heroImage: "/images/BH-0029-eyecatch.webp"
-imageAlt: "日用品の棚に商品を補充するスタッフと、売場でお客さんを案内するスタッフのイラスト。画像完成・検品済み／公開待ち。次は公開・運営Workの公開前確認。"
+imageAlt: "日用品の棚に商品を補充するスタッフと、売場でお客さんを案内するスタッフのイラスト"
 editorialStatus: "approved"
 ---
 

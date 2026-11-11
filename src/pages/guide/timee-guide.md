@@ -5,7 +5,7 @@ description: "タイミーを初めて使う人へ。求人の仕事内容・経
 checkedDate: "2026-11-12"
 articleId: "BH-0201"
 heroImage: "/images/BH-0201-eyecatch.webp"
-imageAlt: "単発バイトの勤務先へ向かう前にスマートフォンで予定を確認する人の水彩イラスト。 画像完成・検品済み／公開待ち。次は公開・運営Workの公開前検品。今回のユーザー指定10件を1件ずつ完了させる手動作業。"
+imageAlt: "単発バイトの勤務先へ向かう前にスマートフォンで予定を確認する人の水彩イラスト"
 editorialStatus: "approved"
 ---
 

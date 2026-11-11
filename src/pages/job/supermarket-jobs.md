@@ -5,7 +5,7 @@ description: "スーパーのアルバイトはレジ、品出し、惣菜、青
 checkedDate: "2026-11-12"
 articleId: "BH-0030"
 heroImage: "/images/BH-0030-eyecatch.webp"
-imageAlt: "スーパーでレジ接客、商品の品出し、惣菜の調理を担当するスタッフのイラスト。 画像完成・検品済み／公開待ち。次は公開・運営Workの公開前検品。"
+imageAlt: "スーパーでレジ接客、商品の品出し、惣菜の調理を担当するスタッフのイラスト"
 editorialStatus: "approved"
 ---
 

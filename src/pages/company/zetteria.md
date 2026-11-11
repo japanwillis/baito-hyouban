@@ -5,7 +5,7 @@ description: "ゼッテリアのアルバイトはどんな仕事？公式採用
 checkedDate: "2026-11-12"
 articleId: "BH-0038"
 heroImage: "/images/BH-0038-eyecatch.webp"
-imageAlt: "架空のハンバーガー店で接客担当がトレーを渡し、奥で調理担当が準備を進める水彩イラスト。 画像完成・検品済み／公開待ち。次は公開・運営Workの公開前検品。今回のユーザー指定10件を1件ずつ完了させる手動作業。"
+imageAlt: "架空のハンバーガー店で接客担当がトレーを渡し、奥で調理担当が準備を進める水彩イラスト"
 editorialStatus: "approved"
 ---
 
