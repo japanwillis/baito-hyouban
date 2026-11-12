@@ -1,0 +1,74 @@
+---
+import Base from '../layouts/Base.astro';
+const groups = [
+  { label:'企業別', files: import.meta.glob('./company/*.md', { eager:true }) },
+  { label:'職種別', files: import.meta.glob('./job/*.md', { eager:true }) },
+  { label:'お役立ち', files: import.meta.glob('./guide/*.md', { eager:true }) }
+];
+const articles = groups.flatMap(group => Object.values(group.files)
+  .filter((page:any) => ['approved','conditionally-approved'].includes(page.frontmatter.editorialStatus))
+  .map((page:any) => ({
+    title:page.frontmatter.title,
+    description:page.frontmatter.description || '',
+    url:page.url,
+    image:page.frontmatter.heroImage || '',
+    category:group.label
+  }))).sort((a,b)=>a.title.localeCompare(b.title,'ja'));
+---
+<Base title="記事を探す" description="企業名・職種・バイトの悩みから記事を検索できます。">
+  <div class="page-head"><span class="eyebrow">SEARCH</span><h1>記事を探す</h1><p>企業名・職種・気になることを入力してください。</p></div>
+  <div class="discovery-controls">
+    <input id="article-search" type="search" placeholder="例：カフェ、面接、シフト" aria-label="記事のキーワード" />
+    <select id="article-category" aria-label="記事のカテゴリ">
+      <option value="">すべてのカテゴリ</option><option value="企業別">企業別</option><option value="職種別">職種別</option><option value="お役立ち">お役立ち</option>
+    </select>
+  </div>
+  <p id="article-count" class="discovery-count" aria-live="polite"></p>
+  <div class="articles" id="article-results">
+    {articles.map(a => <a class="feature-article discovery-item" href={a.url} data-title={a.title} data-description={a.description} data-category={a.category}>
+      {a.image && <img src={a.image} alt="" width="1200" height="630" loading="lazy" />}
+      <div><span class="pill">{a.category}</span><h2>{a.title}</h2><p>{a.description}</p><strong>記事を読む →</strong></div>
+    </a>)}
+  </div>
+  <p id="article-empty" class="discovery-empty" hidden>該当する記事がありません。キーワードやカテゴリを変えてお試しください。</p>
+  <button id="article-more" class="discovery-more" type="button" hidden>さらに12件表示</button>
+</Base>
+<script>
+  const input=document.querySelector<HTMLInputElement>('#article-search');
+  const category=document.querySelector<HTMLSelectElement>('#article-category');
+  const cards=Array.from(document.querySelectorAll<HTMLElement>('.discovery-item'));
+  const count=document.querySelector<HTMLElement>('#article-count');
+  const empty=document.querySelector<HTMLElement>('#article-empty');
+  const more=document.querySelector<HTMLButtonElement>('#article-more');
+  const normalize=(s:string)=>s.normalize('NFKC').toLocaleLowerCase('ja').replace(/\s+/g,' ').trim();
+  let limit=12;
+  const params=new URLSearchParams(location.search);
+  if(input)input.value=params.get('q')||'';
+  if(category && ['企業別','職種別','お役立ち'].includes(params.get('category')||''))category.value=params.get('category')!;
+  function render(){
+    const terms=normalize(input?.value||'').split(' ').filter(Boolean);
+    const selected=category?.value||'';
+    let total=0;
+    cards.forEach(card=>{
+      const body=normalize((card.dataset.title||'')+' '+(card.dataset.description||''));
+      const match=(!selected||card.dataset.category===selected)&&terms.every(term=>body.includes(term));
+      if(match)total++;
+      card.hidden=!match||total>limit;
+      if(card.hidden)card.style.display='none';else card.style.removeProperty('display');
+    });
+    if(count)count.textContent=total+'件の記事が見つかりました';
+    if(empty)empty.hidden=total!==0;
+    if(more)more.hidden=total<=limit;
+    const url=new URL(location.href);
+    if(input?.value)url.searchParams.set('q',input.value);else url.searchParams.delete('q');
+    if(selected)url.searchParams.set('category',selected);else url.searchParams.delete('category');
+    history.replaceState(null,'',url);
+  }
+  input?.addEventListener('input',()=>{limit=12;render()});
+  category?.addEventListener('change',()=>{limit=12;render()});
+  more?.addEventListener('click',()=>{limit+=12;render()});
+  render();
+</script>
+<style>
+.discovery-item[hidden]{display:none!important}
+</style>
