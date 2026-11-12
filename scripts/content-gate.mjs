@@ -43,7 +43,7 @@ for (const path of walk('public/images')) {
 if (process.argv.includes('--dist')) {
   const dist = walk('dist');
   for (const a of approvals.articles) if (!existsSync(resolve(root, `dist${a.publicPath}index.html`))) throw Error(`Missing output ${a.articleId}`);
-  const fixed = ['index.html','404.html','about/index.html','advertising/index.html','contact/index.html','editorial-policy/index.html','privacy/index.html','guide/index.html','company/index.html','job/index.html','diagnosis/index.html','salary-calculator/index.html','job-comparison/index.html','workplace-check/index.html','first-job-anxiety/index.html'];
+  const fixed = ['index.html','404.html','about/index.html','advertising/index.html','contact/index.html','editorial-policy/index.html','privacy/index.html','guide/index.html','company/index.html','job/index.html','search/index.html','diagnosis/index.html','salary-calculator/index.html','job-comparison/index.html','workplace-check/index.html','first-job-anxiety/index.html'];
   for (const p of dist.filter(p => p.endsWith('.html'))) if (!fixed.includes(p.slice(5)) && !approvals.articles.some(a => `dist${a.publicPath}index.html` === p)) throw Error(`Unapproved output route ${p}`);
   const images = dist.filter(p => /\/BH-\d{4}/.test(p));
   for (const p of images) if (!approvals.articles.some(a => `dist${a.imagePath}` === p)) throw Error(`Unapproved output image ${p}`);
