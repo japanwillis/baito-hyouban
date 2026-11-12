@@ -544,6 +544,22 @@
       "sourceSha256": "c2593963962a001f9b40b5ff927690a5d9aa3d0507bb00ac4ba08e42c23fa4ba",
       "imageSha256": "f303fed477da74ab848c851498b264fa1f897c0aecbeb36252ccc80cc3b61994",
       "note": "編集完成稿とGoogle Drive 1200x630 WebP原本を再取得し、SHA256と水彩画風検品履歴を照合。最新公式資料の再照合、プレビューQA・plan復旧検証成功後にのみ公開。"
+    },
+    {
+      "articleId": "BH-0033",
+      "sourcePath": "src/pages/company/yoshinoya.md",
+      "publicPath": "/company/yoshinoya/",
+      "editorialStatus": "approved",
+      "conditionsResolved": true,
+      "imageVerified": true,
+      "linksVerifiedOn": "2026-11-13",
+      "manuscriptUrl": "https://docs.google.com/document/d/1dNzwTmkZSpoQgDC44Ks1ciJu1hO4s8gfF5yfIqV_ihQ/edit",
+      "reviewUrl": "https://docs.google.com/document/d/1dNzwTmkZSpoQgDC44Ks1ciJu1hO4s8gfF5yfIqV_ihQ/edit",
+      "imageUrl": "https://drive.google.com/file/d/1G83qnbme1-iHg-JbTdqebc2UHDdeYam8/view",
+      "imagePath": "/images/BH-0033-eyecatch.webp",
+      "sourceSha256": "8ec52b08b647dbe1a69a2dff5357d14695a2241b6ee9b4125d2db11b452a67b3",
+      "imageSha256": "26f544ba7425d04f95af78d8821fae1aace08989fee3335fe58e12ba0d721823",
+      "note": "2026-11-13 公式吉野家の門前仲町・十三・市ヶ谷駅前・日暮里求人を再照合。通常・深夜・オープニング時給を区別。編集完成稿v2を元に管理資料を排除。BH-0001との水彩画風、1200×630 WebP、Drive再取得とSHA256を確認。"
     }
   ]
 }
