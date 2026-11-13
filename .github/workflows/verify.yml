@@ -2,6 +2,16 @@ name: Verify Astro build
 on:
   push:
     branches: [main]
+    paths:
+      - 'src/**'
+      - 'public/**'
+      - 'scripts/**'
+      - 'tests/**'
+      - 'package*.json'
+      - 'astro.config.mjs'
+      - 'ops/publication-approvals.json'
+      - '.github/workflows/verify.yml'
+      - '.github/workflows/continuous-release.yml'
   pull_request:
 permissions:
   contents: read
@@ -24,4 +34,7 @@ jobs:
           test -f dist/index.html
           test -f dist/guide/first-part-time-job/index.html
           test -f dist/images/BH-0001-eyecatch.webp
+
+# Explicit release-request-only commits are validated and rebuilt by
+# continuous-release.yml. Avoid a second identical build for those requests.
 
