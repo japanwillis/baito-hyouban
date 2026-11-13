@@ -573,9 +573,9 @@
       "reviewUrl": "https://docs.google.com/document/d/1HxYC-a0jh4Z3eTpwJ_EB5ydlVT5Q-iWmu7cyEcWfabc/edit",
       "imageUrl": "https://drive.google.com/file/d/1-IxdJ6VvzyaGHhVYjV8kcp5nH7kSHJxI/view",
       "imagePath": "/images/BH-0205-eyecatch.webp",
-      "sourceSha256": "2bf51747e2429b678581083dde6b96b99d03ba56fbe67524d382fc584ed35135",
+      "sourceSha256": "09510214ce7fd0782ed669687a28d051a0f76d13a934d2c42576b15a37c0a41d",
       "imageSha256": "ce2325042926a3227fef336be12e17f19fe867708ec414b2a6886f270b581922",
-      "note": "編集完成稿v2・一次資料と本文・1200x630 WebP実画像・BH-0001水彩画風を再確認。Google Drive原本を再取得し画像SHA256照合。新規ページのみ追加。"
+      "note": "編集完成稿v2・一次資料と本文・1200x630 WebP実画像・BH-0001水彩画風を再確認。Google Drive原本を再取得し画像SHA256照合。新規ページのみ追加。 比較表のMarkdown行・見出しを正規テーブル表記で検品。"
     },
     {
       "articleId": "BH-0217",
