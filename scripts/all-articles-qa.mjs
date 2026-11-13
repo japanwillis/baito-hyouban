@@ -8,6 +8,11 @@ if(!['http://127.0.0.1:4321',canonicalOrigin].includes(origin))throw Error('Unap
 const approvals=JSON.parse(await readFile('ops/publication-approvals.json','utf8')).articles;
 const pages=[['home','/'],['guide','/guide/'],['company','/company/'],['job','/job/'],['search','/search/'],...approvals.map(a=>[a.articleId,a.publicPath])];
 const out='responsive-qa-evidence';await mkdir(out,{recursive:true});
+// Full accessibility, metadata, image, navigation and overflow checks still cover ALL articles at ALL widths.
+// Retain visual evidence at each width for the eight newest approvals, and a 320px sample for older articles.
+// This reduces redundant full-page screenshots and GitHub Actions artifact storage.
+const visualSample=new Set(approvals.slice(-8).map(a=>a.articleId));
+const captureScreenshot=(label,width)=>!label.startsWith('BH-')||width===320||visualSample.has(label);
 const browser=await chromium.launch();const results=[];
 try{
  for(const width of [320,390,768,1366]){
@@ -16,11 +21,11 @@ try{
   const page=await context.newPage();
   for(const [label,path] of pages){
    const response=await page.goto(origin+path,{waitUntil:'networkidle',timeout:45000});
-   await page.evaluate(async()=>{await document.fonts.ready;});await page.evaluate(async()=>{const height=document.documentElement.scrollHeight;const step=Math.max(350,Math.floor(innerHeight*0.75));for(let y=0;y<height;y+=step){scrollTo(0,y);await new Promise(resolve=>setTimeout(resolve,40));}scrollTo(0,height);});await page.locator('footer').scrollIntoViewIfNeeded();
+   await page.evaluate(async()=>{await document.fonts.ready;});await page.evaluate(async()=>{const height=document.documentElement.scrollHeight;const step=Math.max(350,Math.floor(innerHeight*0.75));for(let y=0;y<height;y+=step){scrollTo(0,y);await new Promise(resolve=>setTimeout(resolve,12));}scrollTo(0,height);});await page.locator('footer').scrollIntoViewIfNeeded();
    await page.waitForFunction(()=>[...document.images].every(i=>i.closest('[hidden]')||i.complete&&i.naturalWidth>0),null,{timeout:15000}).catch(async()=>{const missing=await page.evaluate(()=>[...document.images].filter(i=>!i.closest('[hidden]')&&(!i.complete||!i.naturalWidth)).map(i=>({src:i.src,complete:i.complete,width:i.naturalWidth})));throw Error(`Image readiness failed at ${label} ${path} width=${width}: ${JSON.stringify(missing)}`)});await page.evaluate(()=>scrollTo(0,0));
    const metrics=await page.evaluate(()=>({width:innerWidth,clientWidth:document.documentElement.clientWidth,scrollWidth:document.documentElement.scrollWidth,h1:document.querySelectorAll('h1').length,canonical:document.querySelector('link[rel=canonical]')?.href,description:document.querySelector('meta[name=description]')?.content,heroAlt:document.querySelector('.hero-image')?.alt,images:[...document.images].map(i=>({loaded:!!i.closest('[hidden]')||(i.complete&&i.naturalWidth>0),width:i.naturalWidth,height:i.naturalHeight,hidden:!!i.closest('[hidden]')})),tables:[...document.querySelectorAll('table')].map(t=>({rows:t.querySelectorAll('tbody tr').length,cells:t.querySelectorAll('td').length}))}));
    const errors=[];if(response.status()!==200)errors.push(`HTTP ${response.status()}`);if(metrics.width!==width)errors.push('Viewport mismatch');if(metrics.scrollWidth>metrics.clientWidth+1)errors.push('Horizontal overflow');if(metrics.h1!==1||metrics.canonical!==canonicalOrigin+path||!metrics.description)errors.push('Metadata/heading mismatch');if(!metrics.images.every(i=>i.loaded))errors.push('Image failed');if(label.startsWith('BH-')&&!metrics.heroAlt)errors.push('Missing hero alt');if(label.startsWith('BH-')&&!metrics.images.some(i=>i.width===1200&&i.height===630))errors.push('Missing 1200x630 article hero image');
-   const screenshot=`${label}-${width}.jpg`;await page.screenshot({path:`${out}/${screenshot}`,fullPage:true,type:'jpeg',quality:90});results.push({label,path,width,screenshot,metrics,errors});
+   const screenshot=captureScreenshot(label,width)?`${label}-${width}.jpg`:null;if(screenshot)await page.screenshot({path:`${out}/${screenshot}`,fullPage:true,type:'jpeg',quality:72});results.push({label,path,width,screenshot,metrics,errors});
   }
   for(const a of approvals){
    const category=a.publicPath.startsWith('/company/')?'/company/':a.publicPath.startsWith('/job/')?'/job/':'/guide/';await page.goto(origin+category,{waitUntil:'networkidle'});const target=page.locator(`a.feature-article[href="${a.publicPath}"]`);const filter=page.locator('#list-search');if(await filter.count()) await filter.fill(await target.getAttribute('data-title')||'');await target.click();await page.waitForURL(origin+a.publicPath);results.push({label:'category-to-article-navigation',articleId:a.articleId,width,errors:[]});
