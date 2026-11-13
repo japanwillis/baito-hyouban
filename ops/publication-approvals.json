@@ -573,9 +573,9 @@
       "reviewUrl": "https://docs.google.com/document/d/1HxYC-a0jh4Z3eTpwJ_EB5ydlVT5Q-iWmu7cyEcWfabc/edit",
       "imageUrl": "https://drive.google.com/file/d/1-IxdJ6VvzyaGHhVYjV8kcp5nH7kSHJxI/view",
       "imagePath": "/images/BH-0205-eyecatch.webp",
-      "sourceSha256": "fb16bbe9fea504fed49adf41e7eb0fefdb58d3c2cf843cf7a9bf72d598bda635",
+      "sourceSha256": "2bf51747e2429b678581083dde6b96b99d03ba56fbe67524d382fc584ed35135",
       "imageSha256": "ce2325042926a3227fef336be12e17f19fe867708ec414b2a6886f270b581922",
-      "note": "2026-11-14 編集完成稿v2と指定Google Drive実画像再取得、1200×630 WebP・画像SHA256・BH-0001水彩画風を独立検品。厚労省・Timee公式情報を点検し出典を整理。リンクは公開済み実ページと今回同時リリースだけを使用。公開前プレビュー・plan/復旧試験の成功を条件とする。"
+      "note": "編集完成稿v2・一次資料と本文・1200x630 WebP実画像・BH-0001水彩画風を再確認。Google Drive原本を再取得し画像SHA256照合。新規ページのみ追加。"
     },
     {
       "articleId": "BH-0217",
@@ -589,9 +589,9 @@
       "reviewUrl": "https://docs.google.com/document/d/1rLXz00T2R6moL5c_zd7J3Mz2jMFg1n95eReDWd7Fpj4/edit",
       "imageUrl": "https://drive.google.com/file/d/1mp3toknea67XgwKRle8eFzlR0_w3MWqm/view",
       "imagePath": "/images/BH-0217-eyecatch.webp",
-      "sourceSha256": "ed7647598f0bbe05ca394598de80820c971261dea53898859725dba568224af4",
+      "sourceSha256": "859e76be0fbcf695498e6d355451ae2fd87bdec0da7e6dfefb6eda0af63e8746",
       "imageSha256": "95b92fe2847e8bcf02d4332b1b26ac976f1937eb883b29b7163440ce9dc634fc",
-      "note": "2026-11-14 編集完成稿v2と指定Google Drive実画像再取得、1200×630 WebP・画像SHA256・BH-0001水彩画風を独立検品。厚労省・Timee公式情報を点検し出典を整理。リンクは公開済み実ページと今回同時リリースだけを使用。公開前プレビュー・plan/復旧試験の成功を条件とする。"
+      "note": "編集完成稿v2・一次資料と本文・1200x630 WebP実画像・BH-0001水彩画風を再確認。Google Drive原本を再取得し画像SHA256照合。新規ページのみ追加。"
     },
     {
       "articleId": "BH-0218",
@@ -605,9 +605,41 @@
       "reviewUrl": "https://docs.google.com/document/d/15hzfb5GhRCU-ls2z8h3tX0oKnu7EEXrSWtWOfrbR4KQ/edit",
       "imageUrl": "https://drive.google.com/file/d/1FBK6THXfT4RCHcX4f0T6GtYYIf6OgwEp/view",
       "imagePath": "/images/BH-0218-eyecatch.webp",
-      "sourceSha256": "3281f8d3b62fcb21330f55a6b0f9937378a1d402201eded708d3229eb2c7a75f",
+      "sourceSha256": "5892a726ae702421f68b4fbfac7db849ca0a369f92a6cda0ca1691fe460e0906",
       "imageSha256": "1d94a4241ea2e67bc48ca3db14b2cb8172189e960b70838733ac421388f308c4",
-      "note": "2026-11-14 編集完成稿v2と指定Google Drive実画像再取得、1200×630 WebP・画像SHA256・BH-0001水彩画風を独立検品。厚労省・Timee公式情報を点検し出典を整理。リンクは公開済み実ページと今回同時リリースだけを使用。公開前プレビュー・plan/復旧試験の成功を条件とする。"
+      "note": "編集完成稿v2・一次資料と本文・1200x630 WebP実画像・BH-0001水彩画風を再確認。Google Drive原本を再取得し画像SHA256照合。新規ページのみ追加。"
+    },
+    {
+      "articleId": "BH-0207",
+      "sourcePath": "src/pages/guide/spot-work-cancellation.md",
+      "publicPath": "/guide/spot-work-cancellation/",
+      "editorialStatus": "approved",
+      "conditionsResolved": true,
+      "imageVerified": true,
+      "linksVerifiedOn": "2026-11-14",
+      "manuscriptUrl": "https://docs.google.com/document/d/1bMSkzvsPg7kCz07rMpytEk_HcXtUTYFLMYFNEafady0/edit",
+      "reviewUrl": "https://docs.google.com/document/d/1bMSkzvsPg7kCz07rMpytEk_HcXtUTYFLMYFNEafady0/edit",
+      "imageUrl": "https://drive.google.com/file/d/1lGXqhanG3WL7xZ4Ocp3_CxyAXfmUQECI/view",
+      "imagePath": "/images/BH-0207-eyecatch.webp",
+      "sourceSha256": "92744d5f579a50e9301d886655cb4459b2d3068bfa12cf3439f3aa4cb39a26d2",
+      "imageSha256": "407a5b7a01b643116c82d614607fdfd39cf4ffc7047e4c2bfa17158d393573e1",
+      "note": "編集完成稿v2・一次資料と本文・1200x630 WebP実画像・BH-0001水彩画風を再確認。Google Drive原本を再取得し画像SHA256照合。新規ページのみ追加。"
+    },
+    {
+      "articleId": "BH-0208",
+      "sourcePath": "src/pages/guide/spot-work-employer-cancellation.md",
+      "publicPath": "/guide/spot-work-employer-cancellation/",
+      "editorialStatus": "approved",
+      "conditionsResolved": true,
+      "imageVerified": true,
+      "linksVerifiedOn": "2026-11-14",
+      "manuscriptUrl": "https://docs.google.com/document/d/1nt0gPvQj1_N2rD_TuRhCPfv6rTJNdV9g7JGkW3H9kGU/edit",
+      "reviewUrl": "https://docs.google.com/document/d/1nt0gPvQj1_N2rD_TuRhCPfv6rTJNdV9g7JGkW3H9kGU/edit",
+      "imageUrl": "https://drive.google.com/file/d/1W-GVWOoIl_kjBP-OLCJHk0jHCMTxW4Xh/view",
+      "imagePath": "/images/BH-0208-eyecatch.webp",
+      "sourceSha256": "bdc4bafffa5fe24f869330d43f71c8cb0729a04f712e5873c5b8e6c5b0449a92",
+      "imageSha256": "b4cbf7082bd0e8781ddc1622d80c41cac8e04e9374232c9d5fa88a7c875fc443",
+      "note": "編集完成稿v2・一次資料と本文・1200x630 WebP実画像・BH-0001水彩画風を再確認。Google Drive原本を再取得し画像SHA256照合。新規ページのみ追加。"
     }
   ]
 }
