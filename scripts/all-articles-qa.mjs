@@ -53,6 +53,7 @@ try{
     results.push({label:'category-to-article-navigation',articleId:a.articleId,width,errors:[]});
    }
    const first=group[0];
+   if(hasFilter)await filter.fill(await page.locator(`a.feature-article[href="${first.publicPath}"]`).getAttribute('data-title')||'');
    await page.locator(`a.feature-article[href="${first.publicPath}"]`).click();
    await page.waitForURL(origin+first.publicPath);
   }
