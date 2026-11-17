@@ -4,6 +4,8 @@ CLI always uses the single verified domain root and a private sibling control di
 The Engine constructor is separately usable with temporary directories in tests.
 """
 import fcntl
+from datetime import datetime
+from zoneinfo import ZoneInfo
 import hashlib
 import json
 import os
@@ -54,6 +56,57 @@ def write_json(path, value):
     tmp = path.with_suffix('.tmp')
     tmp.write_bytes(canonical(value))
     os.replace(str(tmp), str(path))
+
+def reserve_daily_deploy(control, release_id, now=None):
+    """Durable one-attempt-per-JST-day reservation under the existing server flock.
+
+    An interrupted or rolled-back deployment still consumes its publish day.
+    Rollbacks and the read-only planning path are deliberately not restricted.
+    """
+    control = Path(control)
+    if not re.fullmatch(r'[0-9]+-[0-9]+', release_id):
+        raise ValueError('Invalid daily deploy release ID')
+    instant = now if now is not None else datetime.now(ZoneInfo('Asia/Tokyo'))
+    if instant.tzinfo is None or instant.utcoffset() is None:
+        raise ValueError('Timezone-aware server clock required')
+    local = instant.astimezone(ZoneInfo('Asia/Tokyo'))
+    if local.hour != 3:
+        raise ValueError('Production deploy allowed only at JST 03:00-03:59')
+    date_jst = local.strftime('%Y-%m-%d')
+    if control.is_symlink() or not control.is_dir():
+        raise ValueError('Unsafe persistent deployment control directory')
+    # Migration safety for legacy releases predating this durable ledger.
+    for entry in control.iterdir():
+        if not re.fullmatch(r'release-[0-9]+-[0-9]+', entry.name):
+            continue
+        if entry.is_symlink() or not entry.is_dir():
+            raise ValueError('Unsafe existing release evidence')
+        evidence = [entry]
+        state = entry / 'state.json'
+        if state.is_symlink():
+            raise ValueError('Unsafe existing release state')
+        if state.exists():
+            evidence.append(state)
+        for item in evidence:
+            if datetime.fromtimestamp(item.stat().st_mtime, ZoneInfo('Asia/Tokyo')).date() == local.date():
+                raise ValueError('Existing release evidence on this JST date; refusing another deploy')
+    directory = control / 'daily-deploy'
+    if directory.is_symlink():
+        raise ValueError('Symlinked daily deploy ledger refused')
+    directory.mkdir(mode=0o700, exist_ok=True)
+    if not directory.is_dir():
+        raise ValueError('Daily deploy ledger is not a directory')
+    os.chmod(directory, 0o700)
+    day = directory / date_jst
+    try:
+        day.mkdir(mode=0o700)
+    except FileExistsError as exc:
+        raise ValueError('Daily deploy already reserved for ' + date_jst) from exc
+    receipt = day / 'attempt.json'
+    write_json(receipt, dict(date_jst=date_jst, release_id=release_id,
+                            reserved_at=local.isoformat(), phase='reserved'))
+    return receipt
+
 
 class Engine:
     def __init__(self, root, control):
@@ -286,6 +339,7 @@ def main():
                 result = engine.verified_plan(candidate, source_sha, release_id)
             else:
                 engine.require_plan(candidate, source_sha, approved, plan_id)
+                reserve_daily_deploy(engine.control, release_id)
                 result = engine.apply(candidate, source_sha, approved, release_id)
         elif mode == 'rollback':
             result = engine.rollback(release_id)
