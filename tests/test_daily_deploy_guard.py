@@ -77,7 +77,7 @@ class ServerLedgerTests(unittest.TestCase):
             timestamp = datetime(2026, 11, 17, 2, 40, tzinfo=JST).timestamp()
             os.utime(old, (timestamp, timestamp))
             os.utime(state, (timestamp, timestamp))
-            with self.assertRaisesRegex(ValueError, "existing release"):
+            with self.assertRaisesRegex(ValueError, "Existing release"):
                 remote.reserve_daily_deploy(base, "101-1", datetime(2026, 11, 17, 3, 5, tzinfo=JST))
 
     def test_invalid_release_id_fails_closed(self):
