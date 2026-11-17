@@ -4,8 +4,10 @@ CLI always uses the single verified domain root and a private sibling control di
 The Engine constructor is separately usable with temporary directories in tests.
 """
 import fcntl
-from datetime import datetime
-from zoneinfo import ZoneInfo
+from datetime import datetime, timedelta, timezone
+
+# Japan has used a constant +09:00 civil offset since 1952. No server tzdata dependency.
+JST = timezone(timedelta(hours=9))
 import hashlib
 import json
 import os
@@ -66,10 +68,10 @@ def reserve_daily_deploy(control, release_id, now=None):
     control = Path(control)
     if not re.fullmatch(r'[0-9]+-[0-9]+', release_id):
         raise ValueError('Invalid daily deploy release ID')
-    instant = now if now is not None else datetime.now(ZoneInfo('Asia/Tokyo'))
+    instant = now if now is not None else datetime.now(JST)
     if instant.tzinfo is None or instant.utcoffset() is None:
         raise ValueError('Timezone-aware server clock required')
-    local = instant.astimezone(ZoneInfo('Asia/Tokyo'))
+    local = instant.astimezone(JST)
     if local.hour != 3:
         raise ValueError('Production deploy allowed only at JST 03:00-03:59')
     date_jst = local.strftime('%Y-%m-%d')
@@ -88,7 +90,7 @@ def reserve_daily_deploy(control, release_id, now=None):
         if state.exists():
             evidence.append(state)
         for item in evidence:
-            if datetime.fromtimestamp(item.stat().st_mtime, ZoneInfo('Asia/Tokyo')).date() == local.date():
+            if datetime.fromtimestamp(item.stat().st_mtime, JST).date() == local.date():
                 raise ValueError('Existing release evidence on this JST date; refusing another deploy')
     directory = control / 'daily-deploy'
     if directory.is_symlink():
