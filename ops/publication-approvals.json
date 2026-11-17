@@ -1011,6 +1011,38 @@
       "sourceSha256": "c2f88ee9b3a253a5bc042f88319fcf50c4c2c3aeb7a98eee5ad7f955fe02308a",
       "imageSha256": "dd47642583057681b282acee94872568ed7df50c0fadbb748f38e6dab3170722",
       "note": "編集承認v2を公開用整形。制作指示・申し送り・画像ブリーフを除外。誤ったS01を正しい公式仕事内容ページに修正。2026-11-17の一次資料再検証、セリア2店の実HTML確認、Drive実バイトSHA256・1200×630・水彩画風目視検品済み。4幅QA/本番plan等は別途必須。"
+    },
+    {
+      "articleId": "BH-0053",
+      "sourcePath": "src/pages/company/bamiyan.md",
+      "publicPath": "/company/bamiyan/",
+      "editorialStatus": "approved",
+      "conditionsResolved": true,
+      "imageVerified": true,
+      "linksVerifiedOn": "2026-11-17",
+      "manuscriptUrl": "https://docs.google.com/document/d/1NH6XkF-aCMZ8RzuowYaNX209Ao5HoD429tw4G-42Dh8",
+      "reviewUrl": "https://docs.google.com/document/d/1NH6XkF-aCMZ8RzuowYaNX209Ao5HoD429tw4G-42Dh8",
+      "imageUrl": "https://drive.google.com/file/d/17c0ZF9hXpl_QY2WEZNKXtKvKpyPk0Fpk/view",
+      "imagePath": "/images/BH-0053-eyecatch.webp",
+      "sourceSha256": "d47b7da82ba7500afb8f034f9be6e467e92b9c9a8be8e521166190562d2a9283",
+      "imageSha256": "8653da17798662921b525a6c7365f9c1863a2935ef8c13ca8ba8f6c6f97d4fa7",
+      "note": "編集承認v2を公開用整形。制作メモ・SEO指示・画像ブリーフ・工程履歴を除外。Drive実バイトSHA256・1200×630 WebP・水彩画風目視照合済み。技術および本番ゲートは別途必須。"
+    },
+    {
+      "articleId": "BH-0054",
+      "sourcePath": "src/pages/company/jonathans.md",
+      "publicPath": "/company/jonathans/",
+      "editorialStatus": "approved",
+      "conditionsResolved": true,
+      "imageVerified": true,
+      "linksVerifiedOn": "2026-11-17",
+      "manuscriptUrl": "https://docs.google.com/document/d/148c9mu0RWbAXOMgIdvGPMnsNo6OeGxiO-TMuu8f8rwA",
+      "reviewUrl": "https://docs.google.com/document/d/148c9mu0RWbAXOMgIdvGPMnsNo6OeGxiO-TMuu8f8rwA",
+      "imageUrl": "https://drive.google.com/file/d/19P1Xqu0KjCXjqnH91tjoB-5phrC7wqO0/view",
+      "imagePath": "/images/BH-0054-eyecatch.webp",
+      "sourceSha256": "de2ff863402106ff76daf0fe508e3917473f1c4ca65bd58383ddb201dfad6c1d",
+      "imageSha256": "d6d9efff96381ee46568873108623cf5e69c0d460f1f2d8abb90d11c450b3491",
+      "note": "編集承認v2を公開用整形。制作メモ・SEO指示・画像ブリーフ・工程履歴を除外。Drive実バイトSHA256・1200×630 WebP・水彩画風目視照合済み。技術および本番ゲートは別途必須。"
     }
   ]
 }
