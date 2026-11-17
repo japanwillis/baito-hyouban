@@ -125,9 +125,10 @@
       "reviewUrl": "https://docs.google.com/document/d/1Flt8Nc8NP8xPIWztwdIUEUsOxNVIbiaXjoashsuv1o0/edit",
       "imageUrl": "https://drive.google.com/file/d/16d2DAMHZc6Y9lOo8KVysQgPfCK-kP3fQ/view?usp=drivesdk",
       "imagePath": "/images/BH-0008-eyecatch.webp",
-      "sourceSha256": "2eab30f299cdd887786a8ca1cf7ebd03192611d213f81dee4b123bef50868237",
+      "sourceSha256": "deb194167e9c310dcc835dd0a9e7cc1c8a8c8bc56d347d4df1a87c63a3ce8c64",
       "imageSha256": "0197339a06e6845d2f26193fefe08753314a25332a160ce41c8a0877d42da1bd",
-      "note": "2026-11-05 一括公開の明示指示に基づく承認稿v2の変換。管理情報・編集記録を非掲載。本文・表・出典を保持。画像実物1200×630 WebPとaltを照合。"
+      "note": "2026-11-05 一括公開の明示指示に基づく承認稿v2の変換。管理情報・編集記録を非掲載。本文・表・出典を保持。画像実物1200×630 WebPとaltを照合。 2026-11-17 ユーザー指示に基づく公開本文修正：内部作業指示・制作管理メモを除去し、管理ID参照を実在確認済み関連記事へ置換。記事の事実関係・留保・画像は維持。",
+      "internalLinksVerifiedOn": "2026-11-17"
     },
     {
       "articleId": "BH-0009",
@@ -173,9 +174,10 @@
       "reviewUrl": "https://docs.google.com/document/d/18PqH70Kgb0-asdWF-9lrQUJ6HdSzCPbsIQU00B060Es/edit",
       "imageUrl": "https://drive.google.com/file/d/1SZKFMd1KWTAyn84D04yQMO5d36rW-pQ3/view",
       "imagePath": "/images/BH-0011-eyecatch.webp",
-      "sourceSha256": "cd1475d465976c6aa062e792196163547f5b62831b5b71d744e9c0478e630b3f",
+      "sourceSha256": "d8f9b2ee8bb60d8958d650077543eb264e91838aee75c29964602b5c0432b9e3",
       "imageSha256": "2f154dc7436543ebbc0e8d057be66bf415bd8b31ef436f6940f904f8638213ab",
-      "note": "2026-11-06完成稿v2を公開稿に変換し出典・画像実物1200×630 WebP・公式求人・公的資料を照合。技術的な公開前ゲートと本番検証は別工程で実施。 2026-11-06公開前の公式求人再確認で、羽田五丁目店の掲載時給が1,300円〜に更新済みと確認。従来の1,250円の不一致説明を訂正。東京都最低賃金1,280円の適用を公式資料で再確認。"
+      "note": "2026-11-06完成稿v2を公開稿に変換し出典・画像実物1200×630 WebP・公式求人・公的資料を照合。技術的な公開前ゲートと本番検証は別工程で実施。 2026-11-06公開前の公式求人再確認で、羽田五丁目店の掲載時給が1,300円〜に更新済みと確認。従来の1,250円の不一致説明を訂正。東京都最低賃金1,280円の適用を公式資料で再確認。 2026-11-17 ユーザー指示に基づく公開本文修正：内部作業指示・制作管理メモを除去し、管理ID参照を実在確認済み関連記事へ置換。記事の事実関係・留保・画像は維持。",
+      "internalLinksVerifiedOn": "2026-11-17"
     },
     {
       "articleId": "BH-0012",
@@ -221,9 +223,10 @@
       "reviewUrl": "https://docs.google.com/document/d/1z_0DrQfMJUztr5LTw5vjWS4yPI1kJWKn_F9ANJ97F_U/edit",
       "imageUrl": "https://drive.google.com/file/d/1qXJchM-D7u9hKJx0OAaeL6snl-5y_E8c/view",
       "imagePath": "/images/BH-0014-eyecatch.webp",
-      "sourceSha256": "9de68877d626b02ab5b29e7f481b03d49f14a998e76125652618049c954cb7d4",
+      "sourceSha256": "a18ce96dc61199dce3226bc1688ea9f915373f98fe676579638acbed4ef2dd78",
       "imageSha256": "17449933c168c6065efe72d6b102fb9730bf2d9e10b22bea4d4be89beb7257bc",
-      "note": "2026-11-07 深夜一括公開候補。完成稿第2稿v2、原本Google Docs revision AHj4eMRa2Z0HbYHFSiblAO0Q86z--IeGM--wg31m、Drive実WebPを再取得・1200×630/ハッシュ検証。記事出典・公式求人を再照合（土浦荒川沖店の掲載時給を2026-11-07の現行公式表示へ修正）。承認対象原稿・画像をSHA256で固定。 2026-11-09にBH-0001と並べて水彩画風を検品したWebPへ差し替え。Drive実ファイルの再取得とSHA256照合済み。"
+      "note": "2026-11-07 深夜一括公開候補。完成稿第2稿v2、原本Google Docs revision AHj4eMRa2Z0HbYHFSiblAO0Q86z--IeGM--wg31m、Drive実WebPを再取得・1200×630/ハッシュ検証。記事出典・公式求人を再照合（土浦荒川沖店の掲載時給を2026-11-07の現行公式表示へ修正）。承認対象原稿・画像をSHA256で固定。 2026-11-09にBH-0001と並べて水彩画風を検品したWebPへ差し替え。Drive実ファイルの再取得とSHA256照合済み。 2026-11-17 ユーザー指示に基づく公開本文修正：内部作業指示・制作管理メモを除去し、管理ID参照を実在確認済み関連記事へ置換。記事の事実関係・留保・画像は維持。",
+      "internalLinksVerifiedOn": "2026-11-17"
     },
     {
       "articleId": "BH-0015",
@@ -237,9 +240,10 @@
       "reviewUrl": "https://docs.google.com/document/d/128CwqZt76bWTIbfTCIRiS0_5appUJ-cwJw0_j9b2QXQ/edit",
       "imageUrl": "https://drive.google.com/file/d/19NXqT5rS99gM23RsO1LEjfUksm1Hjfi7/view",
       "imagePath": "/images/BH-0015-eyecatch.webp",
-      "sourceSha256": "370ce063ec72a09608a00b4a8479bfeed5aaf9cd11177875eeed64936d6a54e9",
+      "sourceSha256": "dffc75b6f850c3134d23259b3be44efc1e6d245af300907ef3d4dac796771f64",
       "imageSha256": "f1be1fe1bd0994fb56704dcaa91cb485ba23623499dd9fcccd6693428229a86f",
-      "note": "2026-11-07 深夜一括公開候補。完成稿第2稿v2、原本Google Docs revision AHj4eMR5iq5jtIqVZ1xhYlaqkplnhHAI8lT6eWMA、Drive実WebPを再取得・1200×630/ハッシュ検証。記事出典・公式求人を再照合。承認対象原稿・画像をSHA256で固定。 2026-11-09にBH-0001と並べて水彩画風を検品したWebPへ差し替え。Drive実ファイルの再取得とSHA256照合済み。"
+      "note": "2026-11-07 深夜一括公開候補。完成稿第2稿v2、原本Google Docs revision AHj4eMR5iq5jtIqVZ1xhYlaqkplnhHAI8lT6eWMA、Drive実WebPを再取得・1200×630/ハッシュ検証。記事出典・公式求人を再照合。承認対象原稿・画像をSHA256で固定。 2026-11-09にBH-0001と並べて水彩画風を検品したWebPへ差し替え。Drive実ファイルの再取得とSHA256照合済み。 2026-11-17 ユーザー指示に基づく公開本文修正：内部作業指示・制作管理メモを除去し、管理ID参照を実在確認済み関連記事へ置換。記事の事実関係・留保・画像は維持。",
+      "internalLinksVerifiedOn": "2026-11-17"
     },
     {
       "articleId": "BH-0016",
@@ -253,9 +257,10 @@
       "reviewUrl": "https://docs.google.com/document/d/1V3jF9Lr3ZLJ60AdLvEermdskTkZjbWFnsmymYO1naHQ/edit",
       "imageUrl": "https://drive.google.com/file/d/1mTbDfD5j8q9Uwm_fXsb18OVvzC60QyQo/view",
       "imagePath": "/images/BH-0016-eyecatch.webp",
-      "sourceSha256": "6aeb842772696e19b6f5315c57fd5a6cca1a1b11ce3fcbb4cf761a73b72f1810",
+      "sourceSha256": "f13ca19c8c81e982aeee2d64f2c2905c50ac349bc2849d36d106e50e77ffb5cc",
       "imageSha256": "6e70ca09d332c00fd99d9b2dab5113e74efc9022a58b362e4c729bffa4763786",
-      "note": "2026-11-07 深夜一括公開候補。完成稿第2稿v2、原本Google Docs revision AHj4eMTim76ltqHcoRpjIKyuQab-OaC0P9ieT5PY、Drive実WebPを再取得・1200×630/ハッシュ検証。記事出典・公式求人を再照合。承認対象原稿・画像をSHA256で固定。 公開表示に不要な制作管理用の内部リンク候補メモを除外。 2026-11-09にBH-0001と並べて水彩画風を検品したWebPへ差し替え。Drive実ファイルの再取得とSHA256照合済み。"
+      "note": "2026-11-07 深夜一括公開候補。完成稿第2稿v2、原本Google Docs revision AHj4eMTim76ltqHcoRpjIKyuQab-OaC0P9ieT5PY、Drive実WebPを再取得・1200×630/ハッシュ検証。記事出典・公式求人を再照合。承認対象原稿・画像をSHA256で固定。 公開表示に不要な制作管理用の内部リンク候補メモを除外。 2026-11-09にBH-0001と並べて水彩画風を検品したWebPへ差し替え。Drive実ファイルの再取得とSHA256照合済み。 2026-11-17 ユーザー指示に基づく公開本文修正：内部作業指示・制作管理メモを除去し、管理ID参照を実在確認済み関連記事へ置換。記事の事実関係・留保・画像は維持。",
+      "internalLinksVerifiedOn": "2026-11-17"
     },
     {
       "articleId": "BH-0017",
@@ -269,9 +274,10 @@
       "reviewUrl": "https://docs.google.com/document/d/1snbS92Cl1c68hafFjIhtNJkT3kcxkfz7o9fb4s8u1-A/edit",
       "imageUrl": "https://drive.google.com/file/d/1y48qYzpNZgRO0JRnuZTNt4GgFNMt3JiL/view",
       "imagePath": "/images/BH-0017-eyecatch.webp",
-      "sourceSha256": "7612e3bd7321be840cce0dfa60b757ddac8c9bc9645eb9937d7f28d445bcb96e",
+      "sourceSha256": "63a73eafdf5a272c1c771830bfef4adf93c39b6c7ecedb9cfd30db2de9ea8e34",
       "imageSha256": "aa2380ca067258ed4b26bacb000a348d3964f7fb92c923d6eaf2d8e6d07f61d8",
-      "note": "2026-11-07 深夜一括公開候補。完成稿第2稿v2、原本Google Docs revision AHj4eMQqDAcpdVgEAspfIygeA_lGj8Kp5cKZRdk6、Drive実WebPを再取得・1200×630/ハッシュ検証。記事出典・公式求人を再照合。承認対象原稿・画像をSHA256で固定。 2026-11-09にBH-0001と並べて水彩画風を検品したWebPへ差し替え。Drive実ファイルの再取得とSHA256照合済み。"
+      "note": "2026-11-07 深夜一括公開候補。完成稿第2稿v2、原本Google Docs revision AHj4eMQqDAcpdVgEAspfIygeA_lGj8Kp5cKZRdk6、Drive実WebPを再取得・1200×630/ハッシュ検証。記事出典・公式求人を再照合。承認対象原稿・画像をSHA256で固定。 2026-11-09にBH-0001と並べて水彩画風を検品したWebPへ差し替え。Drive実ファイルの再取得とSHA256照合済み。 2026-11-17 ユーザー指示に基づく公開本文修正：内部作業指示・制作管理メモを除去し、管理ID参照を実在確認済み関連記事へ置換。記事の事実関係・留保・画像は維持。",
+      "internalLinksVerifiedOn": "2026-11-17"
     },
     {
       "articleId": "BH-0018",
@@ -285,9 +291,10 @@
       "reviewUrl": "https://docs.google.com/document/d/1YIBvD-CFqHCngww53XmctYqSRZBIZSUYzzinkbxcxzg/edit",
       "imageUrl": "https://drive.google.com/file/d/1vlDJppYY6hR3El03YKUF84BICmucVmQV/view",
       "imagePath": "/images/BH-0018-eyecatch.webp",
-      "sourceSha256": "60e810139b329ecd9c5b3606bd98e4c19a2a2aa5af7c3828a14a15ea2d9023b2",
+      "sourceSha256": "47459614e505fb3b7fb20b0c0809d44853ee64f0b878f17b4b4c377a3517952b",
       "imageSha256": "90910e98832b507ef2f744dee442a88c681d26e45f66446b7add3725c8f67ae5",
-      "note": "2026-11-07 深夜一括公開候補。完成稿第2稿v2、原本Google Docs revision AHj4eMRfhWqz6XmGuN2visxB3lOHhRrp52FOm-fy、Drive実WebPを再取得・1200×630/ハッシュ検証。記事出典・公式求人を再照合。承認対象原稿・画像をSHA256で固定。 公開表示に不要な制作管理用の内部リンク候補メモを除外。 2026-11-09にBH-0001と並べて水彩画風を検品したWebPへ差し替え。Drive実ファイルの再取得とSHA256照合済み。"
+      "note": "2026-11-07 深夜一括公開候補。完成稿第2稿v2、原本Google Docs revision AHj4eMRfhWqz6XmGuN2visxB3lOHhRrp52FOm-fy、Drive実WebPを再取得・1200×630/ハッシュ検証。記事出典・公式求人を再照合。承認対象原稿・画像をSHA256で固定。 公開表示に不要な制作管理用の内部リンク候補メモを除外。 2026-11-09にBH-0001と並べて水彩画風を検品したWebPへ差し替え。Drive実ファイルの再取得とSHA256照合済み。 2026-11-17 ユーザー指示に基づく公開本文修正：内部作業指示・制作管理メモを除去し、管理ID参照を実在確認済み関連記事へ置換。記事の事実関係・留保・画像は維持。",
+      "internalLinksVerifiedOn": "2026-11-17"
     },
     {
       "articleId": "BH-0021",
@@ -301,9 +308,10 @@
       "reviewUrl": "https://docs.google.com/document/d/18wqraXu_U4yKo_eKjc8R2lHh8BmiZqDh8COWGZ-mSH0/edit",
       "imageUrl": "https://drive.google.com/file/d/1HDDhxok6keY0zHIkgKzQd8lrNF1VchJL/view",
       "imagePath": "/images/BH-0021-eyecatch.webp",
-      "sourceSha256": "700f13744e5333a1d65689f5c9eea4ef6751382d3133052ec2208682579f1cd4",
+      "sourceSha256": "49a9bacf1233ac4f987e48dbca6ed8113d5871ae21f6013c9d63dd74b96c0a3b",
       "imageSha256": "a5d228c45aef887bae6d2d87e5362bb676d8f5bed7596ae263846b28913e449e",
-      "note": "2026-11-08: 本文は編集承認済み第2稿を原本として公開部分だけを抽出。公式・公的出典と掲載中の個別求人を再照合。Drive再取得済WebPのSHA256・1200×630確認。旧記事は変更しない。 2026-11-09にBH-0001と並べて水彩画風を検品したWebPへ差し替え。Drive実ファイルの再取得とSHA256照合済み。"
+      "note": "2026-11-08: 本文は編集承認済み第2稿を原本として公開部分だけを抽出。公式・公的出典と掲載中の個別求人を再照合。Drive再取得済WebPのSHA256・1200×630確認。旧記事は変更しない。 2026-11-09にBH-0001と並べて水彩画風を検品したWebPへ差し替え。Drive実ファイルの再取得とSHA256照合済み。 2026-11-17 ユーザー指示に基づく公開本文修正：内部作業指示・制作管理メモを除去し、管理ID参照を実在確認済み関連記事へ置換。記事の事実関係・留保・画像は維持。",
+      "internalLinksVerifiedOn": "2026-11-17"
     },
     {
       "articleId": "BH-0022",
@@ -349,9 +357,10 @@
       "reviewUrl": "https://docs.google.com/document/d/1T6gal5FkPwHTaZPB3erZKwZc_RVoOWmMgTskbLCR7z8/edit",
       "imageUrl": "https://drive.google.com/file/d/1rbjw1vjvQzpLmSyQYY03nadltJ5dJMf1/view",
       "imagePath": "/images/BH-0024-eyecatch.webp",
-      "sourceSha256": "0179f487c81926c6bcab5004f61c1b18d918148befc182fc94607ef9de1f0c55",
+      "sourceSha256": "bd44addf20ee15635874f65a1e52be479d00490e50e8b137d877124db777a3e0",
       "imageSha256": "d8431f0936e9d29bab1e4399717c65fbef0b9a39482ab6f02270212f21513316",
-      "note": "編集承認済の原稿から本文と一次出典を抽出して公開用Markdown化。管理情報や未公開リンクを除外。記事用画像はDrive納品検証済Git blobを流用。既存記事の変更なし。2026-11-09安全ゲート・プレビュー・plan後の適格記事のみ公開。 2026-11-09にBH-0001と並べて水彩画風を検品したWebPへ差し替え。Drive実ファイルの再取得とSHA256照合済み。"
+      "note": "編集承認済の原稿から本文と一次出典を抽出して公開用Markdown化。管理情報や未公開リンクを除外。記事用画像はDrive納品検証済Git blobを流用。既存記事の変更なし。2026-11-09安全ゲート・プレビュー・plan後の適格記事のみ公開。 2026-11-09にBH-0001と並べて水彩画風を検品したWebPへ差し替え。Drive実ファイルの再取得とSHA256照合済み。 2026-11-17 ユーザー指示に基づく公開本文修正：内部作業指示・制作管理メモを除去し、管理ID参照を実在確認済み関連記事へ置換。記事の事実関係・留保・画像は維持。",
+      "internalLinksVerifiedOn": "2026-11-17"
     },
     {
       "articleId": "BH-0023",
@@ -365,9 +374,10 @@
       "reviewUrl": "https://docs.google.com/document/d/1W9fMdxCTcxEIvgxSmioVVJqezLskApXO_JlnA_OEVkQ/edit",
       "imageUrl": "https://drive.google.com/file/d/1E3xzUx9YuPK0WQr9yRllGYgR8j-NWfSc/view",
       "imagePath": "/images/BH-0023-eyecatch.webp",
-      "sourceSha256": "fc5d89881c22a2bf9b5c4b5207a302a69e205fa3a4a0d99f1ef14c3cc6930ec5",
+      "sourceSha256": "fdb60cbe2734e171ba3f5426826e669a4b3e468e3740c757971667d64d7ae3e0",
       "imageSha256": "43ca52c8f7d245324b32fd4c3f906f740a28051bcc7c6b6bdaf9c02361f7443d",
-      "note": "編集済み原稿の公開部分のみ抽出。根拠未確認の店舗求人を外し、現行の公式資料の確認範囲に合わせて参照表現を更新。Drive確認済オリジナルWebPとGit blobを照合。2026-11-09公開前安全審査対象。 2026-11-09にBH-0001と並べて水彩画風を検品したWebPへ差し替え。Drive実ファイルの再取得とSHA256照合済み。"
+      "note": "編集済み原稿の公開部分のみ抽出。根拠未確認の店舗求人を外し、現行の公式資料の確認範囲に合わせて参照表現を更新。Drive確認済オリジナルWebPとGit blobを照合。2026-11-09公開前安全審査対象。 2026-11-09にBH-0001と並べて水彩画風を検品したWebPへ差し替え。Drive実ファイルの再取得とSHA256照合済み。 2026-11-17 ユーザー指示に基づく公開本文修正：内部作業指示・制作管理メモを除去し、管理ID参照を実在確認済み関連記事へ置換。記事の事実関係・留保・画像は維持。",
+      "internalLinksVerifiedOn": "2026-11-17"
     },
     {
       "articleId": "BH-0025",
@@ -381,9 +391,10 @@
       "reviewUrl": "https://docs.google.com/document/d/11XebWkAhm1O9RS7JEBxJ8fLuVq5eVcEBL6zpLBc7Viw/edit",
       "imageUrl": "https://drive.google.com/file/d/1cmb1ccWA8wyG1MwFDQne76hm4-m6kyAN/view",
       "imagePath": "/images/BH-0025-eyecatch.webp",
-      "sourceSha256": "e71e41c79ad83fe8d110b7f28785be54857aa5de5b6597b08ec8bb2ec4d545a5",
+      "sourceSha256": "7d29ddbedb12aa350d17380d165afc5e24f94d06d3ade54fc55821bf43268893",
       "imageSha256": "e3911acc3ceafde02d107f437ed92e840fc3e1a747cd4ebb50cce143fd93b496",
-      "note": "編集済み原稿の公開部分のみ抽出。根拠未確認の店舗求人を外し、現行の公式資料の確認範囲に合わせて参照表現を更新。Drive確認済オリジナルWebPとGit blobを照合。2026-11-09公開前安全審査対象。 2026-11-09にBH-0001と並べて水彩画風を検品したWebPへ差し替え。Drive実ファイルの再取得とSHA256照合済み。"
+      "note": "編集済み原稿の公開部分のみ抽出。根拠未確認の店舗求人を外し、現行の公式資料の確認範囲に合わせて参照表現を更新。Drive確認済オリジナルWebPとGit blobを照合。2026-11-09公開前安全審査対象。 2026-11-09にBH-0001と並べて水彩画風を検品したWebPへ差し替え。Drive実ファイルの再取得とSHA256照合済み。 2026-11-17 ユーザー指示に基づく公開本文修正：内部作業指示・制作管理メモを除去し、管理ID参照を実在確認済み関連記事へ置換。記事の事実関係・留保・画像は維持。",
+      "internalLinksVerifiedOn": "2026-11-17"
     },
     {
       "articleId": "BH-0020",
@@ -397,9 +408,10 @@
       "reviewUrl": "https://docs.google.com/document/d/1aKmM1-uEImOZUCVBoAkLxKm_gRKiwKmYGKNa5fo2PWI/edit",
       "imageUrl": "https://drive.google.com/file/d/188q5NNK_TrYyxX7TAvT0clRNgkkLtNPM/view",
       "imagePath": "/images/BH-0020-eyecatch.webp",
-      "sourceSha256": "e60c27ce3b1c1d9d3c305391c23fba174c4b8fa121c71c65f30415b7b0c38847",
+      "sourceSha256": "c06f13a9f758d57cd74929a657ea98d3da66f6f52d6433ef263ea8b587fbaa59",
       "imageSha256": "7d0d791a981f014501fc885785e1d9ac586166cc6108ab6808a632d6baad6487",
-      "note": "2026-11-10: 編集完成第2稿v2（修正履歴・後日承認反映含む）をGoogle Docsから全文再取得。一次資料・現行求人、BH-0001水彩画風と比較した実WebPの1200×630・SHA256・Drive納品を照合。公開前CI・差分・バックアップ・隔離復旧試験を別途実施。 公式求人最終照合：丸亀名張・垂水、ニトリ渋谷・川越、無印良品の現行採用導線、G-7常盤平・オーシャン塩釜の現在表示を参照。過去の時給表示と現在募集条件を区別。"
+      "note": "2026-11-10: 編集完成第2稿v2（修正履歴・後日承認反映含む）をGoogle Docsから全文再取得。一次資料・現行求人、BH-0001水彩画風と比較した実WebPの1200×630・SHA256・Drive納品を照合。公開前CI・差分・バックアップ・隔離復旧試験を別途実施。 公式求人最終照合：丸亀名張・垂水、ニトリ渋谷・川越、無印良品の現行採用導線、G-7常盤平・オーシャン塩釜の現在表示を参照。過去の時給表示と現在募集条件を区別。 2026-11-17 ユーザー指示に基づく公開本文修正：内部作業指示・制作管理メモを除去し、管理ID参照を実在確認済み関連記事へ置換。記事の事実関係・留保・画像は維持。",
+      "internalLinksVerifiedOn": "2026-11-17"
     },
     {
       "articleId": "BH-0026",
@@ -413,9 +425,10 @@
       "reviewUrl": "https://docs.google.com/document/d/1d5TSN8Lo-i98o6kgQrul0hei_rh1rQXh5xvfGzzbQdw/edit",
       "imageUrl": "https://drive.google.com/file/d/1tEMkfcz0aPu0lTNOCoN5DwcWHUCMw9bz/view",
       "imagePath": "/images/BH-0026-eyecatch.webp",
-      "sourceSha256": "6a6986db64b911fa4ce7a1357a616af322966bce331de1d075382e0245678e10",
+      "sourceSha256": "0f032029ba1b3ed8bf62c2f1c7f8eb97e490afa948ff990c22de06dcc71a9062",
       "imageSha256": "0ced9ae639f08753255bfe10249ecc140fcf61949a1a7bf995560b13dc01d3aa",
-      "note": "2026-11-10: 編集完成第2稿v2（修正履歴・後日承認反映含む）をGoogle Docsから全文再取得。一次資料・現行求人、BH-0001水彩画風と比較した実WebPの1200×630・SHA256・Drive納品を照合。公開前CI・差分・バックアップ・隔離復旧試験を別途実施。 公式求人最終照合：丸亀名張・垂水、ニトリ渋谷・川越、無印良品の現行採用導線、G-7常盤平・オーシャン塩釜の現在表示を参照。過去の時給表示と現在募集条件を区別。 2026-11-10公開前再点検：公式求人の時給表示を取得時点で断定せず、表示差がある旨と応募先への確認事項に統一。"
+      "note": "2026-11-10: 編集完成第2稿v2（修正履歴・後日承認反映含む）をGoogle Docsから全文再取得。一次資料・現行求人、BH-0001水彩画風と比較した実WebPの1200×630・SHA256・Drive納品を照合。公開前CI・差分・バックアップ・隔離復旧試験を別途実施。 公式求人最終照合：丸亀名張・垂水、ニトリ渋谷・川越、無印良品の現行採用導線、G-7常盤平・オーシャン塩釜の現在表示を参照。過去の時給表示と現在募集条件を区別。 2026-11-10公開前再点検：公式求人の時給表示を取得時点で断定せず、表示差がある旨と応募先への確認事項に統一。 2026-11-17 ユーザー指示に基づく公開本文修正：内部作業指示・制作管理メモを除去し、管理ID参照を実在確認済み関連記事へ置換。記事の事実関係・留保・画像は維持。",
+      "internalLinksVerifiedOn": "2026-11-17"
     },
     {
       "articleId": "BH-0027",
@@ -429,9 +442,10 @@
       "reviewUrl": "https://docs.google.com/document/d/18vN3TT38lKJyOmGS6VtBp8EpiF08I8mEBCaQaI7PxQ0/edit",
       "imageUrl": "https://drive.google.com/file/d/1OREVXcMIUP_iEP1wbFx9MwqJLU-Sp7Eg/view",
       "imagePath": "/images/BH-0027-eyecatch.webp",
-      "sourceSha256": "ce642b4cc9678d2773bf91946d16790dcfd7d71002db82e5d2b64e0a530e59cc",
+      "sourceSha256": "a6232021d44b062aae9f01a605c0d7e9a0aee0fd124a3ca9328ef8582dc7aa54",
       "imageSha256": "30e7d6e9a6c3a367c5a7130eab8767aa573c6f01cd8e5c168a7ab254955ba82c",
-      "note": "2026-11-10: 編集完成第2稿v2（修正履歴・後日承認反映含む）をGoogle Docsから全文再取得。一次資料・現行求人、BH-0001水彩画風と比較した実WebPの1200×630・SHA256・Drive納品を照合。公開前CI・差分・バックアップ・隔離復旧試験を別途実施。 公式求人最終照合：丸亀名張・垂水、ニトリ渋谷・川越、無印良品の現行採用導線、G-7常盤平・オーシャン塩釜の現在表示を参照。過去の時給表示と現在募集条件を区別。"
+      "note": "2026-11-10: 編集完成第2稿v2（修正履歴・後日承認反映含む）をGoogle Docsから全文再取得。一次資料・現行求人、BH-0001水彩画風と比較した実WebPの1200×630・SHA256・Drive納品を照合。公開前CI・差分・バックアップ・隔離復旧試験を別途実施。 公式求人最終照合：丸亀名張・垂水、ニトリ渋谷・川越、無印良品の現行採用導線、G-7常盤平・オーシャン塩釜の現在表示を参照。過去の時給表示と現在募集条件を区別。 2026-11-17 ユーザー指示に基づく公開本文修正：内部作業指示・制作管理メモを除去し、管理ID参照を実在確認済み関連記事へ置換。記事の事実関係・留保・画像は維持。",
+      "internalLinksVerifiedOn": "2026-11-17"
     },
     {
       "articleId": "BH-0028",
@@ -445,9 +459,10 @@
       "reviewUrl": "https://docs.google.com/document/d/1vxhF4Zg-pEcL_Z9db3IBmpWVR3pELB76WmigQpUbdXA/edit",
       "imageUrl": "https://drive.google.com/file/d/1Ws-hfsnTWK4559W86Z2ovu0amuMDAgMp/view",
       "imagePath": "/images/BH-0028-eyecatch.webp",
-      "sourceSha256": "6200ea061d4a971960cb522ed46b39b93b7c2f3c96a32a5ec1ce09fbb9b481eb",
+      "sourceSha256": "5bc4905af452b913fc083b40db9b9bb38c73e654baf5047c6f9ec13bcc7e33cd",
       "imageSha256": "54ed00709b5fbd55cda101e263c452d12062241c42b1b08a4b94461187ae1a39",
-      "note": "2026-11-10: 編集完成第2稿v2（修正履歴・後日承認反映含む）をGoogle Docsから全文再取得。一次資料・現行求人、BH-0001水彩画風と比較した実WebPの1200×630・SHA256・Drive納品を照合。公開前CI・差分・バックアップ・隔離復旧試験を別途実施。 公式求人最終照合：丸亀名張・垂水、ニトリ渋谷・川越、無印良品の現行採用導線、G-7常盤平・オーシャン塩釜の現在表示を参照。過去の時給表示と現在募集条件を区別。"
+      "note": "2026-11-10: 編集完成第2稿v2（修正履歴・後日承認反映含む）をGoogle Docsから全文再取得。一次資料・現行求人、BH-0001水彩画風と比較した実WebPの1200×630・SHA256・Drive納品を照合。公開前CI・差分・バックアップ・隔離復旧試験を別途実施。 公式求人最終照合：丸亀名張・垂水、ニトリ渋谷・川越、無印良品の現行採用導線、G-7常盤平・オーシャン塩釜の現在表示を参照。過去の時給表示と現在募集条件を区別。 2026-11-17 ユーザー指示に基づく公開本文修正：内部作業指示・制作管理メモを除去し、管理ID参照を実在確認済み関連記事へ置換。記事の事実関係・留保・画像は維持。",
+      "internalLinksVerifiedOn": "2026-11-17"
     },
     {
       "articleId": "BH-0029",
@@ -509,9 +524,10 @@
       "reviewUrl": "https://docs.google.com/document/d/176XmBN09D1AUQ17t7NulLoANdAgd74jG6qRnRpXPsdA/edit",
       "imageUrl": "https://drive.google.com/file/d/1uA0mvPuWoVOmZS3K-WdcAm_RRxlZiaNX/view",
       "imagePath": "/images/BH-0201-eyecatch.webp",
-      "sourceSha256": "3ce357b56fca577c53616a35919002bbda4453e7f4996fe0bc82ad0301480416",
+      "sourceSha256": "c5e0101d158e566cd7df13db7d707ff647a53f84f1c084d6f5dd51865a3e2377",
       "imageSha256": "5bb5431be88fde47b84878f8ab980f5d7964a12527f913bee475fecc62bcfa50",
-      "note": "編集完成稿とGoogle Drive 1200x630 WebP原本を再取得し、SHA256と水彩画風検品履歴を照合。最新公式資料の再照合、プレビューQA・plan復旧検証成功後にのみ公開。"
+      "note": "編集完成稿とGoogle Drive 1200x630 WebP原本を再取得し、SHA256と水彩画風検品履歴を照合。最新公式資料の再照合、プレビューQA・plan復旧検証成功後にのみ公開。 2026-11-17 ユーザー指示に基づく公開本文修正：内部作業指示・制作管理メモを除去し、管理ID参照を実在確認済み関連記事へ置換。記事の事実関係・留保・画像は維持。",
+      "internalLinksVerifiedOn": "2026-11-17"
     },
     {
       "articleId": "BH-0202",
@@ -525,9 +541,10 @@
       "reviewUrl": "https://docs.google.com/document/d/142_Y99vKfu5e1VSWb4529ZldZdrrX4KFUl59RqMAPaA/edit",
       "imageUrl": "https://drive.google.com/file/d/1E1t-dNrmpjKn1VtlU-IF5Hq9nvSbpCnk/view",
       "imagePath": "/images/BH-0202-eyecatch.webp",
-      "sourceSha256": "382f03c35d447b04205af4ad998b7e4eed8e4b8a1bd572e7cbcc5d754b7010e5",
+      "sourceSha256": "8dc1817ad3d2ad13710feb62e137c7d1972a4e1e6071e884e0c96d5bab463378",
       "imageSha256": "1133d9d6bff1c3b3dcb17b16c4610bc7145ca237f8da29b777ed2fe15e6fa684",
-      "note": "編集完成稿とGoogle Drive 1200x630 WebP原本を再取得し、SHA256と水彩画風検品履歴を照合。最新公式資料の再照合、プレビューQA・plan復旧検証成功後にのみ公開。"
+      "note": "編集完成稿とGoogle Drive 1200x630 WebP原本を再取得し、SHA256と水彩画風検品履歴を照合。最新公式資料の再照合、プレビューQA・plan復旧検証成功後にのみ公開。 2026-11-17 ユーザー指示に基づく公開本文修正：内部作業指示・制作管理メモを除去し、管理ID参照を実在確認済み関連記事へ置換。記事の事実関係・留保・画像は維持。",
+      "internalLinksVerifiedOn": "2026-11-17"
     },
     {
       "articleId": "BH-0204",
@@ -557,9 +574,10 @@
       "reviewUrl": "https://docs.google.com/document/d/1dNzwTmkZSpoQgDC44Ks1ciJu1hO4s8gfF5yfIqV_ihQ/edit",
       "imageUrl": "https://drive.google.com/file/d/1G83qnbme1-iHg-JbTdqebc2UHDdeYam8/view",
       "imagePath": "/images/BH-0033-eyecatch.webp",
-      "sourceSha256": "8ec52b08b647dbe1a69a2dff5357d14695a2241b6ee9b4125d2db11b452a67b3",
+      "sourceSha256": "a8203165c4191e63545ea838b801716b01b0522f7a0b44aabaf5d69a14a95d6e",
       "imageSha256": "26f544ba7425d04f95af78d8821fae1aace08989fee3335fe58e12ba0d721823",
-      "note": "2026-11-13 公式吉野家の門前仲町・十三・市ヶ谷駅前・日暮里求人を再照合。通常・深夜・オープニング時給を区別。編集完成稿v2を元に管理資料を排除。BH-0001との水彩画風、1200×630 WebP、Drive再取得とSHA256を確認。"
+      "note": "2026-11-13 公式吉野家の門前仲町・十三・市ヶ谷駅前・日暮里求人を再照合。通常・深夜・オープニング時給を区別。編集完成稿v2を元に管理資料を排除。BH-0001との水彩画風、1200×630 WebP、Drive再取得とSHA256を確認。 2026-11-17 ユーザー指示に基づく公開本文修正：内部作業指示・制作管理メモを除去し、管理ID参照を実在確認済み関連記事へ置換。記事の事実関係・留保・画像は維持。",
+      "internalLinksVerifiedOn": "2026-11-17"
     },
     {
       "articleId": "BH-0205",
@@ -573,9 +591,10 @@
       "reviewUrl": "https://docs.google.com/document/d/1HxYC-a0jh4Z3eTpwJ_EB5ydlVT5Q-iWmu7cyEcWfabc/edit",
       "imageUrl": "https://drive.google.com/file/d/1-IxdJ6VvzyaGHhVYjV8kcp5nH7kSHJxI/view",
       "imagePath": "/images/BH-0205-eyecatch.webp",
-      "sourceSha256": "09510214ce7fd0782ed669687a28d051a0f76d13a934d2c42576b15a37c0a41d",
+      "sourceSha256": "967c9b1851d62fe21d92f4c3509ce487dfe5aaab0f60fb74733abb4168634141",
       "imageSha256": "ce2325042926a3227fef336be12e17f19fe867708ec414b2a6886f270b581922",
-      "note": "編集完成稿v2・一次資料と本文・1200x630 WebP実画像・BH-0001水彩画風を再確認。Google Drive原本を再取得し画像SHA256照合。新規ページのみ追加。 比較表のMarkdown行・見出しを正規テーブル表記で検品。"
+      "note": "編集完成稿v2・一次資料と本文・1200x630 WebP実画像・BH-0001水彩画風を再確認。Google Drive原本を再取得し画像SHA256照合。新規ページのみ追加。 比較表のMarkdown行・見出しを正規テーブル表記で検品。 2026-11-17 ユーザー指示に基づく公開本文修正：内部作業指示・制作管理メモを除去し、管理ID参照を実在確認済み関連記事へ置換。記事の事実関係・留保・画像は維持。",
+      "internalLinksVerifiedOn": "2026-11-17"
     },
     {
       "articleId": "BH-0217",
@@ -605,9 +624,10 @@
       "reviewUrl": "https://docs.google.com/document/d/15hzfb5GhRCU-ls2z8h3tX0oKnu7EEXrSWtWOfrbR4KQ/edit",
       "imageUrl": "https://drive.google.com/file/d/1FBK6THXfT4RCHcX4f0T6GtYYIf6OgwEp/view",
       "imagePath": "/images/BH-0218-eyecatch.webp",
-      "sourceSha256": "5892a726ae702421f68b4fbfac7db849ca0a369f92a6cda0ca1691fe460e0906",
+      "sourceSha256": "ce9dc0a6586846e2e72be6bc265d28055164de6958bc8c8eda84ea7a670350b8",
       "imageSha256": "1d94a4241ea2e67bc48ca3db14b2cb8172189e960b70838733ac421388f308c4",
-      "note": "編集完成稿v2・一次資料と本文・1200x630 WebP実画像・BH-0001水彩画風を再確認。Google Drive原本を再取得し画像SHA256照合。新規ページのみ追加。"
+      "note": "編集完成稿v2・一次資料と本文・1200x630 WebP実画像・BH-0001水彩画風を再確認。Google Drive原本を再取得し画像SHA256照合。新規ページのみ追加。 2026-11-17 ユーザー指示に基づく公開本文修正：内部作業指示・制作管理メモを除去し、管理ID参照を実在確認済み関連記事へ置換。記事の事実関係・留保・画像は維持。",
+      "internalLinksVerifiedOn": "2026-11-17"
     },
     {
       "articleId": "BH-0207",
@@ -621,9 +641,10 @@
       "reviewUrl": "https://docs.google.com/document/d/1bMSkzvsPg7kCz07rMpytEk_HcXtUTYFLMYFNEafady0/edit",
       "imageUrl": "https://drive.google.com/file/d/1lGXqhanG3WL7xZ4Ocp3_CxyAXfmUQECI/view",
       "imagePath": "/images/BH-0207-eyecatch.webp",
-      "sourceSha256": "92744d5f579a50e9301d886655cb4459b2d3068bfa12cf3439f3aa4cb39a26d2",
+      "sourceSha256": "62ab538d287cf8cf9251e130473fed61783dc35bbcf4f2665d85178d1e9fb14d",
       "imageSha256": "407a5b7a01b643116c82d614607fdfd39cf4ffc7047e4c2bfa17158d393573e1",
-      "note": "編集完成稿v2・一次資料と本文・1200x630 WebP実画像・BH-0001水彩画風を再確認。Google Drive原本を再取得し画像SHA256照合。新規ページのみ追加。"
+      "note": "編集完成稿v2・一次資料と本文・1200x630 WebP実画像・BH-0001水彩画風を再確認。Google Drive原本を再取得し画像SHA256照合。新規ページのみ追加。 2026-11-17 ユーザー指示に基づく公開本文修正：内部作業指示・制作管理メモを除去し、管理ID参照を実在確認済み関連記事へ置換。記事の事実関係・留保・画像は維持。",
+      "internalLinksVerifiedOn": "2026-11-17"
     },
     {
       "articleId": "BH-0208",
@@ -637,9 +658,10 @@
       "reviewUrl": "https://docs.google.com/document/d/1nt0gPvQj1_N2rD_TuRhCPfv6rTJNdV9g7JGkW3H9kGU/edit",
       "imageUrl": "https://drive.google.com/file/d/1W-GVWOoIl_kjBP-OLCJHk0jHCMTxW4Xh/view",
       "imagePath": "/images/BH-0208-eyecatch.webp",
-      "sourceSha256": "bdc4bafffa5fe24f869330d43f71c8cb0729a04f712e5873c5b8e6c5b0449a92",
+      "sourceSha256": "5755c51f8e227be0b3176b5df45b1901a73b4c81a36445a57914c6edcc86a079",
       "imageSha256": "b4cbf7082bd0e8781ddc1622d80c41cac8e04e9374232c9d5fa88a7c875fc443",
-      "note": "編集完成稿v2・一次資料と本文・1200x630 WebP実画像・BH-0001水彩画風を再確認。Google Drive原本を再取得し画像SHA256照合。新規ページのみ追加。"
+      "note": "編集完成稿v2・一次資料と本文・1200x630 WebP実画像・BH-0001水彩画風を再確認。Google Drive原本を再取得し画像SHA256照合。新規ページのみ追加。 2026-11-17 ユーザー指示に基づく公開本文修正：内部作業指示・制作管理メモを除去し、管理ID参照を実在確認済み関連記事へ置換。記事の事実関係・留保・画像は維持。",
+      "internalLinksVerifiedOn": "2026-11-17"
     },
     {
       "articleId": "BH-0031",
@@ -653,9 +675,10 @@
       "reviewUrl": "https://docs.google.com/document/d/1ajnqrARVKmiidZovSl1_OLqxWt6XjW77g2jkn4iqiZo/edit",
       "imageUrl": "https://drive.google.com/file/d/1MPVWzXT_rOLgiwohklr3eYmYct0h7OKO/view",
       "imagePath": "/images/BH-0031-eyecatch.webp",
-      "sourceSha256": "5021683d04c8fd9e2a463e0f7d1aca2d6ebfcdfbd826e3563aac11ef4f4eefcb",
+      "sourceSha256": "b63a3a1e0c05dfabbee8f423487c21b820f26033892981073b6f6f8e9f091af7",
       "imageSha256": "db7e1c94b595c0ab18b89a97502e62cd6683575f993ca88c353c648447bcbf87",
-      "note": "編集完成稿を本文・一次資料・FAQと共に採用。画像はGoogle DriveからWebP実体を再取得し1200x630とSHA256一致を確認。求人時給・募集継続は記事記載の参照日時と確認留保を維持。安全な差分審査・本番復旧試験の対象。"
+      "note": "編集完成稿を本文・一次資料・FAQと共に採用。画像はGoogle DriveからWebP実体を再取得し1200x630とSHA256一致を確認。求人時給・募集継続は記事記載の参照日時と確認留保を維持。安全な差分審査・本番復旧試験の対象。 2026-11-17 ユーザー指示に基づく公開本文修正：内部作業指示・制作管理メモを除去し、管理ID参照を実在確認済み関連記事へ置換。記事の事実関係・留保・画像は維持。",
+      "internalLinksVerifiedOn": "2026-11-17"
     },
     {
       "articleId": "BH-0035",
@@ -669,9 +692,10 @@
       "reviewUrl": "https://docs.google.com/document/d/15ozxZJuDjnPe-QySxwtBrPNpxMJpj4-KErU3QCmGTcE/edit",
       "imageUrl": "https://drive.google.com/file/d/1jXBup1jfGy7Eol15XBwOC3nsrcZ19kSr/view",
       "imagePath": "/images/BH-0035-eyecatch.webp",
-      "sourceSha256": "cc1f16d7dc2533a79536ed3fba2f2dea20906700467e0eef67ad2f6256578886",
+      "sourceSha256": "837c5258d923fb931c2d321885852051e57be2777651de36abfbee07672d4150",
       "imageSha256": "4ab27e770cad11332ae3dc54dc62bb4779fd9c9d8198799eb5e004546d9ee9ad",
-      "note": "編集完成稿を本文・一次資料・FAQと共に採用。画像はGoogle DriveからWebP実体を再取得し1200x630とSHA256一致を確認。求人時給・募集継続は記事記載の参照日時と確認留保を維持。安全な差分審査・本番復旧試験の対象。"
+      "note": "編集完成稿を本文・一次資料・FAQと共に採用。画像はGoogle DriveからWebP実体を再取得し1200x630とSHA256一致を確認。求人時給・募集継続は記事記載の参照日時と確認留保を維持。安全な差分審査・本番復旧試験の対象。 2026-11-17 ユーザー指示に基づく公開本文修正：内部作業指示・制作管理メモを除去し、管理ID参照を実在確認済み関連記事へ置換。記事の事実関係・留保・画像は維持。",
+      "internalLinksVerifiedOn": "2026-11-17"
     },
     {
       "articleId": "BH-0036",
@@ -685,9 +709,10 @@
       "reviewUrl": "https://docs.google.com/document/d/1K37uf5ALGNbMOT3QbsyUWHbOyaTNU1X4EWui5xE4TXo/edit",
       "imageUrl": "https://drive.google.com/file/d/1EztgLPirp84YIULjcPNdRuIYzP80hbzS/view",
       "imagePath": "/images/BH-0036-eyecatch.webp",
-      "sourceSha256": "200303436fe50702658ffb6439ae810966ba3a454c2c8cfb674f3e69394b4caf",
+      "sourceSha256": "dcb8f6f8aca48b336ce049f0e27d5ed1503e6950a986610f11cb099d71b6a63a",
       "imageSha256": "79c790bbda7882c72f690bdaecf9667ebc6b58f389b5c4f193bd5dbf78ba53cf",
-      "note": "編集完成稿を本文・一次資料・FAQと共に採用。画像はGoogle DriveからWebP実体を再取得し1200x630とSHA256一致を確認。求人時給・募集継続は記事記載の参照日時と確認留保を維持。安全な差分審査・本番復旧試験の対象。"
+      "note": "編集完成稿を本文・一次資料・FAQと共に採用。画像はGoogle DriveからWebP実体を再取得し1200x630とSHA256一致を確認。求人時給・募集継続は記事記載の参照日時と確認留保を維持。安全な差分審査・本番復旧試験の対象。 2026-11-17 ユーザー指示に基づく公開本文修正：内部作業指示・制作管理メモを除去し、管理ID参照を実在確認済み関連記事へ置換。記事の事実関係・留保・画像は維持。",
+      "internalLinksVerifiedOn": "2026-11-17"
     },
     {
       "articleId": "BH-0037",
@@ -717,9 +742,10 @@
       "reviewUrl": "https://docs.google.com/document/d/15k-o_er0baR1HfM34-8xhMc7pPEeoWgcPdXdfQyRlwk/edit",
       "imageUrl": "https://drive.google.com/file/d/1rqGFD6NbbAifdaTzw_4-eVEjqKE0Zp5V/view",
       "imagePath": "/images/BH-0039-eyecatch.webp",
-      "sourceSha256": "8246ebfb320634d46191fcf3c4da6f19006703d3767222b7c800e563c3ce5a44",
+      "sourceSha256": "01395693dd20bad86e9db7c7d7cd80543fb32a72bd722c38e2bf1adb06f0aaaf",
       "imageSha256": "a515828b8bae58ee2b74893c4bc11e3ee01cbe76982b0a9f8c15a7c7518cdbb5",
-      "note": "編集完成稿を本文・一次資料・FAQと共に採用。画像はGoogle DriveからWebP実体を再取得し1200x630とSHA256一致を確認。求人時給・募集継続は記事記載の参照日時と確認留保を維持。安全な差分審査・本番復旧試験の対象。"
+      "note": "編集完成稿を本文・一次資料・FAQと共に採用。画像はGoogle DriveからWebP実体を再取得し1200x630とSHA256一致を確認。求人時給・募集継続は記事記載の参照日時と確認留保を維持。安全な差分審査・本番復旧試験の対象。 2026-11-17 ユーザー指示に基づく公開本文修正：内部作業指示・制作管理メモを除去し、管理ID参照を実在確認済み関連記事へ置換。記事の事実関係・留保・画像は維持。",
+      "internalLinksVerifiedOn": "2026-11-17"
     },
     {
       "articleId": "BH-0040",
@@ -733,9 +759,10 @@
       "reviewUrl": "https://docs.google.com/document/d/1SjSLgx0QhDc-n-rrQI3fMIW-arpmBtF5m_bR2dQuWlo/edit",
       "imageUrl": "https://drive.google.com/file/d/1qCfXg2_0nwsZb52-pIkBHFIGS8AK6Vbj/view",
       "imagePath": "/images/BH-0040-eyecatch.webp",
-      "sourceSha256": "fc7c5a8aedfff7229f362141c762fe7e9f8c828aba076b232e809dd293c25cdc",
+      "sourceSha256": "17c46df2d16381987ab4b19eae0f469f14d9ca99243df632b90a72bd35bf5232",
       "imageSha256": "fe7d518d52514dcd2b03e78b5aba2efffaeaa514ce4bb07f65609cccd86e8149",
-      "note": "編集完成稿を本文・一次資料・FAQと共に採用。画像はGoogle DriveからWebP実体を再取得し1200x630とSHA256一致を確認。求人時給・募集継続は記事記載の参照日時と確認留保を維持。安全な差分審査・本番復旧試験の対象。"
+      "note": "編集完成稿を本文・一次資料・FAQと共に採用。画像はGoogle DriveからWebP実体を再取得し1200x630とSHA256一致を確認。求人時給・募集継続は記事記載の参照日時と確認留保を維持。安全な差分審査・本番復旧試験の対象。 2026-11-17 ユーザー指示に基づく公開本文修正：内部作業指示・制作管理メモを除去し、管理ID参照を実在確認済み関連記事へ置換。記事の事実関係・留保・画像は維持。",
+      "internalLinksVerifiedOn": "2026-11-17"
     },
     {
       "articleId": "BH-0041",
@@ -749,9 +776,10 @@
       "reviewUrl": "https://docs.google.com/document/d/1MdYxSU0jnmcTiokVhMWEbEubeT7V7Pbj7CgKFdf5HDs/edit",
       "imageUrl": "https://drive.google.com/file/d/1KB-9EdIKFvESeOntdnUxkYXmGZc5bXsr/view",
       "imagePath": "/images/BH-0041-eyecatch.webp",
-      "sourceSha256": "b30a8e595b42b13d50432d2ac743d277e30fd6d8725d212613c4df3cb561b186",
+      "sourceSha256": "77cb8204c64f5a1386740acc0da02fb4bf98457baf56b926a16ca3db0eca71ce",
       "imageSha256": "4a0639c72c0f1f19e2a5a7448a727a414ca0a24fdc6054e4d393b5d2973f03ca",
-      "note": "編集完成稿を本文・一次資料・FAQと共に採用。画像はGoogle DriveからWebP実体を再取得し1200x630とSHA256一致を確認。求人時給・募集継続は記事記載の参照日時と確認留保を維持。安全な差分審査・本番復旧試験の対象。"
+      "note": "編集完成稿を本文・一次資料・FAQと共に採用。画像はGoogle DriveからWebP実体を再取得し1200x630とSHA256一致を確認。求人時給・募集継続は記事記載の参照日時と確認留保を維持。安全な差分審査・本番復旧試験の対象。 2026-11-17 ユーザー指示に基づく公開本文修正：内部作業指示・制作管理メモを除去し、管理ID参照を実在確認済み関連記事へ置換。記事の事実関係・留保・画像は維持。",
+      "internalLinksVerifiedOn": "2026-11-17"
     },
     {
       "articleId": "BH-0043",
@@ -765,9 +793,10 @@
       "reviewUrl": "https://docs.google.com/document/d/1aYTcsjHk90YppsTRoKOHsumVzQIs1ks66l0Xcv8b4J4/edit",
       "imageUrl": "https://drive.google.com/file/d/1oJK-7T4BPd_8yeMQqCgHDHdRZQS0njYq/view",
       "imagePath": "/images/BH-0043-eyecatch.webp",
-      "sourceSha256": "9421b3b9c9fb8d5a1e48c9feb7c3dd7c2e02960c819e227ed73a07b3f2166143",
+      "sourceSha256": "3a26a935e7c83e4b950d5d753c77c87a0ef321b565157844741e85eba2518f18",
       "imageSha256": "73f0193528fda1a405acb4d9bea22e82c70a6301d3c7e8520f1cd1579d3d3650",
-      "note": "編集完成稿を本文・一次資料・FAQと共に採用。画像はGoogle DriveからWebP実体を再取得し1200x630とSHA256一致を確認。求人時給・募集継続は記事記載の参照日時と確認留保を維持。安全な差分審査・本番復旧試験の対象。"
+      "note": "編集完成稿を本文・一次資料・FAQと共に採用。画像はGoogle DriveからWebP実体を再取得し1200x630とSHA256一致を確認。求人時給・募集継続は記事記載の参照日時と確認留保を維持。安全な差分審査・本番復旧試験の対象。 2026-11-17 ユーザー指示に基づく公開本文修正：内部作業指示・制作管理メモを除去し、管理ID参照を実在確認済み関連記事へ置換。記事の事実関係・留保・画像は維持。",
+      "internalLinksVerifiedOn": "2026-11-17"
     },
     {
       "articleId": "BH-0233",
@@ -781,9 +810,10 @@
       "reviewUrl": "https://docs.google.com/document/d/1mtSCmNmAEpsmMisHNz77ym8YjtKwXA8Qo7l0G_wak4E/edit",
       "imageUrl": "https://drive.google.com/file/d/1_6YXlGOtq5_rp-d11MFDBl30oWnui_Hh/view",
       "imagePath": "/images/BH-0233-eyecatch.webp",
-      "sourceSha256": "3643e4cb2df7cff848881410679673a4f85b863df5d35978457f22d34741a500",
+      "sourceSha256": "e8143dc20f45f8da058df45e2bf6a1d8fd14364bcf3177dc00875a35cf33119d",
       "imageSha256": "bd39165e1515c4428d08eb8a0bec4ccd099b4e19809dd51b24fb08002b3812d8",
-      "note": "編集完成稿を本文・一次資料・FAQと共に採用。画像はGoogle DriveからWebP実体を再取得し1200x630とSHA256一致を確認。求人時給・募集継続は記事記載の参照日時と確認留保を維持。安全な差分審査・本番復旧試験の対象。"
+      "note": "編集完成稿を本文・一次資料・FAQと共に採用。画像はGoogle DriveからWebP実体を再取得し1200x630とSHA256一致を確認。求人時給・募集継続は記事記載の参照日時と確認留保を維持。安全な差分審査・本番復旧試験の対象。 2026-11-17 ユーザー指示に基づく公開本文修正：内部作業指示・制作管理メモを除去し、管理ID参照を実在確認済み関連記事へ置換。記事の事実関係・留保・画像は維持。",
+      "internalLinksVerifiedOn": "2026-11-17"
     },
     {
       "articleId": "BH-0032",
@@ -797,9 +827,10 @@
       "reviewUrl": "https://docs.google.com/document/d/11oaaA9VEbeZwizJ2zfV5_nkcdB8C8WGQZtCQs6VzyRs/edit",
       "imageUrl": "https://drive.google.com/file/d/1lZYEoZIJ0W8wibEC222YURd98fpbRuZv/view",
       "imagePath": "/images/BH-0032-eyecatch.webp",
-      "sourceSha256": "792aed3c91a21a48a9f02a734684ae7bd1800aaea61adc778649fc5df55a49a5",
+      "sourceSha256": "fc0422be7443436cd8dec35bf21c96dca814aa599474f930b8eeff58230cb79d",
       "imageSha256": "6012a17fb634fa3ed7b32ca713194e7604e2ea430ae1a894ac1ca5452ef0337b",
-      "note": "編集完成稿を確認し、古い求人の表示と現行条件を区別。最低賃金の公的資料・企業公式情報を11/15に追加照合。画像はGoogle Driveから原本を再取得し1200×630 WebPとSHA256一致を検証。現行の個別採用条件は求人契約で確認する旨を本文に明記。"
+      "note": "編集完成稿を確認し、古い求人の表示と現行条件を区別。最低賃金の公的資料・企業公式情報を11/15に追加照合。画像はGoogle Driveから原本を再取得し1200×630 WebPとSHA256一致を検証。現行の個別採用条件は求人契約で確認する旨を本文に明記。 2026-11-17 ユーザー指示に基づく公開本文修正：内部作業指示・制作管理メモを除去し、管理ID参照を実在確認済み関連記事へ置換。記事の事実関係・留保・画像は維持。",
+      "internalLinksVerifiedOn": "2026-11-17"
     },
     {
       "articleId": "BH-0034",
@@ -813,9 +844,10 @@
       "reviewUrl": "https://docs.google.com/document/d/1mdznP71MLDNiB2E8vNuTsnEaXimgG-GaPoDmgaFxh-k/edit",
       "imageUrl": "https://drive.google.com/file/d/1sS_2MiOgjwOMmL3ypfRR8ZtCCqxsCMDD/view",
       "imagePath": "/images/BH-0034-eyecatch.webp",
-      "sourceSha256": "1cb23c16862bda4a302f6f5b902abbd1e852f9bc0981030fec15963d9da00b4b",
+      "sourceSha256": "d89053f94de82f4a8cd49e6e30a9f7437f102f16a954b99903c482331502a2ba",
       "imageSha256": "77e3d367ffefc5bb0ad201c4f701ace83bb6f1c3aed2ae6e44b1fda13f261ccb",
-      "note": "編集完成稿を確認し、古い求人の表示と現行条件を区別。最低賃金の公的資料・企業公式情報を11/15に追加照合。画像はGoogle Driveから原本を再取得し1200×630 WebPとSHA256一致を検証。現行の個別採用条件は求人契約で確認する旨を本文に明記。"
+      "note": "編集完成稿を確認し、古い求人の表示と現行条件を区別。最低賃金の公的資料・企業公式情報を11/15に追加照合。画像はGoogle Driveから原本を再取得し1200×630 WebPとSHA256一致を検証。現行の個別採用条件は求人契約で確認する旨を本文に明記。 2026-11-17 ユーザー指示に基づく公開本文修正：内部作業指示・制作管理メモを除去し、管理ID参照を実在確認済み関連記事へ置換。記事の事実関係・留保・画像は維持。",
+      "internalLinksVerifiedOn": "2026-11-17"
     },
     {
       "articleId": "BH-0042",
@@ -829,9 +861,10 @@
       "reviewUrl": "https://docs.google.com/document/d/1d92SdJEnv9mol5tnoLazXNzao4n_y8kusDeeti3IzaE/edit",
       "imageUrl": "https://drive.google.com/file/d/13s1YsjqWdL4PnJy1VGpOHZHxdUIHfYt5/view",
       "imagePath": "/images/BH-0042-eyecatch.webp",
-      "sourceSha256": "1145c130c772fe4793882b7120776de6bf8b724cca6c417d9e2dec5761a66356",
+      "sourceSha256": "292f9dcf2244276dc580162c8dd5082795c67cf48bb0f58e71367a139de71976",
       "imageSha256": "e72b74b93bedbc4659da20bc4e51b0efd854514cde2c744033114e5cf76c6490",
-      "note": "編集完成稿を確認し、古い求人の表示と現行条件を区別。最低賃金の公的資料・企業公式情報を11/15に追加照合。画像はGoogle Driveから原本を再取得し1200×630 WebPとSHA256一致を検証。現行の個別採用条件は求人契約で確認する旨を本文に明記。"
+      "note": "編集完成稿を確認し、古い求人の表示と現行条件を区別。最低賃金の公的資料・企業公式情報を11/15に追加照合。画像はGoogle Driveから原本を再取得し1200×630 WebPとSHA256一致を検証。現行の個別採用条件は求人契約で確認する旨を本文に明記。 2026-11-17 ユーザー指示に基づく公開本文修正：内部作業指示・制作管理メモを除去し、管理ID参照を実在確認済み関連記事へ置換。記事の事実関係・留保・画像は維持。",
+      "internalLinksVerifiedOn": "2026-11-17"
     },
     {
       "articleId": "BH-0044",
@@ -845,9 +878,10 @@
       "reviewUrl": "https://docs.google.com/document/d/1FvncEr4Jum1liaFqsDkbDFTgS0mhHQKj24e2LnO-FxE/edit",
       "imageUrl": "https://drive.google.com/file/d/1fv4GWcHAY-urif7XIBH1XYGemK5SaP92/view",
       "imagePath": "/images/BH-0044-eyecatch.webp",
-      "sourceSha256": "447b9770a9c444995617bea22df413d201e0e1778725e1afed39d0f761eaacea",
+      "sourceSha256": "bce2f35b630e6eb520e179131839a14451b7a81111afffda5575058c4bad4165",
       "imageSha256": "b0adba367a1186c04c616236e04b1b7d3d606d273285a6a05f67b7f8cc44817c",
-      "note": "編集完成稿を確認し、古い求人の表示と現行条件を区別。最低賃金の公的資料・企業公式情報を11/15に追加照合。画像はGoogle Driveから原本を再取得し1200×630 WebPとSHA256一致を検証。現行の個別採用条件は求人契約で確認する旨を本文に明記。"
+      "note": "編集完成稿を確認し、古い求人の表示と現行条件を区別。最低賃金の公的資料・企業公式情報を11/15に追加照合。画像はGoogle Driveから原本を再取得し1200×630 WebPとSHA256一致を検証。現行の個別採用条件は求人契約で確認する旨を本文に明記。 2026-11-17 ユーザー指示に基づく公開本文修正：内部作業指示・制作管理メモを除去し、管理ID参照を実在確認済み関連記事へ置換。記事の事実関係・留保・画像は維持。",
+      "internalLinksVerifiedOn": "2026-11-17"
     },
     {
       "articleId": "BH-0045",
@@ -861,9 +895,10 @@
       "reviewUrl": "https://docs.google.com/document/d/1ncCwSD3ycD6NhO3u3ejsFVB5ZlcmTxBIU_W6BynbUs4/edit",
       "imageUrl": "https://drive.google.com/file/d/1EaEmwHNyLz8DBjsX2iuLnS1VnNR7yJiV/view",
       "imagePath": "/images/BH-0045-eyecatch.webp",
-      "sourceSha256": "2b21c0513ab32eaf979c9453d48df42e306c9bc5806587c323fa917335714be8",
+      "sourceSha256": "fb6d1d849ae291ac97e305d3e6748c4724ba543e5dbba87da75842a9ae436f5b",
       "imageSha256": "383f98b231e09738b6cdb8e06ef6eeddb7c4c55c018866c754d7af9df51c11df",
-      "note": "編集完成稿を確認し、古い求人の表示と現行条件を区別。最低賃金の公的資料・企業公式情報を11/15に追加照合。画像はGoogle Driveから原本を再取得し1200×630 WebPとSHA256一致を検証。現行の個別採用条件は求人契約で確認する旨を本文に明記。"
+      "note": "編集完成稿を確認し、古い求人の表示と現行条件を区別。最低賃金の公的資料・企業公式情報を11/15に追加照合。画像はGoogle Driveから原本を再取得し1200×630 WebPとSHA256一致を検証。現行の個別採用条件は求人契約で確認する旨を本文に明記。 2026-11-17 ユーザー指示に基づく公開本文修正：内部作業指示・制作管理メモを除去し、管理ID参照を実在確認済み関連記事へ置換。記事の事実関係・留保・画像は維持。",
+      "internalLinksVerifiedOn": "2026-11-17"
     }
   ]
 }

@@ -165,13 +165,13 @@ A．満18歳未満の深夜勤務は原則禁止です。[10] 18歳以上でも�
 
 ## 関連記事
 
-- セブンイレブンのバイト：レジ以外の業務と店舗差（BH-0010）https://baito-hyouban.com/company/seven-eleven/
+- [セブンイレブンのバイト：レジ以外の業務と店舗差](/company/seven-eleven/)
 
-- 労働条件通知書の確認方法（BH-0003）https://baito-hyouban.com/guide/labor-conditions-notice/
+- [労働条件通知書の確認方法](/guide/labor-conditions-notice/)
 
-- シフトで失敗しないための確認事項（BH-0004）https://baito-hyouban.com/guide/part-time-job-shift/
+- [シフトで失敗しないための確認事項](/guide/part-time-job-shift/)
 
-- 初バイトの選び方（BH-0005）https://baito-hyouban.com/guide/part-time-job-choosing/
+- [初バイトの選び方](/guide/part-time-job-choosing/)
 
 ## 参考資料
 
