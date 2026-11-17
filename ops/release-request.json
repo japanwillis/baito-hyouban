@@ -1,10 +1,9 @@
 {
   "schema_version": 1,
-  "request_id": "bh-20261115-final-five-deploy-052a642",
+  "request_id": "bh-20261117-editorial-cleanup-deploy-77b77bd",
   "mode": "deploy",
-  "source_sha": "052a64256e2bc8b338f6602e066f1ac16f28c539",
-  "plan_id": "43691238461-1",
-  "plan_sha256": "db22ba52bf497b4afe0f6be8b44c574b99d7fa429f21a5796ceeb69f78daa997",
-  "approval": "DEPLOY 052a64256e2bc8b338f6602e066f1ac16f28c539 db22ba52bf497b4afe0f6be8b44c574b99d7fa429f21a5796ceeb69f78daa997",
-  "backup_id": ""
+  "source_sha": "77b77bd7fbc78d769329ea2266d17bdeadf17313",
+  "plan_id": "44035836816-1",
+  "plan_sha256": "34e82ed05bc43a905a666273aae9ac3a4a145abf0242a5fd2b8dabecf4a7c6a5",
+  "approval": "DEPLOY 77b77bd7fbc78d769329ea2266d17bdeadf17313 34e82ed05bc43a905a666273aae9ac3a4a145abf0242a5fd2b8dabecf4a7c6a5"
 }
