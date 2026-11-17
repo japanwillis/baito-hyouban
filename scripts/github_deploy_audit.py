@@ -68,15 +68,29 @@ def _scan(repository, token, current_run_id, now, get_json, get_log):
     end = (today + timedelta(days=1)).isoformat()
     created = urllib.parse.quote(start + ".." + end)
     all_runs = []
+    expected_count = None
+    seen_run_ids = set()
     for page in range(1, 11):
         data = get_json("/actions/runs?per_page=100&page=" + str(page) + "&created=" + created,
                         repository, token)
         runs = data.get("workflow_runs")
+        count = data.get("total_count")
+        if type(count) is not int or count < 0:
+            raise ValueError("Missing Actions run count")
+        if expected_count is not None and count != expected_count:
+            raise ValueError("Actions run history changed during audit")
+        expected_count = count
         if not isinstance(runs, list):
             raise ValueError("Incomplete Actions run history")
+        for run in runs:
+            if not isinstance(run, dict) or type(run.get("id")) is not int or run["id"] in seen_run_ids:
+                raise ValueError("Malformed or duplicated Actions run history")
+            seen_run_ids.add(run["id"])
         all_runs.extend(runs)
-        if len(runs) < 100:
+        if len(all_runs) == expected_count:
             break
+        if len(all_runs) > expected_count or len(runs) < 100:
+            raise ValueError("Incomplete Actions run history")
     else:
         raise ValueError("Actions run history exceeds audit bounds")
     inspected = 0
@@ -87,6 +101,8 @@ def _scan(repository, token, current_run_id, now, get_json, get_log):
         if not isinstance(run_id, int):
             raise ValueError("Invalid historical run ID")
         if str(run_id) == str(current_run_id):
+            if run.get("run_attempt") != 1:
+                raise ValueError("Publisher rerun or missing attempt evidence refused")
             continue
         created_date = _parse_time(run.get("created_at")).date()
         if run.get("status") != "completed":
@@ -117,10 +133,9 @@ def _scan(repository, token, current_run_id, now, get_json, get_log):
         stamps = [release.get("started_at"), release.get("completed_at")]
         may_touch_today = created_date == today
         for stamp in stamps:
-            if stamp:
-                may_touch_today = may_touch_today or _parse_time(stamp).date() == today
-            elif release.get("status") != "completed":
+            if not stamp:
                 raise ValueError("Missing deploy completion proof")
+            may_touch_today = may_touch_today or _parse_time(stamp).date() == today
         if may_touch_today:
             raise ValueError("Another deploy attempt exists on this JST date")
         inspected += 1
@@ -142,3 +157,4 @@ def audit_daily_releases(repository, token, current_run_id, now=None,
         raise ValueError("GitHub historical deploy audit failed closed: " + str(exc)) from exc
     print("GitHub production workflow audit passed; historical runs inspected:", inspected)
     return inspected
+

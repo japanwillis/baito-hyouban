@@ -14,7 +14,7 @@ TOKEN = "test-token"
 def make_run(path=".github/workflows/continuous-release.yml", name="Continuous release (connector request)",
              status="completed", created_at="2026-11-17T20:00:00Z"):
     return {"id": 101, "path": path, "name": name,
-            "created_at": created_at, "status": status}
+            "created_at": created_at, "status": status, "run_attempt": 1}
 
 
 def make_api(run, jobs=None, fail=False):
@@ -28,7 +28,7 @@ def make_api(run, jobs=None, fail=False):
         if fail:
             raise ConnectionError("Actions API unavailable")
         if path.startswith("/actions/runs?"):
-            return {"workflow_runs": [run]}
+            return {"total_count": 1, "workflow_runs": [run]}
         if path == "/actions/runs/101/jobs?per_page=100":
             return {"jobs": jobs}
         raise AssertionError("Unexpected API path: " + path)
@@ -98,3 +98,4 @@ class AuditTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
