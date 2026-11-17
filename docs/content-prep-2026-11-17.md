@@ -32,3 +32,15 @@ This snapshot is stored on a dedicated prep branch with `[skip ci]` in the commi
 ## Follow-up: production-note leakage audit
 
 All six source articles and rendered HTML were additionally checked for internal-link candidate lists, ID-only instructions, editorial handoff text and production annotations. The reported exact internal-link candidate wording was absent. Two Denny's reference-number consolidation instructions remained and were removed. Sagawa manuscript wording, Royal Host comparative writing-process phrasing, Bikkuri Donkey manuscript-date wording, and Joyfull/Royal source-retrieval annotations were also revised for readers. Factual/source limitations and clearly labeled editorial analysis are retained. Approval hashes were refreshed and tests/build/content gates rerun. Four-width visual QA remains pending.
+
+## BH-0052 added after formal image delivery
+
+The latest ledger now places BH-0052 in publication waiting with editorial v2 approval. BH-0053 and BH-0054 are both image-waiting, not publication-waiting (supersedes the earlier BH-0054 editing status above). Prepared `/job/100-yen-shop-part-time/` using the JobArticle layout. Existing six articles/images are unchanged by this addition.
+
+Source: https://docs.google.com/document/d/19l4Yaz7bzSMVM8Kqg5RqtcPqnGlkapgO0LBSAlOxMIA/edit . Image: https://drive.google.com/file/d/1e-EpvBSgnAR0aL0ip-E2O-MRC1puVcEy/view . Drive bytes independently retrieved: 219592 bytes, 1200×630 WebP, SHA256 `dd47642583057681b282acee94872568ed7df50c0fadbb748f38e6dab3170722`, matches ledger. Watercolor style, natural people, no readable logos/text visually inspected.
+
+All nine cited official/public sources checked. S01 originally incorrectly linked to DAISO recorded-interview instructions; replaced with https://recruit-daiso.com/jobfind-pc/ whose job-description section supports the manuscript. Seria official current HTML for Aeon Tobata 14478 confirms high-school graduation and 15:00–21:30 among shifts; Meets Kokubunji 17088 confirms 12:00–18:00 and 16:00–21:30. Search-cached versions showed older/closed state, so current direct HTML was checked instead of treating the cache as current. No salary or continuing vacancy guarantee added. Cando current FAQ supports fixed shifts, store-specific conditions and beginner training. Ministry pages support the general employment-condition/minimum-wage statements.
+
+Removed internal link-setting instructions, SEO production metadata, image brief, editorial handoff/history and pre-publication instructions from reader-facing text. DAISO related live URL returned HTTP 200. Verified source and rendered HTML contain no production-note markers; 12 FAQs, two rendered tables, matching table columns, all S01–S09 references defined. Tests: 41 passed. Build: 77 pages. Pre/post content gates: 61 approved articles. Updated approval hashes.
+
+Seven prepared articles now await mandatory four-width browser QA and the release plan/restore/protected-page checks. This addition is not publication approval. Same JST 03:00-only and one-batch/day restrictions apply. No main update, PR or deployment. Commit uses `[skip ci]`.

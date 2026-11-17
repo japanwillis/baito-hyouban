@@ -960,6 +960,22 @@
       "sourceSha256": "a38beea053836a4e20ce86a3d5dc034f050412976bd7a03ca18f183ccd36170a",
       "imageSha256": "ac4e5e91ecdfeca5799fa358f3d9c5bbb195e3b984778e0b0df3f66dead99f80",
       "note": "編集完成稿から公開用に整形。制作指示・内部メモを除外。2026-11-17に主要求人・公的根拠を再点検し、現行確認不能の具体条件を削除。Drive実画像1200×630 WebP・水彩画風を目視確認。技術・本番planゲートは別途必須。"
+    },
+    {
+      "articleId": "BH-0052",
+      "sourcePath": "src/pages/job/100-yen-shop-part-time.md",
+      "publicPath": "/job/100-yen-shop-part-time/",
+      "editorialStatus": "approved",
+      "conditionsResolved": true,
+      "imageVerified": true,
+      "linksVerifiedOn": "2026-11-17",
+      "manuscriptUrl": "https://docs.google.com/document/d/19l4Yaz7bzSMVM8Kqg5RqtcPqnGlkapgO0LBSAlOxMIA",
+      "reviewUrl": "https://docs.google.com/document/d/19l4Yaz7bzSMVM8Kqg5RqtcPqnGlkapgO0LBSAlOxMIA",
+      "imageUrl": "https://drive.google.com/file/d/1e-EpvBSgnAR0aL0ip-E2O-MRC1puVcEy/view",
+      "imagePath": "/images/BH-0052-eyecatch.webp",
+      "sourceSha256": "c2f88ee9b3a253a5bc042f88319fcf50c4c2c3aeb7a98eee5ad7f955fe02308a",
+      "imageSha256": "dd47642583057681b282acee94872568ed7df50c0fadbb748f38e6dab3170722",
+      "note": "編集承認v2を公開用整形。制作指示・申し送り・画像ブリーフを除外。誤ったS01を正しい公式仕事内容ページに修正。2026-11-17の一次資料再検証、セリア2店の実HTML確認、Drive実バイトSHA256・1200×630・水彩画風目視検品済み。4幅QA/本番plan等は別途必須。"
     }
   ]
 }
