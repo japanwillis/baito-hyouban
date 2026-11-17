@@ -9,9 +9,9 @@ const approvals=JSON.parse(await readFile('ops/publication-approvals.json','utf8
 const pages=[['home','/'],['guide','/guide/'],['company','/company/'],['job','/job/'],['search','/search/'],...approvals.map(a=>[a.articleId,a.publicPath])];
 const out='responsive-qa-evidence';await mkdir(out,{recursive:true});
 // Full accessibility, metadata, image, navigation and overflow checks still cover ALL articles at ALL widths.
-// Retain visual evidence at each width for the eight newest approvals, and a 320px sample for older articles.
+// Retain visual evidence at each width for the nine current publication candidates, and a 320px sample for older articles.
 // This reduces redundant full-page screenshots and GitHub Actions artifact storage.
-const visualSample=new Set(approvals.slice(-8).map(a=>a.articleId));
+const visualSample=new Set(approvals.slice(-9).map(a=>a.articleId));
 const legacyVisualSample=new Set(approvals.slice(0,2).map(a=>a.articleId));
 const captureScreenshot=(label,width)=>!label.startsWith('BH-')||visualSample.has(label)||(width===320&&legacyVisualSample.has(label));
 const browser=await chromium.launch();const results=[];

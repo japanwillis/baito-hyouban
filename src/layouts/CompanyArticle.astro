@@ -4,7 +4,7 @@ const { frontmatter } = Astro.props;
 ---
 <Base title={frontmatter.title} description={frontmatter.description} image={frontmatter.heroImage}>
  <div class="breadcrumb"><a href="/">トップ</a><span>›</span><a href="/company/">企業別の評判</a><span>›</span><span>この記事</span></div>
- <article class="article"><div class="article-intro"><span class="pill">企業別のバイト評判</span><h1>{frontmatter.title}</h1><p class="muted">情報確認日：{frontmatter.checkedDate} ｜ 記事ID：{frontmatter.articleId}</p></div>
+ <article class="article"><div class="article-intro"><span class="pill">企業別のバイト評判</span><h1>{frontmatter.title}</h1><p class="muted">情報確認日：{frontmatter.checkedDate}</p></div>
  {frontmatter.heroImage && <img class="hero-image" src={frontmatter.heroImage} width="1200" height="630" alt={frontmatter.imageAlt} loading="eager" />}
  <div class="article-content"><slot /></div>
  <div class="bottom-link"><a href="/company/">その他のお役立ち記事を見る →</a></div>
