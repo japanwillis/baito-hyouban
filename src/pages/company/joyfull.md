@@ -245,19 +245,19 @@ A. 労働条件の書面などを保存し、採用担当へ確認してくだ�
 
 ## 一次情報・確認日（2026-11-14 JST）
 
-[S1] ジョイフル公式・アルバイト／パート採用トップ <https://joyful.saiyo-job.jp/cct7/recruit/index.html> （2026-11-14 本文直接再取得済み。公式採用案内）
+[S1] ジョイフル公式・アルバイト／パート採用トップ <https://joyful.saiyo-job.jp/cct7/recruit/index.html> （公式採用案内）
 
-[S2] ジョイフル公式求人・山口朝田店フロント <https://joyful.saiyo-job.jp/dsaiyo/cct7/pc_job/show/7451/2360> （直接取得済み。表示額の変動に備え本稿では具体時給転載なし）
+[S2] ジョイフル公式求人・山口朝田店フロント <https://joyful.saiyo-job.jp/dsaiyo/cct7/pc_job/show/7451/2360> （最新の時給は募集ページでご確認ください）
 
-[S3] ジョイフル公式求人・仙台東照宮店キッチン <https://joyful.saiyo-job.jp/dsaiyo/cct7/pc_job/show/6411/1693> （直接取得済み。検索要約とページ取得に賃金表示の差があり、本稿では特定金額を採用しない）
+[S3] ジョイフル公式求人・仙台東照宮店キッチン <https://joyful.saiyo-job.jp/dsaiyo/cct7/pc_job/show/6411/1693> （最新の時給は募集ページでご確認ください）
 
-[S4] ジョイフル公式求人・熊谷店フロント <https://joyful.saiyo-job.jp/dsaiyo/cct7/pc_job/show/6113/2263> （2026-11-14 本文直接再取得済み。時間帯・手当・シフトは応募店舗ごとに異なる）
+[S4] ジョイフル公式求人・熊谷店フロント <https://joyful.saiyo-job.jp/dsaiyo/cct7/pc_job/show/6113/2263> （時間帯・手当・シフトは応募店舗ごとに異なります）
 
 [S5] 厚生労働省・深夜割増賃金FAQ <https://www.mhlw.go.jp/bunya/roudoukijun/faq_kijyunhou_25.html>
 
 [S6] 厚生労働省・確かめようアルバイトの労働条件 <https://www.check-roudou.mhlw.go.jp/lp/arubaito/>
 
-[S7] 厚生労働省・休憩時間は法律で決まっていますか <https://www.mhlw.go.jp/bunya/roudoukijun/faq_kijyunhou_13.html> （6時間超45分・8時間超1時間を直接確認）
+[S7] 厚生労働省・休憩時間は法律で決まっていますか <https://www.mhlw.go.jp/bunya/roudoukijun/faq_kijyunhou_13.html> （6時間超45分・8時間超1時間）
 
 [S8] ハローワーク・労働法等に関する解説 <https://www.hellowork.mhlw.go.jp/enterprise/laborlaw.html>
 

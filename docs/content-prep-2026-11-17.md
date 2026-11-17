@@ -28,3 +28,7 @@ Recheck main and the latest ledger, incorporate separately reviewed guard work i
 
 ## Persistence and CI
 This snapshot is stored on a dedicated prep branch with `[skip ci]` in the commit message. It changes only six article files, six images, the approval registry and this audit document. No PR is created. Workflow inspection found main-only production triggers; remaining unrestricted push triggers are limited to their workflow files. The skip directive also prevents an initial-branch push from launching path-filtered jobs. The later release must deliberately run its own validation; skipped CI is not a passing check.
+
+## Follow-up: production-note leakage audit
+
+All six source articles and rendered HTML were additionally checked for internal-link candidate lists, ID-only instructions, editorial handoff text and production annotations. The reported exact internal-link candidate wording was absent. Two Denny's reference-number consolidation instructions remained and were removed. Sagawa manuscript wording, Royal Host comparative writing-process phrasing, Bikkuri Donkey manuscript-date wording, and Joyfull/Royal source-retrieval annotations were also revised for readers. Factual/source limitations and clearly labeled editorial analysis are retained. Approval hashes were refreshed and tests/build/content gates rerun. Four-width visual QA remains pending.
