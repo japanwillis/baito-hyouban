@@ -940,13 +940,13 @@
       "conditionsResolved": true,
       "imageVerified": true,
       "linksVerifiedOn": "2026-11-17",
-      "manuscriptUrl": "https://docs.google.com/document/d/1X17q06kq4wxJKtWdidXpCcIi2kEm6gH8lqxHkp6PuLA/edit",
-      "reviewUrl": "https://docs.google.com/document/d/1X17q06kq4wxJKtWdidXpCcIi2kEm6gH8lqxHkp6PuLA/edit",
+      "manuscriptUrl": "https://docs.google.com/document/d/15uzcXGcIleP8i--6cUlWvkHE6OQ4BHnzMLbVGbOM4gA/edit",
+      "reviewUrl": "https://docs.google.com/document/d/15uzcXGcIleP8i--6cUlWvkHE6OQ4BHnzMLbVGbOM4gA/edit",
       "imageUrl": "https://drive.google.com/file/d/1sszqLkuv_Fc5LyX_aJ_QzrH-TNlFjWsK/view",
       "imagePath": "/images/BH-0048-eyecatch.webp",
       "sourceSha256": "065360cb247cd3c46d40124491cabdf3493b72ee3a6498d62c85f91d9ec6ab53",
       "imageSha256": "09db6ce3fecae98982f0496d4d6db77a269f033e2b8d0653c4b7fccae7be5aa2",
-      "note": "編集完成稿から公開用に整形。制作指示・内部メモを除外。2026-11-17に主要求人・公的根拠を再点検し、現行確認不能の具体条件を削除。Drive実画像1200×630 WebP・水彩画風を目視確認。技術・本番planゲートは別途必須。 2026-11-18再点検：重複・現行公式掲載との不一致を修正。再取得不能な個店条件は一般的な確認事項へ置換し現行求人断定を除外。"
+      "note": "編集完成稿から公開用に整形。制作指示・内部メモを除外。2026-11-17に主要求人・公的根拠を再点検し、現行確認不能の具体条件を削除。Drive実画像1200×630 WebP・水彩画風を目視確認。技術・本番planゲートは別途必須。 2026-11-18再点検：重複・現行公式掲載との不一致を修正。再取得不能な個店条件は一般的な確認事項へ置換し現行求人断定を除外。 2026-11-18 正本v3・独立編集承認と台帳G58/L58を照合。Google Docs固有の末尾改行1個を除く全文が現行公開MarkdownとSHA256一致。原稿・画像ハッシュは変更なし。未公開・公開待ちを維持し、次回の最新SHA監査・plan・実物バックアップ・隔離復旧検証を必須とする。"
     },
     {
       "articleId": "BH-0049",
