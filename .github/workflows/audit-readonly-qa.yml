@@ -1,0 +1,46 @@
+name: Read-only audit QA
+on:
+  pull_request:
+    paths:
+      - 'scripts/github_deploy_audit.py'
+      - 'scripts/deploy_window.py'
+      - 'scripts/release-request.py'
+      - 'tests/test_audit_hardening.py'
+      - '.github/workflows/audit-readonly-qa.yml'
+permissions:
+  contents: read
+  actions: read
+jobs:
+  audit:
+    if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Verify read-only token against real Actions audit API
+        env:
+          GH_READ_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'PY'
+          import os
+          from scripts.github_deploy_audit import audit_daily_releases, _get_json, _get_log, MODE_PATTERN
+          audit_daily_releases(os.environ['GITHUB_REPOSITORY'],
+                               os.environ['GH_READ_TOKEN'],
+                               os.environ['GITHUB_RUN_ID'])
+          repo, token = os.environ['GITHUB_REPOSITORY'], os.environ['GH_READ_TOKEN']
+          runs = _get_json('/actions/workflows/continuous-release.yml/runs?per_page=1', repo, token)['workflow_runs']
+          if not runs or runs[0].get('status') != 'completed':
+              raise ValueError('No completed publisher sample for token/log verification')
+          run_id = runs[0]['id']
+          jobs = _get_json('/actions/runs/' + str(run_id) + '/jobs?per_page=100', repo, token)['jobs']
+          request_jobs = [j for j in jobs if j.get('name') == 'request']
+          if len(request_jobs) != 1:
+              raise ValueError('Missing unambiguous historical request job')
+          sample = _get_log(request_jobs[0]['id'], repo, token)
+          if len(set(MODE_PATTERN.findall(sample))) != 1:
+              raise ValueError('Historical request log mode cannot be verified')
+          print('Read-only Actions token and token-free log redirect verified; no server connection')
+          PY
+# No Xserver secrets, SSH, deploy request, write token, dispatch or server mutation.

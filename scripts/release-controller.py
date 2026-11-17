@@ -11,6 +11,12 @@ import tempfile
 import urllib.request
 from pathlib import Path
 
+# GitHub invokes these entrypoints by path, not as modules.
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from scripts.deploy_window import require_deploy_window
+from scripts.github_deploy_audit import audit_daily_releases
+
 HOST_FP = 'SHA256:VBukSLflrITK4l8kOHlHhvV5YrpzMEtiwOJO8uMYKY8'
 BASE = 'https://baito-hyouban.com'
 
@@ -97,6 +103,11 @@ def main():
         approval != 'DEPLOY ' + sha + ' ' + plan_digest):
         raise ValueError('Explicit approval of commit and plan required')
     if mode == 'deploy':
+        # Recheck immediately before any SSH setup or server-side operations.
+        require_deploy_window(mode)
+        audit_daily_releases(os.environ.get('GITHUB_REPOSITORY', ''),
+                             os.environ.get('GH_READ_TOKEN', ''),
+                             os.environ.get('GITHUB_RUN_ID', ''))
         verify_successful_plan_run(plan_id, os.environ.get('GITHUB_REPOSITORY', ''), os.environ.get('GH_READ_TOKEN', ''))
     if mode == 'rollback' and (not re.fullmatch(r'[0-9]+-[0-9]+', backup_id) or approval != 'ROLLBACK ' + backup_id):
         raise ValueError('Explicit approval of backup ID required')

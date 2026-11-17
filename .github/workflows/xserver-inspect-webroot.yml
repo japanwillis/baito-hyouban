@@ -66,5 +66,76 @@ jobs:
           echo "WEBROOT_TOP_LEVEL_ITEMS:"
           find "$target" -mindepth 1 -maxdepth 1 -printf '%f\n' | LC_ALL=C sort | head -n 40 || true
           echo "WEBROOT_TOP_LEVEL_ITEMS_END"
+          python3 - <<'CONTROL_AUDIT'
+          """Read-only production deployment evidence inventory. Never creates files/locks.
+          
+          Pipe this reviewed file to pinned SSH `python3 -`; default control is the existing
+          private deployment directory. Nonzero exit means do not publish.
+          """
+          import datetime as dt
+          import fcntl
+          import json
+          from pathlib import Path
+          import re
+          import stat
+          
+          JST=dt.timezone(dt.timedelta(hours=9))
+          def safe_json(path):
+              if path.is_symlink() or not stat.S_ISREG(path.stat().st_mode):
+                  raise ValueError('Unsafe state evidence: '+path.name)
+              if path.stat().st_size>1_000_000:raise ValueError('Oversized state evidence')
+              result=json.loads(path.read_text())
+              if not isinstance(result,dict):raise ValueError('Malformed state evidence')
+              return result
+          
+          def audit(control):
+              control=Path(control)
+              if not control.is_absolute():raise ValueError('Absolute control path required')
+              for p in [control]+list(control.parents):
+                  if p.is_symlink():raise ValueError('Symlinked control path')
+              if not control.is_dir():raise ValueError('Existing control directory required')
+              lock=control/'lock'
+              if lock.is_symlink() or not lock.is_file():raise ValueError('Existing lock required; not creating one')
+              now=dt.datetime.now(JST)
+              result={'observed_at_jst':now.isoformat(),'read_only':True,'releases':[],'daily_receipts':[], 'blockers':[]}
+              with lock.open('r') as stream:
+                  fcntl.flock(stream,fcntl.LOCK_SH|fcntl.LOCK_NB)
+                  entries=list(control.iterdir())
+                  if len(entries)>10000:raise ValueError('Evidence inventory too large')
+                  if (control/'pending.json').exists():
+                      state=safe_json(control/'pending.json')
+                      result['pending']={k:state.get(k) for k in ('release_id','source_sha','phase')}
+                      result['blockers'].append('Pending transaction requires verified recovery')
+                  if (control/'active.json').exists():
+                      state=safe_json(control/'active.json')
+                      result['active']={k:state.get(k) for k in ('release_id','source_sha','phase')}
+                  for entry in entries:
+                      if not re.fullmatch(r'release-[0-9]+-[0-9]+',entry.name):continue
+                      if entry.is_symlink() or not entry.is_dir():raise ValueError('Unsafe release evidence')
+                      state=safe_json(entry/'state.json')
+                      info={k:state.get(k) for k in ('release_id','source_sha','phase')}
+                      info['directory']=entry.name
+                      info['directory_mtime_jst']=dt.datetime.fromtimestamp(entry.stat().st_mtime,JST).isoformat()
+                      info['state_mtime_jst']=dt.datetime.fromtimestamp((entry/'state.json').stat().st_mtime,JST).isoformat()
+                      result['releases'].append(info)
+                  ledger=control/'daily-deploy'
+                  if ledger.is_symlink():raise ValueError('Unsafe daily ledger')
+                  if ledger.exists():
+                      if not ledger.is_dir():raise ValueError('Malformed daily ledger')
+                      days=list(ledger.iterdir())
+                      if len(days)>10000:raise ValueError('Daily ledger too large')
+                      for day in days:
+                          if day.is_symlink() or not day.is_dir() or not re.fullmatch(r'\d{4}-\d{2}-\d{2}',day.name):
+                              raise ValueError('Malformed daily entry')
+                          state=safe_json(day/'attempt.json')
+                          result['daily_receipts'].append({k:state.get(k) for k in ('date_jst','release_id','reserved_at','phase')})
+              return result
+          
+          if __name__=='__main__':
+              result=audit(Path.home()/'.baito-hyouban-deploy')
+              print(json.dumps(result,sort_keys=True))
+              raise SystemExit(1 if result['blockers'] else 0)
+          CONTROL_AUDIT
           echo "NO_FILES_CHANGED=yes"
           REMOTE
+
