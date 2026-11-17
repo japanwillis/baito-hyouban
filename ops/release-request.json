@@ -1,6 +1,9 @@
 {
   "schema_version": 1,
-  "request_id": "bh-20261117-editorial-cleanup-plan-77b77bd",
-  "mode": "plan",
-  "source_sha": "77b77bd7fbc78d769329ea2266d17bdeadf17313"
+  "request_id": "bh-20261117-editorial-cleanup-deploy-77b77bd",
+  "mode": "deploy",
+  "source_sha": "77b77bd7fbc78d769329ea2266d17bdeadf17313",
+  "plan_id": "44035836816-1",
+  "plan_sha256": "34e82ed05bc43a905a666273aae9ac3a4a145abf0242a5fd2b8dabecf4a7c6a5",
+  "approval": "DEPLOY 77b77bd7fbc78d769329ea2266d17bdeadf17313 34e82ed05bc43a905a666273aae9ac3a4a145abf0242a5fd2b8dabecf4a7c6a5"
 }
