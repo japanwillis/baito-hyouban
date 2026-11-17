@@ -4,7 +4,7 @@ The server-side daily reservation is the authoritative cross-workflow lock.
 This independent API audit fails closed on missing, ambiguous, or inaccessible
 historical release evidence. It never authorizes a deploy on its own.
 """
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timezone
 import json
 import re
 import urllib.parse
@@ -33,13 +33,30 @@ def _candidate(run):
     return RELEASE_WORKFLOW in path or any(word in name for word in ("deploy", "production release", "publish"))
 
 
+class NoRedirect(urllib.request.HTTPRedirectHandler):
+    def redirect_request(self, *args):
+        raise ValueError("Unexpected redirect from GitHub JSON API")
+
+
+class TokenFreeLogRedirect(urllib.request.HTTPRedirectHandler):
+    def redirect_request(self, request, fp, code, message, headers, newurl):
+        destination = urllib.parse.urlsplit(newurl)
+        if (destination.scheme != "https" or not destination.hostname or
+                destination.username or destination.password or
+                destination.port not in (None, 443)):
+            raise ValueError("Unsafe GitHub log redirect")
+        # Signed log destinations need no bearer token. Construct a NEW request,
+        # never let urllib copy Authorization/Cookie headers across a redirect.
+        return urllib.request.Request(newurl, headers={"User-Agent": "baito-hyouban-deploy-audit"})
+
+
 def _get_json(path, repository, token):
     request = urllib.request.Request(
         "https://api.github.com/repos/" + repository + path,
         headers={"Authorization": "Bearer " + token,
                  "Accept": "application/vnd.github+json",
                  "User-Agent": "baito-hyouban-deploy-audit"})
-    with urllib.request.urlopen(request, timeout=20) as response:
+    with urllib.request.build_opener(NoRedirect).open(request, timeout=20) as response:
         raw = response.read(4_000_001)
     if len(raw) > 4_000_000:
         raise ValueError("Oversized GitHub audit response")
@@ -52,7 +69,7 @@ def _get_log(job_id, repository, token):
         headers={"Authorization": "Bearer " + token,
                  "Accept": "application/vnd.github+json",
                  "User-Agent": "baito-hyouban-deploy-audit"})
-    with urllib.request.urlopen(request, timeout=20) as response:
+    with urllib.request.build_opener(TokenFreeLogRedirect).open(request, timeout=20) as response:
         raw = response.read(3_000_001)
     if len(raw) > 3_000_000:
         raise ValueError("Oversized GitHub request log")
@@ -63,15 +80,13 @@ def _scan(repository, token, current_run_id, now, get_json, get_log):
     if now.tzinfo is None or now.utcoffset() is None:
         raise ValueError("Timezone-aware audit clock required")
     today = now.astimezone(JST).date()
-    # Search adjacent UTC dates to include runs queued before JST midnight.
-    start = (today - timedelta(days=2)).isoformat()
-    end = (today + timedelta(days=1)).isoformat()
-    created = urllib.parse.quote(start + ".." + end)
+    # Do not filter by created_at: a run created months ago can be rerun today.
+    # Scan bounded complete history, then skip only provably old completed runs.
     all_runs = []
     expected_count = None
     seen_run_ids = set()
-    for page in range(1, 11):
-        data = get_json("/actions/runs?per_page=100&page=" + str(page) + "&created=" + created,
+    for page in range(1, 101):
+        data = get_json("/actions/runs?per_page=100&page=" + str(page),
                         repository, token)
         runs = data.get("workflow_runs")
         count = data.get("total_count")
@@ -80,6 +95,8 @@ def _scan(repository, token, current_run_id, now, get_json, get_log):
         if expected_count is not None and count != expected_count:
             raise ValueError("Actions run history changed during audit")
         expected_count = count
+        if count > 10000:
+            raise ValueError("Actions run history exceeds audit bounds")
         if not isinstance(runs, list):
             raise ValueError("Incomplete Actions run history")
         for run in runs:
@@ -108,6 +125,12 @@ def _scan(repository, token, current_run_id, now, get_json, get_log):
         if run.get("status") != "completed":
             # Even another plan might later become deploy; never race it.
             raise ValueError("Another production-capable workflow is still active")
+        updated_date = _parse_time(run.get("updated_at")).date()
+        started_date = _parse_time(run.get("run_started_at")).date()
+        if max(created_date, updated_date, started_date) < today:
+            # Completed before this JST day; no rerun or late completion today.
+            inspected += 1
+            continue
         data = get_json("/actions/runs/" + str(run_id) + "/jobs?per_page=100",
                         repository, token)
         jobs = data.get("jobs")
@@ -154,7 +177,8 @@ def audit_daily_releases(repository, token, current_run_id, now=None,
         inspected = _scan(repository, token, current_run_id, clock,
                           get_json or _get_json, get_log or _get_log)
     except Exception as exc:
-        raise ValueError("GitHub historical deploy audit failed closed: " + str(exc)) from exc
+        reason = str(exc) if isinstance(exc, ValueError) else type(exc).__name__
+        raise ValueError("GitHub historical deploy audit failed closed: " + reason) from None
     print("GitHub production workflow audit passed; historical runs inspected:", inspected)
     return inspected
 

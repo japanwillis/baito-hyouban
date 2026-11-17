@@ -15,7 +15,8 @@ class ReviewTests(unittest.TestCase):
         with self.assertRaises(ValueError):self.audit([run],current='101')
     def test_missing_completion_timestamps_must_fail_closed(self):
         run={'id':101,'path':'.github/workflows/continuous-release.yml','name':'publish',
-             'created_at':'2026-11-16T18:00:00Z','status':'completed'}
+             'created_at':'2026-11-16T18:00:00Z','updated_at':'2026-11-17T18:00:00Z',
+             'run_started_at':'2026-11-17T18:00:00Z','status':'completed'}
         jobs=[{'id':200,'name':'request','status':'completed'},
               {'id':201,'name':'release','status':'completed','started_at':None,'completed_at':None}]
         with self.assertRaises(ValueError):self.audit([run],jobs)

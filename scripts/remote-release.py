@@ -54,10 +54,22 @@ def inventory(root):
             result[p.relative_to(root).as_posix()] = hashlib.sha256(p.read_bytes()).hexdigest()
     return result
 
+def sync_directory(path):
+    descriptor = os.open(str(path), os.O_RDONLY | os.O_DIRECTORY)
+    try:
+        os.fsync(descriptor)
+    finally:
+        os.close(descriptor)
+
+
 def write_json(path, value):
     tmp = path.with_suffix('.tmp')
-    tmp.write_bytes(canonical(value))
+    with tmp.open('wb') as stream:
+        stream.write(canonical(value))
+        stream.flush()
+        os.fsync(stream.fileno())
     os.replace(str(tmp), str(path))
+    sync_directory(path.parent)
 
 def reserve_daily_deploy(control, release_id, now=None):
     """Durable one-attempt-per-JST-day reservation under the existing server flock.
@@ -99,11 +111,13 @@ def reserve_daily_deploy(control, release_id, now=None):
     if not directory.is_dir():
         raise ValueError('Daily deploy ledger is not a directory')
     os.chmod(directory, 0o700)
+    sync_directory(control)
     day = directory / date_jst
     try:
         day.mkdir(mode=0o700)
     except FileExistsError as exc:
         raise ValueError('Daily deploy already reserved for ' + date_jst) from exc
+    sync_directory(directory)  # Keep an empty reservation durable after a crash.
     receipt = day / 'attempt.json'
     write_json(receipt, dict(date_jst=date_jst, release_id=release_id,
                             reserved_at=local.isoformat(), phase='reserved'))

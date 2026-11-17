@@ -14,7 +14,8 @@ TOKEN = "test-token"
 def make_run(path=".github/workflows/continuous-release.yml", name="Continuous release (connector request)",
              status="completed", created_at="2026-11-17T20:00:00Z"):
     return {"id": 101, "path": path, "name": name,
-            "created_at": created_at, "status": status, "run_attempt": 1}
+            "created_at": created_at, "updated_at": created_at, "run_started_at": created_at,
+            "status": status, "run_attempt": 1}
 
 
 def make_api(run, jobs=None, fail=False):
