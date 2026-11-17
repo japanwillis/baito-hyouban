@@ -1,4 +1,4 @@
-+name: Inspect Xserver web root (read-only)
+name: Inspect Xserver web root (read-only)
 on:
   workflow_dispatch:
   push:
