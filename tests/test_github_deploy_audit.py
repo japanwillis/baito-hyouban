@@ -53,12 +53,12 @@ class AuditTests(unittest.TestCase):
         self.assertEqual(self.audit(), 1)
 
     def test_prior_deploy_same_jst_day_rejected(self):
-        with self.assertRaisesRegex(ValueError, "another deploy attempt"):
+        with self.assertRaisesRegex(ValueError, "Another deploy attempt"):
             self.audit(mode="deploy")
 
     def test_cross_workflow_named_publish_rejected(self):
         run = make_run(path=".github/workflows/emergency.yml", name="Production publish")
-        with self.assertRaisesRegex(ValueError, "another deploy attempt"):
+        with self.assertRaisesRegex(ValueError, "Another deploy attempt"):
             self.audit(run, mode="deploy")
 
     def test_previous_day_deploy_without_overlap_allowed(self):
