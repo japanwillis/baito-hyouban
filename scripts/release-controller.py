@@ -1,6 +1,5 @@
 """GitHub runner: pinned SSH, manual approval, HTTPS hash checks, rollback on failure."""
 import hashlib
-from scripts.deploy_window import require_deploy_window
 import json
 import os
 import re
@@ -11,6 +10,11 @@ import tarfile
 import tempfile
 import urllib.request
 from pathlib import Path
+
+# GitHub invokes these entrypoints by path, not as modules.
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from scripts.deploy_window import require_deploy_window
 
 HOST_FP = 'SHA256:VBukSLflrITK4l8kOHlHhvV5YrpzMEtiwOJO8uMYKY8'
 BASE = 'https://baito-hyouban.com'
