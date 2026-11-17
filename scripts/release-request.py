@@ -1,5 +1,6 @@
 """Validate connector requests before server secrets become available."""
 import json
+from scripts.deploy_window import require_deploy_window
 import os
 import re
 import subprocess
@@ -68,6 +69,8 @@ def main():
         raise ValueError('Invalid source SHA')
     subprocess.run(['git', 'merge-base', '--is-ancestor', sha, trigger], check=True)
     result = validate(request, git('diff', '--name-only', sha, trigger).splitlines())
+    # Earliest explicit-request gate. Non-publishing plans and rollback remain available.
+    require_deploy_window(result['mode'])
     with open(os.environ['GITHUB_OUTPUT'], 'a') as output:
         for key, value in result.items():
             output.write(key + '=' + value + '\n')
