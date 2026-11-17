@@ -1,10 +1,14 @@
 """Validate connector requests before server secrets become available."""
 import json
-from scripts.deploy_window import require_deploy_window
 import os
 import re
 import subprocess
 from pathlib import Path
+
+# GitHub invokes these entrypoints by path, not as modules.
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from scripts.deploy_window import require_deploy_window
 
 REQUEST_PATH = 'ops/release-request.json'
 
