@@ -1008,9 +1008,9 @@
       "reviewUrl": "https://docs.google.com/document/d/19l4Yaz7bzSMVM8Kqg5RqtcPqnGlkapgO0LBSAlOxMIA",
       "imageUrl": "https://drive.google.com/file/d/1e-EpvBSgnAR0aL0ip-E2O-MRC1puVcEy/view",
       "imagePath": "/images/BH-0052-eyecatch.webp",
-      "sourceSha256": "4136cb2496c957f04f824582bb9bfcd9d4ad078fffdfa69ddc69c1eb27a36bcf",
+      "sourceSha256": "ff8364ad6ed112b365906f8c377ad328e6314691c65c28d42174a34bfa4e60aa",
       "imageSha256": "dd47642583057681b282acee94872568ed7df50c0fadbb748f38e6dab3170722",
-      "note": "編集承認v2を公開用整形。制作指示・申し送り・画像ブリーフを除外。誤ったS01を正しい公式仕事内容ページに修正。2026-11-17の一次資料再検証、セリア2店の実HTML確認、Drive実バイトSHA256・1200×630・水彩画風目視検品済み。4幅QA/本番plan等は別途必須。 2026-11-18訂正案：S06取得時は非公開表示。具体勤務枠と同店を根拠にした固定シフトの現行説明を除去。v2と既存画像は保全。manuscriptUrlはv3レビュー候補、reviewUrlは従前のv2承認記録でv3承認ではない。独立レビュー待ち、条件未解決、公開不可。"
+      "note": "編集承認v2を公開用整形。制作指示・申し送り・画像ブリーフを除外。誤ったS01を正しい公式仕事内容ページに修正。2026-11-17の一次資料再検証、セリア2店の実HTML確認、Drive実バイトSHA256・1200×630・水彩画風目視検品済み。4幅QA/本番plan等は別途必須。 2026-11-18訂正案：S06取得時は非公開表示。具体勤務枠と同店を根拠にした固定シフトの現行説明を除去。v2と既存画像は保全。manuscriptUrlはv3レビュー候補、reviewUrlは従前のv2承認記録でv3承認ではない。独立レビュー待ち、条件未解決、公開不可。 追補：S01公式URLをv3/コードで一致。確認日は初回11/16・候補再点検記録11/17・限定追加11/18と区別。S10静岡労働局の年少者規制一次資料を追補。S06再取得では求人本文も返り、非公開表示と競合するため掲載終了を断定せず現行継続未確定と訂正。checkedDate=11/18は部分更新日、全URL再検収日ではない。独立レビュー待ちを維持。"
     },
     {
       "articleId": "BH-0053",
