@@ -6,7 +6,7 @@ checkedDate: "2026-11-18"
 articleId: "BH-0052"
 heroImage: "/images/BH-0052-eyecatch.webp"
 imageAlt: "100円ショップで棚に商品を補充するスタッフとレジで接客するスタッフの水彩イラスト"
-editorialStatus: "pending"
+editorialStatus: "approved"
 ---
 
 ## 結論：100円ショップは「値札が分かりやすい＝仕事が簡単」ではない
