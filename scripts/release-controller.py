@@ -1,5 +1,6 @@
 """GitHub runner: pinned SSH, manual approval, HTTPS hash checks, rollback on failure."""
 import hashlib
+from scripts.deploy_window import require_deploy_window
 import json
 import os
 import re
@@ -97,6 +98,8 @@ def main():
         approval != 'DEPLOY ' + sha + ' ' + plan_digest):
         raise ValueError('Explicit approval of commit and plan required')
     if mode == 'deploy':
+        # Recheck immediately before any SSH setup or server-side operations.
+        require_deploy_window(mode)
         verify_successful_plan_run(plan_id, os.environ.get('GITHUB_REPOSITORY', ''), os.environ.get('GH_READ_TOKEN', ''))
     if mode == 'rollback' and (not re.fullmatch(r'[0-9]+-[0-9]+', backup_id) or approval != 'ROLLBACK ' + backup_id):
         raise ValueError('Explicit approval of backup ID required')
