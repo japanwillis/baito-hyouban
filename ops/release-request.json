@@ -1,6 +1,9 @@
 {
   "schema_version": 1,
-  "request_id": "plan-20261118-reviewed-nine-0333",
-  "mode": "plan",
-  "source_sha": "6f9a11aed3629d12606f1aaf2442d6e78fa21d32"
+  "request_id": "deploy-20261118-reviewed-nine-once",
+  "mode": "deploy",
+  "source_sha": "6f9a11aed3629d12606f1aaf2442d6e78fa21d32",
+  "plan_id": "44148930895-1",
+  "plan_sha256": "3e701461bf7cf84179396e0176b7b2fd3d959309bc17fa4bf043083deecbf00a",
+  "approval": "DEPLOY 6f9a11aed3629d12606f1aaf2442d6e78fa21d32 3e701461bf7cf84179396e0176b7b2fd3d959309bc17fa4bf043083deecbf00a"
 }
