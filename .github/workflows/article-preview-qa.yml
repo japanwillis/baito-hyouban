@@ -1,11 +1,16 @@
 name: Article preview responsive QA
 on:
   pull_request:
+    types: [opened, synchronize, reopened, ready_for_review, converted_to_draft]
     paths: ['src/**', 'public/**', 'ops/publication-approvals.json', 'scripts/article-preview-qa.mjs', 'scripts/all-articles-qa.mjs', '.github/workflows/article-preview-qa.yml']
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 permissions:
   contents: read
 jobs:
   preview:
+    if: ${{ !github.event.pull_request.draft }}
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
