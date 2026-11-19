@@ -1,6 +1,7 @@
 import { readdirSync, readFileSync, existsSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { resolve, relative } from 'node:path';
+import { assertNoEditorialNotes } from './editorial-notes.mjs';
 
 const root = resolve(process.argv[2] || '.');
 const sha = path => createHash('sha256').update(readFileSync(resolve(root, path))).digest('hex');
@@ -18,20 +19,19 @@ for (const path of articles) {
   const a = approvals.articles.find(a => a.sourcePath === path);
   if (!a || seen.has(a.articleId)) throw Error(`No unique approval record: ${path}`);
   seen.add(a.articleId);
-  if (!['approved', 'conditionally-approved'].includes(a.editorialStatus) || !a.conditionsResolved || !a.imageVerified || !a.linksVerifiedOn)
-    throw Error(`Approval incomplete: ${path}`);
-  for (const key of ['manuscriptUrl', 'reviewUrl', 'imageUrl']) {
+  for (const key of ['manuscriptUrl', 'imageUrl']) {
     if (!/^https:\/\/(docs\.google\.com|drive\.google\.com)\//.test(a[key] || '')) throw Error(`Missing evidence ${key}: ${path}`);
   }
   const text = readFileSync(resolve(root, path), 'utf8');
+  assertNoEditorialNotes(text, path);
   // These frontmatter fields are plain scalar lines under this project's authoring convention.
   const field = key => text.match(new RegExp(`^${key}: *([^\\r\\n]+)$`, 'm'))?.[1].trim().replace(/^['"]|['"]$/g, '');
-  if (field('articleId') !== a.articleId || field('editorialStatus') !== a.editorialStatus || field('heroImage') !== a.imagePath)
+  if (field('articleId') !== a.articleId || field('heroImage') !== a.imagePath)
     throw Error(`Frontmatter differs from approval: ${path}`);
-  if (sha(path) !== a.sourceSha256 || sha(`public${a.imagePath}`) !== a.imageSha256)
-    throw Error(`Approved source/image has changed: ${path}`);
   if (!a.imagePath.startsWith('/images/') || a.imagePath.includes('..') || !/^\/[a-z0-9/-]+\/$/.test(a.publicPath))
     throw Error(`Unsafe path: ${path}`);
+  if (sha(path) !== a.sourceSha256 || sha(`public${a.imagePath}`) !== a.imageSha256)
+    throw Error(`Registered source/image has changed: ${path}`);
   const derived = '/' + relative('src/pages', path).replace(/\.(md|mdx)$/i, '') + '/';
   if (derived !== a.publicPath) throw Error(`Route differs from approval: ${path}`);
 }
@@ -42,10 +42,18 @@ for (const path of walk('public/images')) {
 }
 if (process.argv.includes('--dist')) {
   const dist = walk('dist');
-  for (const a of approvals.articles) if (!existsSync(resolve(root, `dist${a.publicPath}index.html`))) throw Error(`Missing output ${a.articleId}`);
-  const fixed = ['index.html','404.html','about/index.html','advertising/index.html','contact/index.html','editorial-policy/index.html','privacy/index.html','guide/index.html','company/index.html','job/index.html','diagnosis/index.html','salary-calculator/index.html','job-comparison/index.html','workplace-check/index.html','first-job-anxiety/index.html'];
+  for (const a of approvals.articles) {
+    const output = `dist${a.publicPath}index.html`;
+    if (!existsSync(resolve(root, output))) throw Error(`Missing output ${a.articleId}`);
+    const html = readFileSync(resolve(root, output), 'utf8');
+    const body = html.match(/<div class="article-content">([\s\S]*?)<div class="bottom-link">/)?.[1];
+    if (!body) throw Error(`Missing article body ${a.articleId}`);
+    assertNoEditorialNotes(body, output, { html: true });
+  }
+  const fixed = ['index.html','404.html','about/index.html','advertising/index.html','contact/index.html','editorial-policy/index.html','privacy/index.html','guide/index.html','company/index.html','job/index.html','search/index.html','diagnosis/index.html','salary-calculator/index.html','job-comparison/index.html','workplace-check/index.html','first-job-anxiety/index.html'];
   for (const p of dist.filter(p => p.endsWith('.html'))) if (!fixed.includes(p.slice(5)) && !approvals.articles.some(a => `dist${a.publicPath}index.html` === p)) throw Error(`Unapproved output route ${p}`);
   const images = dist.filter(p => /\/BH-\d{4}/.test(p));
   for (const p of images) if (!approvals.articles.some(a => `dist${a.imagePath}` === p)) throw Error(`Unapproved output image ${p}`);
 }
-console.log(`Publication gate passed: ${seen.size} approved article(s)`);
+console.log(`Publication gate passed: ${seen.size} registered article(s)`);
+

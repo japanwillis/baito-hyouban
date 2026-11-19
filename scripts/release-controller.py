@@ -11,8 +11,43 @@ import tempfile
 import urllib.request
 from pathlib import Path
 
+# GitHub invokes these entrypoints by path, not as modules.
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from scripts.github_deploy_audit import audit_daily_releases
+from scripts.deploy_window import require_deploy_window
+
 HOST_FP = 'SHA256:VBukSLflrITK4l8kOHlHhvV5YrpzMEtiwOJO8uMYKY8'
 BASE = 'https://baito-hyouban.com'
+
+def preserve_bh0001_live_html(dist):
+    """Keep the protected first article byte-for-byte identical across unrelated releases.
+
+    Astro may assign a different shared CSS asset name when new articles are added.
+    The content approval gate has already validated the article source and image;
+    this operation prevents re-rendering of the protected published HTML. The
+    server-side release engine independently verifies equality with its disk copy.
+    """
+    target = Path(dist) / 'guide/first-part-time-job/index.html'
+    if not target.is_file() or target.is_symlink():
+        raise ValueError('Protected article build output missing or unsafe')
+    class NoRedirect(urllib.request.HTTPRedirectHandler):
+        def redirect_request(self, *args):
+            return None
+    request = urllib.request.Request(
+        BASE + '/guide/first-part-time-job/',
+        headers={'Cache-Control': 'no-cache', 'Accept-Encoding': 'identity'})
+    with urllib.request.build_opener(NoRedirect).open(request, timeout=30) as response:
+        if response.status != 200:
+            raise ValueError('Protected live article is unavailable')
+        original = response.read(2_000_001)
+    if len(original) < 500 or len(original) > 2_000_000 or b'<html' not in original.lower():
+        raise ValueError('Unexpected protected live article bytes')
+    if target.read_bytes() != original:
+        target.write_bytes(original)
+        print('Preserved protected BH-0001 live HTML verbatim; server plan will verify disk match')
+    return hashlib.sha256(original).hexdigest()
+
 
 def verify_successful_plan_run(plan_id, repository, token):
     if not re.fullmatch(r'[0-9]+-[0-9]+', plan_id) or not re.fullmatch(r'[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+', repository):
@@ -68,9 +103,17 @@ def main():
         approval != 'DEPLOY ' + sha + ' ' + plan_digest):
         raise ValueError('Explicit approval of commit and plan required')
     if mode == 'deploy':
+        require_deploy_window(mode)
+        # Recheck immediately before any SSH setup or server-side operations.
+        audit_daily_releases(os.environ.get('GITHUB_REPOSITORY', ''),
+                             os.environ.get('GH_READ_TOKEN', ''),
+                             os.environ.get('GITHUB_RUN_ID', ''))
         verify_successful_plan_run(plan_id, os.environ.get('GITHUB_REPOSITORY', ''), os.environ.get('GH_READ_TOKEN', ''))
     if mode == 'rollback' and (not re.fullmatch(r'[0-9]+-[0-9]+', backup_id) or approval != 'ROLLBACK ' + backup_id):
         raise ValueError('Explicit approval of backup ID required')
+    if mode == 'deploy':
+        # Revalidate the timezone-aware clock after the API audit/plan check.
+        require_deploy_window(mode)
     host, user, port = [os.environ.get('XSERVER_' + n, '') for n in ('HOST', 'USER', 'PORT')]
     if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9.-]*', host) or not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_-]*', user) or not re.fullmatch(r'[0-9]{1,5}', port):
         raise ValueError('Invalid server settings')
@@ -100,6 +143,7 @@ def main():
             result = subprocess.run(ssh + [command], input=engine, stdout=subprocess.PIPE, check=True)
             return json.loads(result.stdout)
         if mode in ('plan', 'deploy'):
+            preserve_bh0001_live_html(Path('dist'))
             archive = temp / 'release.tar'
             with tarfile.open(archive, 'w') as t:
                 for p in sorted(Path('dist').rglob('*')):

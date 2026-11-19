@@ -37,6 +37,9 @@ jobs:
     if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    permissions:
+      contents: read
+      actions: read
     outputs:
       mode: ${{ steps.request.outputs.mode }}
       source_sha: ${{ steps.request.outputs.source_sha }}
@@ -51,6 +54,8 @@ jobs:
           persist-credentials: false
       - id: request
         name: Validate request and source diff without server secrets
+        env:
+          GH_READ_TOKEN: ${{ github.token }}
         run: python3 scripts/release-request.py
   release:
     needs: request

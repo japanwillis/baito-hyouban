@@ -2,11 +2,18 @@ name: Verify Astro build
 on:
   push:
     branches: [main]
+    # Request-only commits are tested/built by Continuous release itself.
+    paths-ignore: ['ops/release-request.json']
   pull_request:
+    types: [opened, synchronize, reopened, ready_for_review, converted_to_draft]
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 permissions:
   contents: read
 jobs:
   build:
+    if: ${{ github.event_name != 'pull_request' || !github.event.pull_request.draft }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
