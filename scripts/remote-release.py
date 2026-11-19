@@ -84,6 +84,8 @@ def reserve_daily_deploy(control, release_id, now=None):
     if instant.tzinfo is None or instant.utcoffset() is None:
         raise ValueError('Timezone-aware server clock required')
     local = instant.astimezone(JST)
+    if local.hour != 3:
+        raise ValueError('Production deploy is permitted only 03:00–03:59 JST')
     date_jst = local.strftime('%Y-%m-%d')
     if control.is_symlink() or not control.is_dir():
         raise ValueError('Unsafe persistent deployment control directory')

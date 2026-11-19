@@ -9,6 +9,7 @@ from pathlib import Path
 import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from scripts.github_deploy_audit import audit_daily_releases
+from scripts.deploy_window import require_deploy_window
 
 REQUEST_PATH = 'ops/release-request.json'
 
@@ -75,6 +76,7 @@ def main():
     result = validate(request, git('diff', '--name-only', sha, trigger).splitlines())
 
     if result['mode'] == 'deploy':
+        require_deploy_window(result['mode'])
         audit_daily_releases(os.environ.get('GITHUB_REPOSITORY', ''),
                              os.environ.get('GH_READ_TOKEN', ''),
                              os.environ.get('GITHUB_RUN_ID', ''))

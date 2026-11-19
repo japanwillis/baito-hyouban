@@ -15,6 +15,7 @@ from pathlib import Path
 import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from scripts.github_deploy_audit import audit_daily_releases
+from scripts.deploy_window import require_deploy_window
 
 HOST_FP = 'SHA256:VBukSLflrITK4l8kOHlHhvV5YrpzMEtiwOJO8uMYKY8'
 BASE = 'https://baito-hyouban.com'
@@ -102,6 +103,7 @@ def main():
         approval != 'DEPLOY ' + sha + ' ' + plan_digest):
         raise ValueError('Explicit approval of commit and plan required')
     if mode == 'deploy':
+        require_deploy_window(mode)
         # Recheck immediately before any SSH setup or server-side operations.
         audit_daily_releases(os.environ.get('GITHUB_REPOSITORY', ''),
                              os.environ.get('GH_READ_TOKEN', ''),
@@ -109,6 +111,9 @@ def main():
         verify_successful_plan_run(plan_id, os.environ.get('GITHUB_REPOSITORY', ''), os.environ.get('GH_READ_TOKEN', ''))
     if mode == 'rollback' and (not re.fullmatch(r'[0-9]+-[0-9]+', backup_id) or approval != 'ROLLBACK ' + backup_id):
         raise ValueError('Explicit approval of backup ID required')
+    if mode == 'deploy':
+        # The API audit/plan check may have crossed the end of the 03:00 hour.
+        require_deploy_window(mode)
     host, user, port = [os.environ.get('XSERVER_' + n, '') for n in ('HOST', 'USER', 'PORT')]
     if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9.-]*', host) or not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_-]*', user) or not re.fullmatch(r'[0-9]{1,5}', port):
         raise ValueError('Invalid server settings')
