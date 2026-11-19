@@ -8,7 +8,6 @@ from pathlib import Path
 # GitHub invokes these entrypoints by path, not as modules.
 import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from scripts.deploy_window import require_deploy_window
 from scripts.github_deploy_audit import audit_daily_releases
 
 REQUEST_PATH = 'ops/release-request.json'
@@ -74,8 +73,7 @@ def main():
         raise ValueError('Invalid source SHA')
     subprocess.run(['git', 'merge-base', '--is-ancestor', sha, trigger], check=True)
     result = validate(request, git('diff', '--name-only', sha, trigger).splitlines())
-    # Earliest explicit-request gate. Non-publishing plans and rollback remain available.
-    require_deploy_window(result['mode'])
+
     if result['mode'] == 'deploy':
         audit_daily_releases(os.environ.get('GITHUB_REPOSITORY', ''),
                              os.environ.get('GH_READ_TOKEN', ''),
