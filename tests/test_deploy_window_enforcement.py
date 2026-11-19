@@ -1,4 +1,4 @@
-"""Fail-closed JST deploy-hour regression checks; no GitHub or SSH needed."""
+"""Explicit-release timezone regression checks; no GitHub or SSH needed."""
 import unittest
 from datetime import datetime, timezone
 from zoneinfo import ZoneInfo
@@ -12,18 +12,15 @@ class DeployHourEnforcementTests(unittest.TestCase):
             with self.subTest(t=t):
                 self.assertEqual(require_deploy_window('deploy', datetime(2026, 11, 20, *t, tzinfo=JST)), '2026-11-20')
 
-    def test_off_hours_fail_closed(self):
+    def test_explicit_off_hours_allowed(self):
         for hour in (0, 1, 2, 4, 5, 16, 22, 23):
             with self.subTest(hour=hour):
-                with self.assertRaisesRegex(ValueError, '03:00'):
-                    require_deploy_window('deploy', datetime(2026, 11, 20, hour, tzinfo=JST))
+                self.assertEqual(require_deploy_window('deploy', datetime(2026, 11, 20, hour, tzinfo=JST)), '2026-11-20')
 
     def test_utc_conversion_and_day_boundary(self):
         self.assertEqual(require_deploy_window('deploy', datetime(2026, 11, 19, 18, 0, tzinfo=timezone.utc)), '2026-11-20')
-        with self.assertRaises(ValueError):
-            require_deploy_window('deploy', datetime(2026, 11, 19, 17, 59, 59, tzinfo=timezone.utc))
-        with self.assertRaises(ValueError):
-            require_deploy_window('deploy', datetime(2026, 11, 19, 19, 0, tzinfo=timezone.utc))
+        self.assertEqual(require_deploy_window('deploy', datetime(2026, 11, 19, 14, 59, 59, tzinfo=timezone.utc)), '2026-11-19')
+        self.assertEqual(require_deploy_window('deploy', datetime(2026, 11, 19, 15, 0, tzinfo=timezone.utc)), '2026-11-20')
 
     def test_naive_time_fails_closed(self):
         with self.assertRaisesRegex(ValueError, 'timezone'):

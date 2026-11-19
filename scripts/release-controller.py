@@ -112,7 +112,7 @@ def main():
     if mode == 'rollback' and (not re.fullmatch(r'[0-9]+-[0-9]+', backup_id) or approval != 'ROLLBACK ' + backup_id):
         raise ValueError('Explicit approval of backup ID required')
     if mode == 'deploy':
-        # The API audit/plan check may have crossed the end of the 03:00 hour.
+        # Revalidate the timezone-aware clock after the API audit/plan check.
         require_deploy_window(mode)
     host, user, port = [os.environ.get('XSERVER_' + n, '') for n in ('HOST', 'USER', 'PORT')]
     if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9.-]*', host) or not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_-]*', user) or not re.fullmatch(r'[0-9]{1,5}', port):

@@ -15,15 +15,9 @@ def deploy_jst_date(mode, now=None):
 
 
 def require_deploy_window(mode, now=None):
-    """Allow production deploy only during the actual JST 03:00 hour.
+    """Compatibility entrypoint: explicit releases are not restricted by hour.
 
-    plan/rollback remain unrestricted. The scheduled run time cannot stand in
-    for the trusted real clock. Call at request, before SSH, and server apply.
+    Scheduled automation chooses 03:00 JST; explicit requests keep their existing
+    authorization, plan and daily-publication checks at any hour.
     """
-    if mode != "deploy":
-        return None
-    instant = now if now is not None else datetime.now(JST)
-    date_jst = deploy_jst_date(mode, instant)
-    if instant.astimezone(JST).hour != 3:
-        raise ValueError("Production deploy is permitted only 03:00–03:59 JST")
-    return date_jst
+    return deploy_jst_date(mode, now)

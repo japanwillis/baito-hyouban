@@ -59,11 +59,13 @@ class ServerLedgerTests(unittest.TestCase):
             remote.reserve_daily_deploy(base, "102-1", datetime(2026, 11, 18, 3, 5, tzinfo=JST))
             self.assertEqual(len(list((base / "daily-deploy").iterdir())), 2)
 
-    def test_server_refuses_deploy_outside_the_window(self):
+    def test_server_accepts_explicit_deploy_outside_scheduled_window(self):
         for hour in (0, 2, 4, 16, 23):
             with self.subTest(hour=hour), tempfile.TemporaryDirectory() as d:
-                with self.assertRaisesRegex(ValueError, '03:00'):
-                    remote.reserve_daily_deploy(Path(d), "101-1", datetime(2026, 11, 17, hour, 5, tzinfo=JST))
+                receipt = remote.reserve_daily_deploy(Path(d), "101-1", datetime(2026, 11, 17, hour, 5, tzinfo=JST))
+                self.assertEqual(json.loads(receipt.read_text())["date_jst"], "2026-11-17")
+                with self.assertRaisesRegex(ValueError, "already"):
+                    remote.reserve_daily_deploy(Path(d), "102-1", datetime(2026, 11, 17, hour, 6, tzinfo=JST))
 
     def test_legacy_same_day_release_evidence_blocks(self):
         with tempfile.TemporaryDirectory() as d:
