@@ -79,8 +79,10 @@ class RequestGateTests(unittest.TestCase):
                      GITHUB_EVENT_NAME='workflow_dispatch',GITHUB_RUN_ID='999',GITHUB_REPOSITORY='owner/repo',GH_READ_TOKEN='dummy')
             with patch.dict(os.environ,env),patch.object(request,'git',side_effect=[sha,'']), \
                  patch.object(request.subprocess,'run'), \
-                 patch.object(request,'audit_daily_releases',side_effect=ValueError('audit failed')) as audit:
+                 patch.object(request,'audit_daily_releases',side_effect=ValueError('audit failed')) as audit, \
+                 patch.object(request,'require_deploy_window',return_value='2026-11-18') as window:
                 with self.assertRaisesRegex(ValueError,'audit failed'):request.main()
+                window.assert_called_once_with('deploy')
                 audit.assert_called_once_with('owner/repo','dummy','999')
                 self.assertFalse(output.exists())
     def test_workflow_request_has_read_only_audit_token_no_server_secrets(self):
