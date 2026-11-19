@@ -1,11 +1,12 @@
 ---
+import { isPublicArticle } from '../lib/publication-eligibility';
 import Base from '../layouts/Base.astro';
 const pages = Object.values(import.meta.glob('./guide/*.md', {eager:true}));
 const jobPages = Object.values(import.meta.glob('./job/*.md', {eager:true}));
-const jobArticles = jobPages.filter(p=>['approved','conditionally-approved'].includes(p.frontmatter.editorialStatus));
+const jobArticles = jobPages.filter(p=>isPublicArticle(p.frontmatter));
 const companyPages = Object.values(import.meta.glob('./company/*.md', {eager:true}));
-const companyArticles = companyPages.filter(p=>['approved','conditionally-approved'].includes(p.frontmatter.editorialStatus));
-const articles = pages.filter((p)=>['approved', 'conditionally-approved'].includes(p.frontmatter.editorialStatus)).map((p)=>({title:p.frontmatter.title,url:p.url,description:p.frontmatter.description,image:p.frontmatter.heroImage}));
+const companyArticles = companyPages.filter(p=>isPublicArticle(p.frontmatter));
+const articles = pages.filter((p)=>isPublicArticle(p.frontmatter)).map((p)=>({title:p.frontmatter.title,url:p.url,description:p.frontmatter.description,image:p.frontmatter.heroImage}));
 ---
 <Base>
  <section class="hero"><div class="hero-copy"><span class="eyebrow">アルバイト選びをもっと安心に</span><h1>そのバイト、<br/><em>応募する前</em>に知っておこう。</h1><p>時給だけでは分からない仕事内容、シフト、面接、労働条件。最初の一歩を踏み出すための情報を、わかりやすくまとめます。</p><a class="primary-link" href="/guide/">バイトの基礎知識を読む <span>→</span></a></div><img src="/images/BH-0001-eyecatch.webp" alt="アルバイトを始める前に働き方を考える学生" width="1200" height="630" /></section>

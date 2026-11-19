@@ -7,6 +7,7 @@ historical release evidence. It never authorizes a deploy on its own.
 from datetime import datetime, timezone
 import json
 import re
+import time
 import urllib.parse
 import urllib.request
 
@@ -15,6 +16,10 @@ from scripts.deploy_window import JST
 RELEASE_WORKFLOW = "continuous-release.yml"
 MODE_PATTERN = re.compile(r"Validated explicit request:\s+[A-Za-z0-9_-]+\s+(plan|deploy|rollback)\b")
 UTC = timezone.utc
+
+
+class HistoryChanged(ValueError):
+    """A changing pagination snapshot must be discarded, never accepted."""
 
 
 def _parse_time(value):
@@ -93,7 +98,7 @@ def _scan(repository, token, current_run_id, now, get_json, get_log):
         if type(count) is not int or count < 0:
             raise ValueError("Missing Actions run count")
         if expected_count is not None and count != expected_count:
-            raise ValueError("Actions run history changed during audit")
+            raise HistoryChanged("Actions run history changed during audit")
         expected_count = count
         if count > 10000:
             raise ValueError("Actions run history exceeds audit bounds")
@@ -174,8 +179,19 @@ def audit_daily_releases(repository, token, current_run_id, now=None,
         raise ValueError("GitHub Actions read permission and run ID required")
     clock = now if now is not None else datetime.now(UTC)
     try:
-        inspected = _scan(repository, token, current_run_id, clock,
-                          get_json or _get_json, get_log or _get_log)
+        # A request push may enqueue unrelated PR QA between pagination calls.
+        # Restart ONLY this explicitly detected snapshot race, from page one.
+        # Never reuse partial results, retry a publisher rejection, or ignore
+        # API errors/ambiguous evidence. Persistent churn still fails closed.
+        for attempt in range(3):
+            try:
+                inspected = _scan(repository, token, current_run_id, clock,
+                                  get_json or _get_json, get_log or _get_log)
+                break
+            except HistoryChanged:
+                if attempt == 2:
+                    raise
+                time.sleep(2 * (attempt + 1))
     except Exception as exc:
         reason = str(exc) if isinstance(exc, ValueError) else type(exc).__name__
         raise ValueError("GitHub historical deploy audit failed closed: " + reason) from None

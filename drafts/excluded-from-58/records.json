@@ -1,0 +1,34 @@
+[
+  {
+    "articleId": "BH-0046",
+    "sourcePath": "src/pages/company/amazon-warehouse.md",
+    "publicPath": "/company/amazon-warehouse/",
+    "editorialStatus": "approved",
+    "conditionsResolved": true,
+    "imageVerified": true,
+    "linksVerifiedOn": "2026-11-17",
+    "manuscriptUrl": "https://docs.google.com/document/d/1TTLVFSXJHBaOEedPpdL_WW1IavR6-vDSvhNWCmSXfmk/edit",
+    "reviewUrl": "https://docs.google.com/document/d/1TTLVFSXJHBaOEedPpdL_WW1IavR6-vDSvhNWCmSXfmk/edit",
+    "imageUrl": "https://drive.google.com/file/d/19prW8ViEYUX800Rf6HBnRDFtbJ98qohe/view",
+    "imagePath": "/images/BH-0046-eyecatch.webp",
+    "sourceSha256": "4ae65ac3d7f96bded8e5732b4a352736e055d366e8f6ec023e64d6b29bbbffaf",
+    "imageSha256": "d21875670e38fa103ad51899e0af373f01530b76a7e5b4eb03e6b08d39df3ad6",
+    "note": "編集完成稿から公開用に整形。制作指示・内部メモを除外。2026-11-17に主要求人・公的根拠を再点検し、現行確認不能の具体条件を削除。Drive実画像1200×630 WebP・水彩画風を目視確認。技術・本番planゲートは別途必須。"
+  },
+  {
+    "articleId": "BH-0049",
+    "sourcePath": "src/pages/company/dennys.md",
+    "publicPath": "/company/dennys/",
+    "editorialStatus": "approved",
+    "conditionsResolved": true,
+    "imageVerified": true,
+    "linksVerifiedOn": "2026-11-17",
+    "manuscriptUrl": "https://docs.google.com/document/d/1DlgvvBkJLMJEYdVdWiRjfl3hzxQAON9pAli4LP2R0-0/edit",
+    "reviewUrl": "https://docs.google.com/document/d/1DlgvvBkJLMJEYdVdWiRjfl3hzxQAON9pAli4LP2R0-0/edit",
+    "imageUrl": "https://drive.google.com/file/d/17nnLiIMrOBoAIQpMA6asm5Kk6moio3Ru/view",
+    "imagePath": "/images/BH-0049-eyecatch.webp",
+    "sourceSha256": "1fa95896e49594a7db3ccf4a81ee57b8f3ed357b154d349bf9a1eea55b86d63c",
+    "imageSha256": "951f243b95de485e99494806739af9466ec50b065408f78726c9a4893df5a8c1",
+    "note": "編集完成稿から公開用に整形。制作指示・内部メモを除外。2026-11-17に主要求人・公的根拠を再点検し、現行確認不能の具体条件を削除。Drive実画像1200×630 WebP・水彩画風を目視確認。技術・本番planゲートは別途必須。 2026-11-18再点検：重複・現行公式掲載との不一致を修正。再取得不能な個店条件は一般的な確認事項へ置換し現行求人断定を除外。"
+  }
+]

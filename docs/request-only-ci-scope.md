@@ -1,0 +1,3 @@
+# Request-only build deduplication
+
+Only Verify Astro build on.push gains paths-ignore: [ops/release-request.json]. A push containing any other file still runs its normal source verification. Pull request triggers and draft policy are unchanged. A single-file connector request no longer starts the redundant standalone verification; Continuous release still validates the request, checks exact source, and runs npm test and npm run build for plan/deploy before server operations. No permissions, deployment guard, SSH host pin, backups, rollback, time/day limits or audit code is changed. This reduces duplicate Actions and one source of concurrent audit-history growth; it does not guarantee an immutable Actions snapshot.

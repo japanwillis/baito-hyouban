@@ -1,4 +1,5 @@
 ---
+import { isPublicArticle } from '../lib/publication-eligibility';
 import Base from '../layouts/Base.astro';
 const groups = [
   { label:'企業別', files: import.meta.glob('./company/*.md', { eager:true }) },
@@ -6,7 +7,7 @@ const groups = [
   { label:'お役立ち', files: import.meta.glob('./guide/*.md', { eager:true }) }
 ];
 const articles = groups.flatMap(group => Object.values(group.files)
-  .filter((page:any) => ['approved','conditionally-approved'].includes(page.frontmatter.editorialStatus))
+  .filter((page:any) => isPublicArticle(page.frontmatter))
   .map((page:any) => ({
     title:page.frontmatter.title,
     description:page.frontmatter.description || '',

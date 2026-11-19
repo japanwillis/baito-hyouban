@@ -1,7 +1,8 @@
 ---
+import { isPublicArticle } from '../../lib/publication-eligibility';
 import Base from '../../layouts/Base.astro';
 const pages = Object.values(import.meta.glob('./*.md',{eager:true}));
-const articles = pages.filter(p=>['approved', 'conditionally-approved'].includes(p.frontmatter.editorialStatus)).map(p=>({title:p.frontmatter.title,url:p.url,description:p.frontmatter.description,image:p.frontmatter.heroImage}));
+const articles = pages.filter(p=>isPublicArticle(p.frontmatter)).map(p=>({title:p.frontmatter.title,url:p.url,description:p.frontmatter.description,image:p.frontmatter.heroImage}));
 ---
 <Base title="バイトの基礎知識"><div class="page-head"><span class="eyebrow">GUIDE</span><h1>バイトの基礎知識</h1><p>面接や労働条件、初めてのアルバイトについて知っておきたい情報。</p></div><div class="discovery-controls"><input id="list-search" type="search" placeholder="記事タイトル・キーワードで絞り込む" aria-label="記事一覧を絞り込む" /></div><p id="list-count" class="discovery-count" aria-live="polite"></p><div class="articles">{articles.map(a=><a class="feature-article list-item" href={a.url} data-title={a.title} data-description={a.description}><img src={a.image} alt="" width="1200" height="630"/><div><h2>{a.title}</h2><p>{a.description}</p><strong>記事を読む →</strong></div></a>)}</div><p id="list-empty" class="discovery-empty" hidden>該当する記事がありません。</p><button id="list-more" class="discovery-more" type="button" hidden>さらに12件表示</button></Base>
 

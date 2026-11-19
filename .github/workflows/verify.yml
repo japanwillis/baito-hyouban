@@ -2,6 +2,8 @@ name: Verify Astro build
 on:
   push:
     branches: [main]
+    # Request-only commits are tested/built by Continuous release itself.
+    paths-ignore: ['ops/release-request.json']
   pull_request:
     types: [opened, synchronize, reopened, ready_for_review, converted_to_draft]
 concurrency:
