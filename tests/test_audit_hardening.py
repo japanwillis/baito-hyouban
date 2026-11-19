@@ -78,7 +78,7 @@ class RequestGateTests(unittest.TestCase):
             env=dict(GITHUB_REF='refs/heads/main',GITHUB_SHA=sha,GITHUB_EVENT_PATH=str(event),GITHUB_OUTPUT=str(output),
                      GITHUB_EVENT_NAME='workflow_dispatch',GITHUB_RUN_ID='999',GITHUB_REPOSITORY='owner/repo',GH_READ_TOKEN='dummy')
             with patch.dict(os.environ,env),patch.object(request,'git',side_effect=[sha,'']), \
-                 patch.object(request.subprocess,'run'),patch.object(request,'require_deploy_window'), \
+                 patch.object(request.subprocess,'run'), \
                  patch.object(request,'audit_daily_releases',side_effect=ValueError('audit failed')) as audit:
                 with self.assertRaisesRegex(ValueError,'audit failed'):request.main()
                 audit.assert_called_once_with('owner/repo','dummy','999')

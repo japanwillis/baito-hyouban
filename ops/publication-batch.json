@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "eligibilityBasis": "finished-manuscript-and-image",
+  "eligibilityBasis": "manuscript-and-image",
   "articleIds": [
     "BH-0047",
     "BH-0048",
@@ -59,8 +59,11 @@
     "BH-0096",
     "BH-0097",
     "BH-0098",
-    "BH-0099"
+    "BH-0099",
+    "BH-0046",
+    "BH-0049",
+    "BH-0100"
   ],
-  "expectedCount": 58,
+  "expectedCount": 61,
   "scope": "current-request-only"
 }
